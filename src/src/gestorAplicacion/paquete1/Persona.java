@@ -1,4 +1,4 @@
-package paquete1;
+package gestorAplicacion.paquete1;
 
 public class Persona {
 	private String nombre;

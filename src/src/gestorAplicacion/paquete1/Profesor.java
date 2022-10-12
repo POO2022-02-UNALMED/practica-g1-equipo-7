@@ -1,6 +1,6 @@
-package paquete1;
+package gestorAplicacion.paquete1;
 
-import paquete2.*;
+import gestorAplicacion.paquete2.*;
 import java.util.*;
 public class Profesor extends Persona{
 	private Salon salonAsignado;

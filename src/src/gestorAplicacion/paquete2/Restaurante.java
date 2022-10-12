@@ -1,6 +1,6 @@
-package paquete2;
+package gestorAplicacion.paquete2;
 
-import paquete1.*;
+import gestorAplicacion.paquete1.*;
 import java.util.*;
 public class Restaurante extends Bloque{
 	private Map<String, String> menuDiario = new HashMap<String, String>();

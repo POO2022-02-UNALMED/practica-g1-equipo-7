@@ -1,6 +1,6 @@
-package paquete2;
+package gestorAplicacion.paquete2;
 
-import paquete1.Estudiante;
+import gestorAplicacion.paquete1.Estudiante;
 public class Matricula {
 	private int valor;
 	private Estudiante estudiante;

@@ -1,4 +1,4 @@
-package paquete2;
+package gestorAplicacion.paquete2;
 
 public abstract class Bloque {
 	private int capacidad;
