@@ -1,7 +1,9 @@
 package gestorAplicacion.servicios;
 
-import gestorAplicacion.libreria.EjemplarLibro;
+
+import gestorAplicacion.libreria.Titulo;
 import gestorAplicacion.libreria.EjemplarRevista;
+import gestorAplicacion.libreria.EjemplarLibro;
 
 import java.util.ArrayList;
 
@@ -9,6 +11,7 @@ public abstract class Servicio {
     public static ArrayList<EjemplarRevista> ejemplarRevistaDisponibles = new ArrayList<>();
     public static ArrayList<EjemplarLibro> ejemplarLibroDisponibles = new ArrayList<>();
     private Usuario usuario;
+    private Titulo tituloEscogido;
 
     //Constructores
 
@@ -41,7 +44,14 @@ public abstract class Servicio {
         this.usuario = usuario;
     }
 
-    //metodos
+    public Titulo getTituloEscogido() {
+        return tituloEscogido;
+    }
+
+    public void setTituloEscogido(Titulo tituloEscogido) {
+        this.tituloEscogido = tituloEscogido;
+    }
+//metodos
 
 
 }

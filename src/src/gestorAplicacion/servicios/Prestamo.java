@@ -7,7 +7,8 @@ public class Prestamo extends Servicio{
 
     //Constructores
 
-    public Prestamo(Date fecha) {
+    public Prestamo(Usuario usuario, Date fecha) {
+        super(usuario);
         this.fecha = fecha;
     }
 

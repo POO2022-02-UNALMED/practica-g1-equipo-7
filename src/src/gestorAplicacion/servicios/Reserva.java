@@ -8,8 +8,10 @@ public class Reserva extends Servicio{
 
     //Constructores
 
-    public Reserva(Date fechaReserva) {
+    public Reserva(Usuario usuario, Date fechaReserva, Date fechaDevolucion) {
+        super(usuario);
         this.fechaReserva = fechaReserva;
+        this.fechaDevolucion = fechaDevolucion;
     }
 
 
