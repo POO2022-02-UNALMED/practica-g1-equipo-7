@@ -24,12 +24,12 @@ public class UiMenu {
             System.out.println("1. Hacer una consulta");
             System.out.println("2. Realizar una reserva");
             System.out.println("3. Realizar un prestamo");
-            System.out.println("4. Hacer devolcion");
+            System.out.println("4. Hacer devolucion");
             System.out.println("5. Cancelar una reserva");
             System.out.println("0. Salir del sistema");
 
             Scanner sc = new Scanner(System.in);
-            respuesta = Integer.valueOf(sc.nextLine());
+            respuesta = Integer.parseInt(sc.nextLine());
 
             switch (respuesta){
                 case 1:
