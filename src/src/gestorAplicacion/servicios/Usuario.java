@@ -3,17 +3,18 @@ package gestorAplicacion.servicios;
 import java.util.ArrayList;
 
 public class Usuario {
-    String nombre;
-    int id;
-    ArrayList<Prestamo> prestamos = new ArrayList<>();
-    ArrayList<Reserva> reservas = new ArrayList<>();
-    ArrayList<Tiquete> tiquetes = new ArrayList<>();
-    boolean multa = false;
+    private String nombre;
+    private int id;
+    public static ArrayList<Prestamo> prestamos = new ArrayList<>();
+    public static ArrayList<Reserva> reservas = new ArrayList<>();
+    public static ArrayList<Tiquete> tiquetes = new ArrayList<>();
+    public static boolean multa = false;
 
     //constructor
 
-    public Usuario(String nombre) {
+    public Usuario(String nombre, int id) {
         this.nombre = nombre;
+        this.id = id;
     }
 
     //getters y setters

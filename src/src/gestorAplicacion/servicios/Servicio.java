@@ -1,12 +1,13 @@
 package gestorAplicacion.servicios;
 
-import libreria.EjemplarRevistas;
-import libreria.EjemplarLibro;
+import gestorAplicacion.libreria.EjemplarLibro;
+import gestorAplicacion.libreria.EjemplarRevista;
+
 import java.util.ArrayList;
 
 public abstract class Servicio {
-    private static ArrayList<EjemplarRevista> ejemplarRevistaDisponibles = new ArrayList<>();
-    private static ArrayList<EjemplarLibro> ejemplarLibroDisponibles = new ArrayList<>();
+    public static ArrayList<EjemplarRevista> ejemplarRevistaDisponibles = new ArrayList<>();
+    public static ArrayList<EjemplarLibro> ejemplarLibroDisponibles = new ArrayList<>();
     private Usuario usuario;
 
     //Constructores

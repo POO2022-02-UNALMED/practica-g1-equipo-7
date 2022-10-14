@@ -9,4 +9,9 @@ public class Revista extends Titulo{
     public Revista(String categoria) {
         this.categoria = categoria;
     }
+
+    public Revista(String nombre, String autor, int ISBN, String categoria) {
+        super(nombre, autor, ISBN);
+        this.categoria = categoria;
+    }
 }
