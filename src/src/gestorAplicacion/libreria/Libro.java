@@ -11,7 +11,10 @@ public class Libro extends Titulo{
         this.genero = genero;
     }
 
-    public Libro(String genero) {
-        this.genero = genero;
+
+    public String toString(){
+        return "nombre: " + getNombre() + " autor: " + getAutor() + " ISBN: " + getISBN() + " género: " + genero;
     }
+
+
 }

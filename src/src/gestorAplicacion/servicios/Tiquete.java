@@ -6,7 +6,7 @@ public class Tiquete {
 
     //Constructor
 
-    public Tiquete(Servicio servicio) {
+    public Tiquete(Servicio servicio, int i) {
         this.servicio = servicio;
     }
 

@@ -8,4 +8,7 @@ public class EjemplarLibro extends Ejemplar{
         this.libro = libro;
     }
 
+    public Libro getLibro() {
+        return libro;
+    }
 }

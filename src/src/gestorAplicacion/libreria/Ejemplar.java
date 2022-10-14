@@ -8,4 +8,14 @@ public class Ejemplar {
         this.id = id;
         this.estadoEjemplar = estadoEjemplar;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public EstadoEjemplar getEstadoEjemplar() {
+        return estadoEjemplar;
+    }
+
+
 }

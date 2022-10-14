@@ -7,4 +7,10 @@ public class EjemplarRevista extends Ejemplar{
         super(id, estadoEjemplar);
         this.revista = revista;
     }
+
+    public Revista getRevista() {
+        return revista;
+    }
+
+
 }
