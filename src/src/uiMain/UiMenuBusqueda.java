@@ -1,5 +1,10 @@
 package uiMain;
 
+import gestorAplicacion.libreria.Ejemplar;
+import gestorAplicacion.libreria.Titulo;
+import gestorAplicacion.servicios.Servicio;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UiMenuBusqueda {
