@@ -65,6 +65,7 @@ public class UiMenu {
                 case 0:
                     //System.out.println("Gracias por visitarnos");
                     JOptionPane.showMessageDialog(null, "Gracias por visitarnos");
+                    break;
 
 
                 default:
