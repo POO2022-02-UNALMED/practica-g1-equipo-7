@@ -1,14 +1,15 @@
 package gestorAplicacion.servicios;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Reserva extends Servicio{
-    Date fechaReserva;
-    Date fechaDevolucion;
+    LocalDate fechaReserva;
+    LocalDate fechaDevolucion;
 
     //Constructores
 
-    public Reserva(Usuario usuario, Date fechaReserva, Date fechaDevolucion) {
+    public Reserva(Usuario usuario, LocalDate fechaReserva, LocalDate fechaDevolucion) {
         super(usuario);
         this.fechaReserva = fechaReserva;
         this.fechaDevolucion = fechaDevolucion;
@@ -17,19 +18,19 @@ public class Reserva extends Servicio{
 
     //getters y setters
 
-    public Date getFechaReserva() {
+    public LocalDate getFechaReserva() {
         return fechaReserva;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
+    public void setFechaReserva(LocalDate fechaReserva) {
         this.fechaReserva = fechaReserva;
     }
 
-    public Date getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(Date fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 
