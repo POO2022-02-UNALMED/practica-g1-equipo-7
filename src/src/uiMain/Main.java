@@ -11,7 +11,7 @@ public class Main {
 
         //Creacion de objetos
 
-        Libro libro_soledad = new Libro("100 anios de soledad", "Gabriel Garcia Marquez", 373512323, "Fantasia");
+        Libro libro_soledad = new Libro("100 años de soledad", "Gabriel Garcia Marquez", 373512323, "Fantasia");
         Libro libro_noches = new Libro("Las mil y una noches", "Varios autores",391212871, "Cuento");
 
         Revista revista_viernes = new Revista("Viernes", "El Universal", 323823999, "Entretenimiento");
