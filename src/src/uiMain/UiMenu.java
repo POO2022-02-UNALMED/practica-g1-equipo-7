@@ -1,7 +1,7 @@
 package uiMain;
 
 import gestorAplicacion.servicios.Usuario;
-
+import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 public class UiMenu {
@@ -16,8 +16,10 @@ public class UiMenu {
 
     public static void showMenu(){
 
-        System.out.println(":: Bienvenido a la Biblioteca");
-        System.out.println("Selecciona la opción deseada");
+        //System.out.println(":: Bienvenido a la Biblioteca");
+        //System.out.println("Selecciona la opción deseada");
+        JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
+        JOptionPane.showMessageDialog(null, "Selecciona una de las opciones:");
 
         int respuesta = 0;
         do {
@@ -27,6 +29,14 @@ public class UiMenu {
             System.out.println("4. Hacer devolucion");
             System.out.println("5. Cancelar una reserva");
             System.out.println("0. Salir del sistema");
+            JOptionPane.showMessageDialog(null,
+                    "1. Hacer una consulta" +"\n"+
+                    "2. Realizar una reserva" +"\n"+
+                    "3. Realizar un prestamo" +"\n"+
+                    "4. Hacer devolución" +"\n"+
+                    "5. Cancelar una reserva" +"\n"+
+                    "0. Salir del sistema");
+
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.parseInt(sc.nextLine());
@@ -53,9 +63,13 @@ public class UiMenu {
                     UiMenuCancelarReserva.showMenuCancelarReserva();
                     break;
                 case 0:
-                    System.out.println("Gracias por visitarnos");
+                    //System.out.println("Gracias por visitarnos");
+                    JOptionPane.showMessageDialog(null, "Gracias por visitarnos");
+
+
                 default:
-                    System.out.println("Por favor selecciona una de las opciones indicadas");
+                    //System.out.println("Por favor selecciona una de las opciones indicadas");
+                    JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
             }
         }while(respuesta!=0);
     }
