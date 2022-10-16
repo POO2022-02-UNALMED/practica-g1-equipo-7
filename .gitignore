@@ -4,6 +4,5 @@ build/
 .classpath
 .project
 .settings
-.class
 .idea/
 *__pycache__*
