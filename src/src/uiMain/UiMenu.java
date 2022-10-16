@@ -66,8 +66,6 @@ public class UiMenu {
                     //System.out.println("Gracias por visitarnos");
                     JOptionPane.showMessageDialog(null, "Gracias por visitarnos");
                     break;
-
-
                 default:
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
