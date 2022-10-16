@@ -125,6 +125,7 @@ public class UiMenuReserva {
                     }
 
                     generarReservaLibro(resp_submenu, fecha_reserva, fecha_devolucion);
+                    System.out.println("\n");
                     UiMenu.showMenu();
                 }
             }
@@ -205,6 +206,7 @@ public class UiMenuReserva {
                     }
 
                     generarReservaRevista(resp_submenu, fecha_reserva, fecha_devolucion);
+                    System.out.println("\n");
                     UiMenu.showMenu();
 
 
@@ -214,7 +216,7 @@ public class UiMenuReserva {
         }
 
     }
-    public static void mostrarEjemplaresLibro(){
+    public static void mostrarEjemplaresLibro(){ //Recorre la lista de Ejemplares de Libro
         int i = 0;
         for(EjemplarLibro ejemplar: Servicio.ejemplarLibroDisponibles){
             if(!ejemplar.getEstadoEjemplar().isPrestado() && !ejemplar.getEstadoEjemplar().isReservado()){
@@ -225,7 +227,7 @@ public class UiMenuReserva {
 
     }
 
-    public static void mostrarEjemplaresRevista(){
+    public static void mostrarEjemplaresRevista(){ //Recorre la lista de Ejemplares de Revista
         int i = 0;
         for(EjemplarRevista ejemplar: Servicio.ejemplarRevistaDisponibles){
             if(!ejemplar.getEstadoEjemplar().isPrestado() && !ejemplar.getEstadoEjemplar().isReservado()){
@@ -235,6 +237,8 @@ public class UiMenuReserva {
         }
     }
 
+    //Esta función lo que hace es añadir la reserva al usuario, generar un tiquete y actualizar el estado del libro que//
+    //el usuario reservó. Se le pasan esos parámetros porque son necesarios en el contexto del método//
     public static void generarReservaLibro(int resp_submenu, LocalDate fecha_reserva, LocalDate fecha_devolucion){
         String nombre_libro = Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro().getNombre();
         Reserva reserva = new Reserva(UiMenu.getUsuario(), fecha_reserva, fecha_devolucion);
