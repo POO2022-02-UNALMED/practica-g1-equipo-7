@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Usuario {
     private String nombre;
     private int id;
-    public static ArrayList<Prestamo> prestamos = new ArrayList<>();
-    public static ArrayList<Reserva> reservas = new ArrayList<>();
-    public static ArrayList<Tiquete> tiquetes = new ArrayList<>();
-    public static boolean multa = false;
+    private ArrayList<Prestamo> prestamos = new ArrayList<>();
+    private ArrayList<Reserva> reservas = new ArrayList<>();
+    private ArrayList<Tiquete> tiquetes = new ArrayList<>();
+    private boolean multa = false;
 
     //constructor
 

@@ -16,8 +16,9 @@ public class UiMenu {
 
     public static void showMenu(){
 
-        //System.out.println(":: Bienvenido a la Biblioteca");
-        //System.out.println("Selecciona la opción deseada");
+        System.out.println("\n");
+        System.out.println(":: Bienvenido a la Biblioteca");
+        System.out.println("Selecciona la opción deseada");
         JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
         JOptionPane.showMessageDialog(null, "Selecciona una de las opciones:");
 

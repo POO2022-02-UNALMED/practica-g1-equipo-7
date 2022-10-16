@@ -62,7 +62,7 @@ public class UiMenuPrestamo {
                     break;
                 case 2:
                     respuesta = 0;
-                    if(Usuario.multa){
+                    if(UiMenu.getUsuario().isMulta()){
                         System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
                     }else{
                         int i = 0;
