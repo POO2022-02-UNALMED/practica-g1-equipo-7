@@ -50,6 +50,6 @@ public class Revista extends Titulo{
     }
 
     public String toString(){
-        return "nombre: " + getNombre() + " autor: " + getAutor() + " ISBN: " + getISBN() + " Categoria: " + categoria;
+        return "nombre: " + this.getNombre() + " autor: " + this.getAutor() + " ISBN: " + this.getISBN() + " Categoria: " + categoria;
     }
 }

@@ -149,7 +149,8 @@ public class UiMenuReserva {
             mostrarEjemplaresRevista();
             int resp_submenu = 0;
             while (resp_submenu < 1 || resp_submenu >= Servicio.ejemplarRevistaDisponibles.size() ) {
-                System.out.println("Cual quiere prestar?");
+                System.out.println("");
+                System.out.println("¿Cual quiere reservar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 1) {
                     System.out.println("Por favor escoja un número valido");
@@ -204,7 +205,14 @@ public class UiMenuReserva {
                             break;
 
                         case 3:
-                            fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dia_reserva);
+                            if(mes_reserva!=12){
+                                fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dia_reserva);
+                            }
+                            else{
+                                mes_reserva=1;
+                                fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
+                            }
+
                             break;
 
                         case 4:
