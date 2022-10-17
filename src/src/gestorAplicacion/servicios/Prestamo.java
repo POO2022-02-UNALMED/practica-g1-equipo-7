@@ -30,9 +30,9 @@ public class Prestamo extends Servicio{
     public String toString() {
         String msgTitulo = "";
         if (this.getTituloEscogido() instanceof Libro) {
-            msgTitulo = "Libro reservado: " + this.getTituloEscogido().getNombre();
+            msgTitulo = "Libro prestado: " + this.getTituloEscogido().getNombre();
         } else if (this.getTituloEscogido() instanceof Revista) {
-            msgTitulo = "Revista reservada: " + this.getTituloEscogido().getNombre();
+            msgTitulo = "Revista prestado: " + this.getTituloEscogido().getNombre();
         }
         return (msgTitulo + " Fecha prestamo: " + this.getFecha());
     }

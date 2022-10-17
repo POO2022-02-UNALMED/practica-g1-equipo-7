@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class UiMenuPrestamo {
-    public static void showMenuPrestamo(){
+    public static void showMenuPrestamo() {
         System.out.println(":: Prestamo");
 
         int respuesta = 0;
@@ -29,7 +29,7 @@ public class UiMenuPrestamo {
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.parseInt(sc.nextLine());
 
-            switch (respuesta){
+            switch (respuesta) {
                 case 1:
                     respuesta = 0;
                     prestarLibro();
@@ -43,104 +43,129 @@ public class UiMenuPrestamo {
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
-                   // System.out.println("Por favor selecciona una de las opciones indicadas");
+                    // System.out.println("Por favor selecciona una de las opciones indicadas");
             }
-        }while (respuesta!=0);
+        } while (respuesta != 0);
     }
 
-    public static void generarPrestamoLibro(int resp_submenu){
+    public static void generarPrestamoLibro(int resp_submenu) {
         String nombre_libro = Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro().getNombre();
-        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro(),new Date());
-        int id_prestamo = (int)(Math.random() * 10000);
+        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro(), new Date());
+        int id_prestamo = (int) (Math.random() * 10000);
         Tiquete tiquete = new Tiquete(prestamo, id_prestamo);
-        Servicio.ejemplarLibroDisponibles.get(resp_submenu-1).getEstadoEjemplar().setPrestamo(prestamo);
-        Servicio.ejemplarLibroDisponibles.get(resp_submenu-1).getEstadoEjemplar().setPrestado(true);
+        Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setPrestamo(prestamo);
+        Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setPrestado(true);
+        //Se remueve de disponibles el libro prestado
+        Servicio.ejemplarLibroDisponibles.remove(resp_submenu - 1);
         UiMenu.getUsuario().getPrestamos().add(prestamo);
         UiMenu.getUsuario().getTiquetes().add(tiquete);
 
-        System.out.println("Usted ha escogido el libro: "+   nombre_libro + " y se le ha generado el prestamo con el id " + id_prestamo);
+        System.out.println("Usted ha escogido el libro: " + nombre_libro + " y se le ha generado el prestamo con el id " + id_prestamo);
+        UiMenu.showMenu();
     }
 
-    public static void generarPrestamoRevista(int resp_submenu){
+    public static void generarPrestamoRevista(int resp_submenu) {
         String nombre_revista = Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista().getNombre();
-        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista(),new Date());
-        int id_prestamo = (int)(Math.random() * 10000);
+        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista(), new Date());
+        int id_prestamo = (int) (Math.random() * 10000);
         Tiquete tiquete = new Tiquete(prestamo, id_prestamo);
-        Servicio.ejemplarRevistaDisponibles.get(resp_submenu-1).getEstadoEjemplar().setPrestamo(prestamo);
-        Servicio.ejemplarRevistaDisponibles.get(resp_submenu-1).getEstadoEjemplar().setPrestado(true);
+        Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setPrestamo(prestamo);
+        Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setPrestado(true);
+        //Se remueve la revista prestada
+        Servicio.ejemplarRevistaDisponibles.remove(resp_submenu - 1);
         UiMenu.getUsuario().getPrestamos().add(prestamo);
         UiMenu.getUsuario().getTiquetes().add(tiquete);
 
-        System.out.println("Usted ha escogido la revista: "+   nombre_revista + " y se le ha generado el prestamo con el id " + id_prestamo);
+        System.out.println("Usted ha escogido la revista: " + nombre_revista + " y se le ha generado el prestamo con el id " + id_prestamo);
+        UiMenu.showMenu();
 
     }
 
-    public static void prestarLibro(){
+    public static void prestarLibro() {
         Scanner sc = new Scanner(System.in);
 
-        if(UiMenu.getUsuario().isMulta()){
+        if (UiMenu.getUsuario().isMulta()) {
             JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
-           // System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
-        }else{
+            // System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+        } else if (Servicio.ejemplarLibroDisponibles.size() == 0) {
+            System.out.println("No hay libros disponibles");
+        } else {
 
             //Se le presenta una lista de ejemplares que puede prestar, para que escoja
             System.out.println("Ejemplares disponibles: ");
             UiMenuReserva.mostrarEjemplaresLibro();
+            System.out.println("0. Regresar");
 
             //Se crea otro submenú en el que se le pregunta cuál de esos ejemplares anteriores quiere escoger
             //Se ejecuta un bucle hasta que elija una respuesta que esté en el rango indicado
             int resp_submenu = 0;
-            while (resp_submenu < 1 || resp_submenu >= Servicio.ejemplarLibroDisponibles.size() ){
+            do {
+                System.out.println("Cual quiere prestar?");
+                resp_submenu = Integer.parseInt(sc.nextLine());
+                if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 0) {
+                    //JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
+                    System.out.println("Por favor escoja un número válido");
+                } else if (resp_submenu == 0) {
+                    showMenuPrestamo();
+                } else {
+                    generarPrestamoLibro(resp_submenu);
+                    System.out.println("\n");
+                    resp_submenu = 0;
+                    // Escoge un número correcto y se le crea un tiquete, se le genera el préstamo y se agrega
+                    // todo al usuario que hay en UiMain, además de quitar el Ejemplar
+                }
+            } while (resp_submenu != 0);
+
+            /*
+            while (resp_submenu < 1 || resp_submenu > Servicio.ejemplarLibroDisponibles.size() ){
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 1){
-                    JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
-                    //System.out.println("Por favor escoja un número válido");
+                    //JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
+                    System.out.println("Por favor escoja un número válido");
                 }
                 else {
                     generarPrestamoLibro(resp_submenu);
                     System.out.println("\n");
                                 // Escoge un número correcto y se le crea un tiquete, se le genera el préstamo y se agrega
                                  // todo al usuario que hay en UiMain, además de quitar el Ejemplar
-                    UiMenu.showMenu();
                 }
-            }
+             }*/
         }
     }
 
-    public static void prestarRevista(){
+    public static void prestarRevista() {
         Scanner sc = new Scanner(System.in);
-        if(UiMenu.getUsuario().isMulta()){
+        if (UiMenu.getUsuario().isMulta()) {
             JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
             //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
-        }else{
-
+        } else if (Servicio.ejemplarRevistaDisponibles.size() == 0) {
+            System.out.println("No hay Revistas disponibles");
+        } else {
             //Se le presenta una lista de ejemplares que puede prestar, para que escoja
             System.out.println("Ejemplares disponibles: ");
             UiMenuReserva.mostrarEjemplaresRevista();
-
+            System.out.println("0. Regresar");
             //Se crea otro submenú en el que se le pregunta cuál de esos ejemplares anteriores quiere escoger
             //Se ejecuta un bucle hasta que elija una respuesta que esté en el rango indicado
             int resp_submenu = 0;
-            while (resp_submenu < 1 || resp_submenu >= Servicio.ejemplarRevistaDisponibles.size() ){
+            do {
                 System.out.println("Cual quiere prestar?");
-
                 resp_submenu = Integer.parseInt(sc.nextLine());
-                if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 1){
+
+                if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 0) {
                     JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
                     //System.out.println("Por favor escoja un número válido");
-                }
-                else {
+                } else if (resp_submenu == 0) {
+                    showMenuPrestamo();
+                } else {
                     generarPrestamoRevista(resp_submenu);
+                    resp_submenu = 0;
                     System.out.println("\n");
-                    UiMenu.showMenu();
                 }
-            }
+
+            }while (resp_submenu != 0) ;
+
         }
-
     }
-
-
-
-
 }
