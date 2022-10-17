@@ -16,20 +16,20 @@ import java.util.Scanner;
 
 public class UiMenuBusqueda {
     public static void showMenuBusqueda() {
-        System.out.println("\n");
+        System.out.println("");
         System.out.println(":: Consulta");
         JOptionPane.showMessageDialog(null, "¿Que deseas consultar?");
         //System.out.println("¿Que deseas consultar?");
 
         int respuesta = 0;
         do {
-            System.out.println("\n");
+            System.out.println("");
             System.out.println("1. Buscar Libro");
             System.out.println("2. Buscar Revista");
             System.out.println("3. Mis Prestamos");
             System.out.println("4. Mis Reservas");
             System.out.println("0. Regresar");
-            System.out.println("\n");
+
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.valueOf(sc.nextLine());
@@ -62,62 +62,60 @@ public class UiMenuBusqueda {
     }
 
     private static void buscarLibro() {
-        System.out.println("\n");
+        System.out.println("");
         System.out.println("::Buscar Libro");
         JOptionPane.showMessageDialog(null, "¿Que filtro deseas usar?");
        // System.out.println("¿Que filtro deseas usar?");
 
-        int respuesta = 0;
+        String respuesta = "0";
         String palabraClave;
         ArrayList<Libro> resultadoBusqueda = new ArrayList<>();
         do {
-            System.out.println("\n");
+            System.out.println("");
             System.out.println("1. Nombre");
             System.out.println("2. Autor");
             System.out.println("3. Genero");
             System.out.println("0. Regresar");
-            System.out.println("\n");
+
 
             Scanner sc = new Scanner(System.in);
-            respuesta = Integer.valueOf(sc.nextLine());
+             respuesta =  sc.nextLine();
+            //respuesta = Integer.valueOf(sc.nextLine());
 
             switch (respuesta) {
-                case 1:
-                    respuesta = 0;
-                    System.out.println("\n");
+                case "1":
+                    respuesta = "0";
                     JOptionPane.showMessageDialog(null, "Escribe el nombre del libro que buscas");
                     //System.out.println("Escribe el nombre del libro que buscas");
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarLibros("nombre", palabraClave);
                     break;
-                case 2:
-                    respuesta = 0;
-                    System.out.println("\n");
+                case "2":
+                    respuesta = "0";
                     JOptionPane.showMessageDialog(null, "Escribe el nombre del Autor del libro que buscas");
                     //System.out.println("Escribe el nombre del Autor del libro que buscas");
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarLibros("autor", palabraClave);
                     break;
-                case 3:
-                    respuesta = 0;
-                    System.out.println("\n");
+                case "3":
+                    respuesta = "0";
                     JOptionPane.showMessageDialog(null, "Escribe el genero del libro que buscas");
                     //System.out.println("Escribe el genero del libro que buscas");
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarLibros("genero", palabraClave);
                     break;
-                case 0:
-                    respuesta = 0;
+                case "0":
+                    respuesta = "0";
                     showMenuBusqueda();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
             }
-        } while (respuesta != 0);
+        } while (!respuesta.equals("0"));
 
         System.out.println("");
-        System.out.println("::Resultado de la busqueda");
+        System.out.println("::Resultado de los libros encontados");
 
         if (resultadoBusqueda.size() == 0){
             JOptionPane.showMessageDialog(null, "No se encontraron resultados");
@@ -130,16 +128,16 @@ public class UiMenuBusqueda {
     }
 
     private static void buscarRevista(){
-        System.out.println("\n");
+        System.out.println("");
         System.out.println("::Buscar Revista");
         JOptionPane.showMessageDialog(null, "¿Que filtro deseas usar?");
         //System.out.println("¿Que filtro deseas usar?");
 
-        int respuesta = 0;
+        String respuesta = "0";
         String palabraClave;
         ArrayList<Revista> resultadoBusqueda = new ArrayList<>();
         do {
-            System.out.println("\n");
+            System.out.println("");
             System.out.println("1. Nombre");
             System.out.println("2. Autor");
             System.out.println("3. Categoria");
@@ -147,42 +145,42 @@ public class UiMenuBusqueda {
 
 
             Scanner sc = new Scanner(System.in);
-            respuesta = Integer.valueOf(sc.nextLine());
+            respuesta = sc.nextLine();
 
             switch (respuesta) {
-                case 1:
-                    respuesta = 0;
-                    System.out.println("\n");
+                case "1":
+                    respuesta = "0";
+                    System.out.println("");
                     System.out.println("Escribe el nombre de la revista que buscas");
 
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarRevistas("nombre", palabraClave);
                     break;
-                case 2:
-                    respuesta = 0;
-                    System.out.println("\n");
+                case "2":
+                    respuesta = "0";
+                    System.out.println("");
                     System.out.println("Escribe el nombre del autor de la revista que buscas");
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarRevistas("autor", palabraClave);
                     break;
-                case 3:
-                    respuesta = 0;
-                    System.out.println("\n");
+                case "3":
+                    respuesta = "0";
+                    System.out.println("");
                     System.out.println("Escribe la categoria de la revista que buscas");
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarRevistas("categoria", palabraClave);
                     break;
-                case 0:
+                case "0":
                     showMenuBusqueda();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
                    // System.out.println("Por favor selecciona una de las opciones indicadas");
             }
-        } while (respuesta != 0);
+        } while (!respuesta.equals("0"));
 
         System.out.println("");
-        System.out.println("::Resultado de busqueda");
+        System.out.println("::Resultado de las revistas encontradas");
         if (resultadoBusqueda.size() == 0){
             JOptionPane.showMessageDialog(null, "No se encontraron resultados");
             //System.out.println("No se encontraron resultados");
@@ -194,17 +192,17 @@ public class UiMenuBusqueda {
     }
 
     private static void consultarPrestamos(){
-        System.out.println("\n");
+        System.out.println("");
         System.out.println("::Mis Prestamos");
         ArrayList<Prestamo> prestamos = UiMenu.getUsuario().getPrestamos();
 
         if (prestamos.size() == 0){
-            System.out.println("\n");
+            System.out.println("");
             JOptionPane.showMessageDialog(null, "Aun no realizas prestamos");
            // System.out.println("Aun no realizas prestamos");
             showMenuBusqueda();
         } else {
-            System.out.println("\n");
+            System.out.println("");
             for (int i = 0; i < prestamos.size(); i++) {
                 System.out.println((i+1) + ". " + prestamos.get(i));
             }
@@ -213,7 +211,7 @@ public class UiMenuBusqueda {
     }
 
     private static void consultarReservas(){
-        System.out.println("\n");
+        System.out.println("");
         System.out.println("::Mis Reservas");
         ArrayList<Reserva> reservas = UiMenu.getUsuario().getReservas();
 

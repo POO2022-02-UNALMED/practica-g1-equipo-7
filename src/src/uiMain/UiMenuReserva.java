@@ -19,11 +19,11 @@ public class UiMenuReserva {
 
         int respuesta = 0;
         do {
-            System.out.println("\n\n");
+            System.out.println("");
             System.out.println("1. Reservar Libro");
             System.out.println("2. Reservar Revista");
             System.out.println("0. Regresar");
-            System.out.println("\n\n");
+            System.out.println("");
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.parseInt(sc.nextLine());

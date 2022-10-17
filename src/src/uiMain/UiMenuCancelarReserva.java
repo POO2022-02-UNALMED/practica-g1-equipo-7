@@ -25,13 +25,12 @@ public class UiMenuCancelarReserva {
 
            // System.out.println("Selecciona la reserva que deseas cancelar");
             JOptionPane.showMessageDialog(null, "Selecciona la reserva que deseas cancelar");
-            System.out.println("\n\n");
             //Ciclo para recorrer la lista de prestamos y mostrar las opciones para reservar
             for (int i = 0; i < reservas.size(); i++) {
                 System.out.println((i+1) + ". Nombre: " + reservas.get(i).getTituloEscogido().getNombre() + " Fecha de reserva: " + reservas.get(i).getFechaReserva() + " Fecha de devolucion: " + reservas.get(i).getFechaDevolucion());
             }
             System.out.println("0. Regresar");
-            System.out.println("\n\n");
+            System.out.println("");
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.valueOf(sc.nextLine());

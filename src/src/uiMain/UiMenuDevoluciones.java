@@ -18,10 +18,8 @@ public class UiMenuDevoluciones {
         do {
 
             if(prestamos.size() == 0){
-                System.out.println("\n\n");
                 JOptionPane.showMessageDialog(null, "Aun no realizas prestamos");
                 //System.out.println("Aun no realizas prestamos");
-                System.out.println("\n\n");
                 UiMenu.showMenu();
                 break;
             }
@@ -29,12 +27,11 @@ public class UiMenuDevoluciones {
             //System.out.println("Selecciona el titulo que deseas devolver");
             JOptionPane.showMessageDialog(null, "Selecciona el titulo que deseas devolver");
             //Ciclo para recorrer la lista de prestamos y mostrar las opciones para devolver
-            System.out.println("\n\n");
+            System.out.println("");
             for (int i = 0; i < prestamos.size(); i++) {
                 System.out.println((i+1) + ". Nombre: " + prestamos.get(i).getTituloEscogido().getNombre() + " Autor: " + prestamos.get(i).getTituloEscogido().getAutor());
             }
             System.out.println("0. Regresar");
-            System.out.println("\n\n");
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.valueOf(sc.nextLine());
