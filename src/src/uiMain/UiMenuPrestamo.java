@@ -93,6 +93,7 @@ public class UiMenuPrestamo {
 
             //Se le presenta una lista de ejemplares que puede prestar, para que escoja
             System.out.println("Ejemplares disponibles: ");
+            System.out.println(" ");
             UiMenuReserva.mostrarEjemplaresLibro();
             System.out.println("0. Regresar");
 
@@ -100,6 +101,7 @@ public class UiMenuPrestamo {
             //Se ejecuta un bucle hasta que elija una respuesta que esté en el rango indicado
             int resp_submenu = 0;
             do {
+                System.out.println("");
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 0) {
@@ -144,12 +146,14 @@ public class UiMenuPrestamo {
         } else {
             //Se le presenta una lista de ejemplares que puede prestar, para que escoja
             System.out.println("Ejemplares disponibles: ");
+            System.out.println("");
             UiMenuReserva.mostrarEjemplaresRevista();
             System.out.println("0. Regresar");
             //Se crea otro submenú en el que se le pregunta cuál de esos ejemplares anteriores quiere escoger
             //Se ejecuta un bucle hasta que elija una respuesta que esté en el rango indicado
             int resp_submenu = 0;
             do {
+                System.out.println("");
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
 
