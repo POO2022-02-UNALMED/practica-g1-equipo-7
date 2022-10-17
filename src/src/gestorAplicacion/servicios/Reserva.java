@@ -2,6 +2,7 @@ package gestorAplicacion.servicios;
 
 import gestorAplicacion.libreria.Libro;
 import gestorAplicacion.libreria.Revista;
+import gestorAplicacion.libreria.Titulo;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -9,13 +10,11 @@ import java.util.Date;
 public class Reserva extends Servicio{
     LocalDate fechaReserva;
     LocalDate fechaDevolucion;
-    Revista revista;
-    Libro libro;
 
     //Constructores
 
-    public Reserva(Usuario usuario, LocalDate fechaReserva, LocalDate fechaDevolucion) {
-        super(usuario);
+    public Reserva(Usuario usuario, Titulo tituloEscogido, LocalDate fechaReserva, LocalDate fechaDevolucion) {
+        super(usuario, tituloEscogido);
         this.fechaReserva = fechaReserva;
         this.fechaDevolucion = fechaDevolucion;
     }

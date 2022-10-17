@@ -33,7 +33,7 @@ public class UiMenu {
 
 
             Scanner sc = new Scanner(System.in);
-            respuesta = sc.nextLine();
+            respuesta = (String) sc.nextLine();
 
             switch (respuesta){
                 case "1":
@@ -64,6 +64,6 @@ public class UiMenu {
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
             }
-        }while(respuesta!="0");
+        }while(!respuesta.equals("0"));
     }
 }

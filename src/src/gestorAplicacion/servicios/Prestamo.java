@@ -2,6 +2,7 @@ package gestorAplicacion.servicios;
 
 import gestorAplicacion.libreria.Libro;
 import gestorAplicacion.libreria.Revista;
+import gestorAplicacion.libreria.Titulo;
 
 import java.util.Date;
 
@@ -10,8 +11,8 @@ public class Prestamo extends Servicio{
 
     //Constructores
 
-    public Prestamo(Usuario usuario, Date fecha) {
-        super(usuario);
+    public Prestamo(Usuario usuario, Titulo tituloEscogido, Date fecha) {
+        super(usuario, tituloEscogido);
         this.fecha = fecha;
     }
 

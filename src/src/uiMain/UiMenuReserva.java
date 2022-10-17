@@ -258,7 +258,7 @@ public class UiMenuReserva {
     //el usuario reservó. Se le pasan esos parámetros porque son necesarios en el contexto del método//
     public static void generarReservaLibro(int resp_submenu, LocalDate fecha_reserva, LocalDate fecha_devolucion){
         String nombre_libro = Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro().getNombre();
-        Reserva reserva = new Reserva(UiMenu.getUsuario(), fecha_reserva, fecha_devolucion);
+        Reserva reserva = new Reserva(UiMenu.getUsuario(), Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro(),fecha_reserva, fecha_devolucion);
         int id_reserva = (int) (Math.random() * 10000);
         Tiquete tiquete = new Tiquete(reserva, id_reserva);
         Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setReserva(reserva);
@@ -273,7 +273,7 @@ public class UiMenuReserva {
 
     public static void generarReservaRevista(int resp_submenu, LocalDate fecha_reserva, LocalDate fecha_devolucion){
         String nombre_revista = Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista().getNombre();
-        Reserva reserva = new Reserva(UiMenu.getUsuario(), fecha_reserva, fecha_devolucion);
+        Reserva reserva = new Reserva(UiMenu.getUsuario(), Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista(),fecha_reserva, fecha_devolucion);
         int id_reserva = (int) (Math.random() * 10000);
         Tiquete tiquete = new Tiquete(reserva, id_reserva);
         Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setReserva(reserva);

@@ -49,8 +49,8 @@ public class UiMenuPrestamo {
     }
 
     public static void generarPrestamoLibro(int resp_submenu){
-        String nombre_libro = Servicio.ejemplarLibroDisponibles.get(resp_submenu-1).getLibro().getNombre();
-        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), new Date());
+        String nombre_libro = Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro().getNombre();
+        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getLibro(),new Date());
         int id_prestamo = (int)(Math.random() * 10000);
         Tiquete tiquete = new Tiquete(prestamo, id_prestamo);
         Servicio.ejemplarLibroDisponibles.get(resp_submenu-1).getEstadoEjemplar().setPrestamo(prestamo);
@@ -62,8 +62,8 @@ public class UiMenuPrestamo {
     }
 
     public static void generarPrestamoRevista(int resp_submenu){
-        String nombre_revista = Servicio.ejemplarRevistaDisponibles.get(resp_submenu-1).getRevista().getNombre();
-        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), new Date());
+        String nombre_revista = Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista().getNombre();
+        Prestamo prestamo = new Prestamo(UiMenu.getUsuario(), Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getRevista(),new Date());
         int id_prestamo = (int)(Math.random() * 10000);
         Tiquete tiquete = new Tiquete(prestamo, id_prestamo);
         Servicio.ejemplarRevistaDisponibles.get(resp_submenu-1).getEstadoEjemplar().setPrestamo(prestamo);

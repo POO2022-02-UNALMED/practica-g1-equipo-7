@@ -59,8 +59,6 @@ public class UiMenuBusqueda {
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         } while (respuesta != 0);
-
-        UiMenu.showMenu();
     }
 
     private static void buscarLibro() {

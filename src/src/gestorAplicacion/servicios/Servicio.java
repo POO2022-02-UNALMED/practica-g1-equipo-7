@@ -16,8 +16,9 @@ public abstract class Servicio {
 
     //Constructores
 
-    public Servicio(Usuario usuario) {
+    public Servicio(Usuario usuario, Titulo tituloEscogido) {
         this.usuario = usuario;
+        this.tituloEscogido = tituloEscogido;
     }
 
     //getters y setters
@@ -54,4 +55,5 @@ public abstract class Servicio {
     }
 
 //metodos
+
 }
