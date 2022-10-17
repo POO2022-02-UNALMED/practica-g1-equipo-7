@@ -114,13 +114,12 @@ public class UiMenuBusqueda {
             }
         } while (!respuesta.equals("0"));
 
-        System.out.println("");
-        System.out.println("::Resultado de los libros encontados");
-
         if (resultadoBusqueda.size() == 0){
             JOptionPane.showMessageDialog(null, "No se encontraron resultados");
             //System.out.println("No se encontraron resultados");
         }else {
+            System.out.println("::Resultado de los libros encontrados");
+            System.out.println("");
             for (int i = 0; i < resultadoBusqueda.size(); i++) {
                 System.out.println((i+1) + ". " + resultadoBusqueda.get(i));
             }
@@ -179,13 +178,15 @@ public class UiMenuBusqueda {
             }
         } while (!respuesta.equals("0"));
 
-        System.out.println("");
-        System.out.println("::Resultado de las revistas encontradas");
+
         if (resultadoBusqueda.size() == 0){
             JOptionPane.showMessageDialog(null, "No se encontraron resultados");
             //System.out.println("No se encontraron resultados");
         }else{
+            System.out.println("::Resultado de las revistas encontradas");
+            System.out.println("");
             for (int i = 0; i < resultadoBusqueda.size(); i++) {
+
                 System.out.println((i+1) + ". " + resultadoBusqueda.get(i));
             }
         }

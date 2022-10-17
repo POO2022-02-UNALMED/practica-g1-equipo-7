@@ -24,7 +24,7 @@ public class UiMenuPrestamo {
             System.out.println("1. Prestar Libro");
             System.out.println("2. Prestar Revista");
             System.out.println("0. Regresar");
-            System.out.println("");
+
 
             Scanner sc = new Scanner(System.in);
             respuesta = sc.nextLine();
