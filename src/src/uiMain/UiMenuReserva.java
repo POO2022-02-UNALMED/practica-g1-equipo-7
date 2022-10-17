@@ -7,6 +7,7 @@ import gestorAplicacion.servicios.Reserva;
 import gestorAplicacion.servicios.Servicio;
 import gestorAplicacion.servicios.Tiquete;
 
+import javax.swing.*;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -40,7 +41,8 @@ public class UiMenuReserva {
                     UiMenu.showMenu();
                     break;
                 default:
-                    System.out.println("Por favor selecciona una de las opciones indicadas");
+                    JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
+                    //System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         }while (respuesta!=0);
     }
@@ -49,7 +51,8 @@ public class UiMenuReserva {
         Scanner sc = new Scanner(System.in);
 
         if(UiMenu.getUsuario().isMulta()) {
-            System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         }else{
 
             mostrarEjemplaresLibro();
@@ -59,7 +62,8 @@ public class UiMenuReserva {
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 1) {
-                    System.out.println("Por favor escoja un número valido");
+                    JOptionPane.showMessageDialog(null, "Por favor escoja un número valido");
+                    //System.out.println("Por favor escoja un número valido");
                 } else {
 
                      //Eleccion de las fechas
@@ -81,7 +85,8 @@ public class UiMenuReserva {
 
                     int opcion;
                     do {
-                        System.out.println("Cuanto tiempo lo va a reservar?");
+                        //System.out.println("Cuanto tiempo lo va a reservar?");
+                        JOptionPane.showMessageDialog(null, "¿Cuanto tiempo lo va a reservar?");
                         System.out.println("""
                                             1. 7 dias
                                             2. 14 dias
@@ -119,7 +124,9 @@ public class UiMenuReserva {
                             break;
 
                         case 4:
-                            System.out.println("Usted ha cancelado la operación");
+                            JOptionPane.showMessageDialog(null, "Usted ha cancelado la operación");
+                            //System.out.println("Usted ha cancelado la operación");
+
                             UiMenu.showMenu();
                             break;
                     }
@@ -136,7 +143,8 @@ public class UiMenuReserva {
         Scanner sc = new Scanner(System.in);
 
         if(UiMenu.getUsuario().isMulta()) {
-            System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         }else{
             mostrarEjemplaresRevista();
             int resp_submenu = 0;
@@ -200,7 +208,8 @@ public class UiMenuReserva {
                             break;
 
                         case 4:
-                            System.out.println("Usted ha cancelado la operación");
+                            JOptionPane.showMessageDialog(null, "Usted ha cancelado la operación");
+                            //System.out.println("Usted ha cancelado la operación");
                             UiMenu.showMenu();
                             break;
                     }

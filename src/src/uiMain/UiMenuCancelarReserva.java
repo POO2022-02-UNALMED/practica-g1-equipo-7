@@ -2,6 +2,7 @@ package uiMain;
 
 import gestorAplicacion.servicios.Reserva;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,13 +16,15 @@ public class UiMenuCancelarReserva {
 
             if(reservas.size() == 0){
                 System.out.println("\n\n");
-                System.out.println("Aun no realizas reservas");
+                JOptionPane.showMessageDialog(null, "Aun no realizas reservas");
+                //System.out.println("Aun no realizas reservas");
                 System.out.println("\n\n");
                 UiMenu.showMenu();
                 break;
             }
 
-            System.out.println("Selecciona la reserva que deseas cancelar");
+           // System.out.println("Selecciona la reserva que deseas cancelar");
+            JOptionPane.showMessageDialog(null, "Selecciona la reserva que deseas cancelar");
             System.out.println("\n\n");
             //Ciclo para recorrer la lista de prestamos y mostrar las opciones para reservar
             for (int i = 0; i < reservas.size(); i++) {
@@ -34,7 +37,9 @@ public class UiMenuCancelarReserva {
             respuesta = Integer.valueOf(sc.nextLine());
 
             if (respuesta<0 || respuesta>reservas.size()){
-                System.out.println("Por favor selecciona una de las opciones indicadas");
+                JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
+                //System.out.println("Por favor selecciona una de las opciones indicadas");
+
                 continue;
             } else if(respuesta==0){
                 UiMenu.showMenu();

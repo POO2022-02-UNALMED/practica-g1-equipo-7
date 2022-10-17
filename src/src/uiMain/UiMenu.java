@@ -18,7 +18,7 @@ public class UiMenu {
 
         System.out.println("\n");
         System.out.println(":: Bienvenido a la Biblioteca");
-        System.out.println("Selecciona la opción deseada");
+        System.out.println("Selecciona la opcion deseada");
         JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
         JOptionPane.showMessageDialog(null, "Selecciona una de las opciones:");
 
@@ -30,14 +30,6 @@ public class UiMenu {
             System.out.println("4. Hacer devolucion");
             System.out.println("5. Cancelar una reserva");
             System.out.println("0. Salir del sistema");
-            JOptionPane.showMessageDialog(null,
-                    "1. Hacer una consulta" +"\n"+
-                    "2. Realizar una reserva" +"\n"+
-                    "3. Realizar un prestamo" +"\n"+
-                    "4. Hacer devolución" +"\n"+
-                    "5. Cancelar una reserva" +"\n"+
-                    "0. Salir del sistema");
-
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.parseInt(sc.nextLine());

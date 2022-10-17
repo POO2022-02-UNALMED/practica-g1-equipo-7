@@ -9,6 +9,7 @@ import gestorAplicacion.servicios.Servicio;
 import gestorAplicacion.servicios.Tiquete;
 import gestorAplicacion.servicios.Usuario;
 
+import javax.swing.*;
 import java.io.Serial;
 import java.util.Date;
 import java.util.Scanner;
@@ -41,7 +42,8 @@ public class UiMenuPrestamo {
                     UiMenu.showMenu();
                     break;
                 default:
-                    System.out.println("Por favor selecciona una de las opciones indicadas");
+                    JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
+                   // System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         }while (respuesta!=0);
     }
@@ -77,7 +79,8 @@ public class UiMenuPrestamo {
         Scanner sc = new Scanner(System.in);
 
         if(UiMenu.getUsuario().isMulta()){
-            System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
+           // System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         }else{
 
             //Se le presenta una lista de ejemplares que puede prestar, para que escoja
@@ -91,13 +94,14 @@ public class UiMenuPrestamo {
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 1){
-                    System.out.println("Por favor escoja un número válido");
+                    JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
+                    //System.out.println("Por favor escoja un número válido");
                 }
                 else {
                     generarPrestamoLibro(resp_submenu);
                     System.out.println("\n");
-                                /*Escoge un número correcto y se le crea un tiquete, se le genera el préstamo y se agrega
-                              todo al usuario que hay en UiMain, además de quitar el Ejemplar*/
+                                // Escoge un número correcto y se le crea un tiquete, se le genera el préstamo y se agrega
+                                 // todo al usuario que hay en UiMain, además de quitar el Ejemplar
                     UiMenu.showMenu();
                 }
             }
@@ -107,7 +111,8 @@ public class UiMenuPrestamo {
     public static void prestarRevista(){
         Scanner sc = new Scanner(System.in);
         if(UiMenu.getUsuario().isMulta()){
-            System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         }else{
 
             //Se le presenta una lista de ejemplares que puede prestar, para que escoja
@@ -122,7 +127,8 @@ public class UiMenuPrestamo {
 
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 1){
-                    System.out.println("Por favor escoja un número válido");
+                    JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
+                    //System.out.println("Por favor escoja un número válido");
                 }
                 else {
                     generarPrestamoRevista(resp_submenu);
