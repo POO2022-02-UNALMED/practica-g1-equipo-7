@@ -1,11 +1,16 @@
 package gestorAplicacion.servicios;
 
+import gestorAplicacion.libreria.Libro;
+import gestorAplicacion.libreria.Revista;
+
 import java.time.LocalDate;
 import java.util.Date;
 
 public class Reserva extends Servicio{
     LocalDate fechaReserva;
     LocalDate fechaDevolucion;
+    Revista revista;
+    Libro libro;
 
     //Constructores
 
@@ -35,4 +40,15 @@ public class Reserva extends Servicio{
     }
 
     //metodos
+
+    @Override
+    public String toString() {
+        String msgTitulo = "";
+        if(this.getTituloEscogido() instanceof Libro){
+            msgTitulo = "Libro reservado: " + this.getTituloEscogido().getNombre();
+        } else if (this.getTituloEscogido() instanceof Revista) {
+            msgTitulo = "Revista reservada: " + this.getTituloEscogido().getNombre();
+        }
+        return (msgTitulo + " Fecha reserva: " + this.getFechaReserva() + " Fecha Devolucion: " + this.getFechaDevolucion());
+    }
 }

@@ -1,6 +1,7 @@
 package gestorAplicacion.servicios;
 
 
+import gestorAplicacion.libreria.Libro;
 import gestorAplicacion.libreria.Titulo;
 import gestorAplicacion.libreria.EjemplarRevista;
 import gestorAplicacion.libreria.EjemplarLibro;
@@ -51,7 +52,6 @@ public abstract class Servicio {
     public void setTituloEscogido(Titulo tituloEscogido) {
         this.tituloEscogido = tituloEscogido;
     }
+
 //metodos
-
-
 }
