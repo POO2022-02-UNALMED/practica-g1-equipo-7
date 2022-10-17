@@ -22,7 +22,7 @@ public class UiMenu {
         JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
         JOptionPane.showMessageDialog(null, "Selecciona una de las opciones:");
 
-        int respuesta = 0;
+        String respuesta = "0";
         do {
             System.out.println("1. Hacer una consulta");
             System.out.println("2. Realizar una reserva");
@@ -31,31 +31,32 @@ public class UiMenu {
             System.out.println("5. Cancelar una reserva");
             System.out.println("0. Salir del sistema");
 
+
             Scanner sc = new Scanner(System.in);
-            respuesta = Integer.parseInt(sc.nextLine());
+            respuesta = sc.nextLine();
 
             switch (respuesta){
-                case 1:
-                    respuesta = 0;
+                case "1":
+                    respuesta = "0";
                     UiMenuBusqueda.showMenuBusqueda();
                     break;
-                case 2:
-                    respuesta = 0;
+                case "2":
+                    respuesta = "0";
                     UiMenuReserva.showMenuReserva();
                     break;
-                case 3:
-                    respuesta = 0;
+                case "3":
+                    respuesta = "0";
                     UiMenuPrestamo.showMenuPrestamo();
                     break;
-                case 4:
-                    respuesta = 0;
+                case "4":
+                    respuesta = "0";
                     UiMenuDevoluciones.showMenuDevoluciones();
                     break;
-                case 5:
-                    respuesta = 0;
+                case "5":
+                    respuesta = "0";
                     UiMenuCancelarReserva.showMenuCancelarReserva();
                     break;
-                case 0:
+                case "0":
                     //System.out.println("Gracias por visitarnos");
                     JOptionPane.showMessageDialog(null, "Gracias por visitarnos");
                     break;
@@ -63,6 +64,6 @@ public class UiMenu {
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
             }
-        }while(respuesta!=0);
+        }while(respuesta!="0");
     }
 }
