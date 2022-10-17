@@ -231,6 +231,12 @@ public class UiMenuBusqueda {
         }
     }
 
+    /**
+     * Esta funcion se encarga de filtrar los libros creados de la clase libros según el filtro pasado como parametro
+     * @param filtro
+     * @param palabra
+     * @return
+     */
     private static ArrayList<Libro> filtrarLibros(String filtro, String palabra) {
         ArrayList<Libro> resultadosBusqueda = new ArrayList<>();
         palabra = palabra.toLowerCase();

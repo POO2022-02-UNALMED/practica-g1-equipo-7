@@ -1,5 +1,8 @@
 package gestorAplicacion.servicios;
 
+import gestorAplicacion.libreria.Libro;
+import gestorAplicacion.libreria.Revista;
+
 import java.util.Date;
 
 public class Prestamo extends Servicio{
@@ -22,4 +25,14 @@ public class Prestamo extends Servicio{
     }
 
     //metodos
+    @Override
+    public String toString() {
+        String msgTitulo = "";
+        if (this.getTituloEscogido() instanceof Libro) {
+            msgTitulo = "Libro reservado: " + this.getTituloEscogido().getNombre();
+        } else if (this.getTituloEscogido() instanceof Revista) {
+            msgTitulo = "Revista reservada: " + this.getTituloEscogido().getNombre();
+        }
+        return (msgTitulo + " Fecha prestamo: " + this.getFecha());
+    }
 }
