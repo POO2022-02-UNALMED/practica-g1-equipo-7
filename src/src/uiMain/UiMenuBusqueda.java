@@ -21,7 +21,7 @@ public class UiMenuBusqueda {
         JOptionPane.showMessageDialog(null, "¿Que deseas consultar?");
         //System.out.println("¿Que deseas consultar?");
 
-        int respuesta = 0;
+        String respuesta = "0";
         do {
             System.out.println("");
             System.out.println("1. Buscar Libro");
@@ -32,33 +32,33 @@ public class UiMenuBusqueda {
 
 
             Scanner sc = new Scanner(System.in);
-            respuesta = Integer.valueOf(sc.nextLine());
+            respuesta = sc.nextLine();
 
             switch (respuesta) {
-                case 1:
-                    respuesta = 0;
+                case "1":
+                    respuesta = "0";
                     buscarLibro();
                     break;
-                case 2:
-                    respuesta = 0;
+                case "2":
+                    respuesta = "0";
                     buscarRevista();
                     break;
-                case 3:
-                    respuesta = 0;
+                case "3":
+                    respuesta = "0";
                     consultarPrestamos();
                     break;
-                case 4:
-                    respuesta = 0;
+                case "4":
+                    respuesta = "0";
                     consultarReservas();
                     break;
-                case 0:
+                case "0":
                     UiMenu.showMenu();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
             }
-        } while (respuesta != 0);
+        } while (!respuesta.equals("0"));
     }
 
     private static void buscarLibro() {

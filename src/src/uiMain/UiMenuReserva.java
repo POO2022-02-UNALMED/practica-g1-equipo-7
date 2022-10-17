@@ -17,7 +17,7 @@ public class UiMenuReserva {
     public static void showMenuReserva(){
         System.out.println(":: Reservas");
 
-        int respuesta = 0;
+        String respuesta="0";
         do {
             System.out.println("");
             System.out.println("1. Reservar Libro");
@@ -26,25 +26,25 @@ public class UiMenuReserva {
             System.out.println("");
 
             Scanner sc = new Scanner(System.in);
-            respuesta = Integer.parseInt(sc.nextLine());
+            respuesta = sc.nextLine();
 
             switch (respuesta){
-                case 1:
-                    respuesta = 0;
+                case "1":
+                    respuesta = "0";
                     reservarLibro();
                     break;
-                case 2:
-                    respuesta = 0;
+                case "2":
+                    respuesta = "0";
                     reservarRevista();
                     break;
-                case 0:
+                case "0":
                     UiMenu.showMenu();
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
             }
-        }while (respuesta!=0);
+        }while (!respuesta.equals("0"));
     }
 
     public static void reservarLibro(){
