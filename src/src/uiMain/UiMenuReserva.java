@@ -54,16 +54,19 @@ public class UiMenuReserva {
         }else{
 
             mostrarEjemplaresLibro();
+            System.out.println("0. Regresar");
 
             int resp_submenu = 0;
-            while (resp_submenu < 1 || resp_submenu >= Servicio.ejemplarLibroDisponibles.size() ) {
+            do {
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
-                if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 1) {
+                if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 0) {
                     System.out.println("Por favor escoja un número valido");
+                } else if (resp_submenu == 0) {
+                    showMenuReserva();
                 } else {
 
-                     //Eleccion de las fechas
+                    //Eleccion de las fechas
                     System.out.println("Para que dia lo quiere reservar? (1-30)");
                     int dia_reserva = Integer.parseInt(sc.nextLine());
                     System.out.println("Para que mes lo quiere reservar? (1-12)");
@@ -143,10 +146,12 @@ public class UiMenuReserva {
                     }
 
                     generarReservaLibro(resp_submenu, fecha_reserva, fecha_devolucion);
+                    //Control para termiar el ciclo
+                    resp_submenu = 0;
                     System.out.println("\n");
-                    UiMenu.showMenu();
                 }
-            }
+
+            }while (resp_submenu!=0);
         }
     }
 
@@ -157,13 +162,16 @@ public class UiMenuReserva {
             System.out.println("Lo sentimos, no puede realizar esta accion porque tiene una multa");
         }else{
             mostrarEjemplaresRevista();
+            System.out.println("0. Regresar");
             int resp_submenu = 0;
-            while (resp_submenu < 1 || resp_submenu >= Servicio.ejemplarRevistaDisponibles.size() ) {
+            do {
                 System.out.println("");
                 System.out.println("Cual quiere reservar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
-                if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 1) {
+                if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 0) {
                     System.out.println("Por favor escoja un número valido");
+                } else if (resp_submenu == 0) {
+                    showMenuReserva();
                 } else {
                     System.out.println("Para que dia la quiere reservar? (1-30)");
                     int dia_reserva = Integer.parseInt(sc.nextLine());
@@ -244,12 +252,10 @@ public class UiMenuReserva {
                     }
 
                     generarReservaRevista(resp_submenu, fecha_reserva, fecha_devolucion);
+                    resp_submenu = 0;
                     System.out.println("\n");
-                    UiMenu.showMenu();
-
-
                 }
-            }
+            }while (resp_submenu!=0);
 
         }
 
@@ -284,11 +290,14 @@ public class UiMenuReserva {
         Tiquete tiquete = new Tiquete(reserva, id_reserva);
         Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setReserva(reserva);
         Servicio.ejemplarLibroDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setReservado(true);
+        Servicio.ejemplarLibroDisponibles.remove(resp_submenu - 1);
         UiMenu.getUsuario().getReservas().add(reserva);
         UiMenu.getUsuario().getTiquetes().add(tiquete);
 
         System.out.println("Se ha realizado con exito su reserva del libro " + nombre_libro +
                 ". El id de esta operacion es " + id_reserva + "\n");
+
+        UiMenu.showMenu();
 
     }
 
@@ -299,12 +308,14 @@ public class UiMenuReserva {
         Tiquete tiquete = new Tiquete(reserva, id_reserva);
         Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setReserva(reserva);
         Servicio.ejemplarRevistaDisponibles.get(resp_submenu - 1).getEstadoEjemplar().setReservado(true);
+        Servicio.ejemplarRevistaDisponibles.remove(resp_submenu - 1);
         UiMenu.getUsuario().getReservas().add(reserva);
         UiMenu.getUsuario().getTiquetes().add(tiquete);
 
         System.out.println("Se ha realizado con exito su reserva de la revista " + nombre_revista +
                 ". El id de esta operacion es " + id_reserva + "\n");
 
-    }
+        UiMenu.showMenu();
 
+    }
 }
