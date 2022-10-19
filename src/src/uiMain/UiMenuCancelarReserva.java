@@ -51,6 +51,14 @@ public class UiMenuCancelarReserva {
     }
 
     private static void cancelarReserva(int indiceCancelarReserva){
+        /*LO QUE HAY QUE HACER AQUÍ:
+        acordémonos que para indexar
+        tiene que ser con un -1 (respuesta-1) porque la lista empieza en 0.
+         Luego, lo que tenemos que hacer es primero acceder a la lista de reservas y quitarla. Luego
+         hay que quitar también el tiquete correspondiente a esa reserva.
+         Para esto último hay que coger el servicio correspondiente a esa reserva y
+         compararlo con la lista de tiquetes de Usuario, hacerle getServicio a cada uno de ellos ver cuál es el mismo
+         */
 
     }
 }
