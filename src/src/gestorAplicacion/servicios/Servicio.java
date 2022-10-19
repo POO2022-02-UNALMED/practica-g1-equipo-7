@@ -54,6 +54,9 @@ public abstract class Servicio {
         this.tituloEscogido = tituloEscogido;
     }
 
-//metodos
-
+    //metodos
+    //Metodo que implementa la ligadura dinamica
+    public String mostrarTituloEscogido(){
+        return (this.getTituloEscogido().mostrarse());
+    }
 }

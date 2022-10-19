@@ -26,14 +26,9 @@ public class Prestamo extends Servicio{
     }
 
     //metodos
+
     @Override
     public String toString() {
-        String msgTitulo = "";
-        if (this.getTituloEscogido() instanceof Libro) {
-            msgTitulo = "Libro prestado: " + this.getTituloEscogido().getNombre();
-        } else if (this.getTituloEscogido() instanceof Revista) {
-            msgTitulo = "Revista prestado: " + this.getTituloEscogido().getNombre();
-        }
-        return (msgTitulo + " Fecha prestamo: " + this.getFecha());
+        return (this.mostrarTituloEscogido()+ " Fecha prestamo: " + this.getFecha());
     }
 }

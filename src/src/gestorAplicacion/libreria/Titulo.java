@@ -39,4 +39,7 @@ public abstract class Titulo {
     public void setISBN(int ISBN) {
         this.ISBN = ISBN;
     }
+
+    //Metodo abstracto
+    public abstract String mostrarse();
 }

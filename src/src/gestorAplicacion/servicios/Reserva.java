@@ -42,12 +42,6 @@ public class Reserva extends Servicio{
 
     @Override
     public String toString() {
-        String msgTitulo = "";
-        if(this.getTituloEscogido() instanceof Libro){
-            msgTitulo = "Libro reservado: " + this.getTituloEscogido().getNombre();
-        } else if (this.getTituloEscogido() instanceof Revista) {
-            msgTitulo = "Revista reservada: " + this.getTituloEscogido().getNombre();
-        }
-        return (msgTitulo + " Fecha reserva: " + this.getFechaReserva() + " Fecha Devolucion: " + this.getFechaDevolucion());
+        return (this.mostrarTituloEscogido() + " Fecha reserva: " + this.getFechaReserva() + " Fecha Devolucion: " + this.getFechaDevolucion());
     }
 }

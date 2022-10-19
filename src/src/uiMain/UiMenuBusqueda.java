@@ -38,18 +38,22 @@ public class UiMenuBusqueda {
                 case "1":
                     respuesta = "0";
                     buscarLibro();
+                    showMenuBusqueda();
                     break;
                 case "2":
                     respuesta = "0";
                     buscarRevista();
+                    showMenuBusqueda();
                     break;
                 case "3":
                     respuesta = "0";
                     consultarPrestamos();
+                    showMenuBusqueda();
                     break;
                 case "4":
                     respuesta = "0";
                     consultarReservas();
+                    showMenuBusqueda();
                     break;
                 case "0":
                     UiMenu.showMenu();
@@ -198,7 +202,6 @@ public class UiMenuBusqueda {
             for (int i = 0; i < prestamos.size(); i++) {
                 System.out.println((i+1) + ". " + prestamos.get(i));
             }
-            showMenuBusqueda();
         }
     }
 
@@ -214,7 +217,6 @@ public class UiMenuBusqueda {
             for (int i = 0; i < reservas.size(); i++) {
                 System.out.println((i+1) + ". " + reservas.get(i));
             }
-            showMenuBusqueda();
         }
     }
 

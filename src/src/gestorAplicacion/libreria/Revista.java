@@ -52,4 +52,10 @@ public class Revista extends Titulo{
     public String toString(){
         return "nombre: " + this.getNombre() + " autor: " + this.getAutor() + " ISBN: " + this.getISBN() + " Categoria: " + categoria;
     }
+
+    //Metodo abstracto
+    @Override
+    public String mostrarse() {
+        return ("Revista: " + this.getNombre() + " Escrita por: " + this.getAutor());
+    }
 }

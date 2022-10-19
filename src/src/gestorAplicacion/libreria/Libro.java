@@ -40,11 +40,15 @@ public class Libro extends Titulo{
     public static void setLibros(ArrayList<Libro> libros) {
         Libro.libros = libros;
     }
-//Metodos
+    //Metodos
 
     public String toString(){
         return "nombre: " + getNombre() + " autor: " + getAutor() + " ISBN: " + getISBN() + " genero: " + genero;
     }
 
-
+    //Metodo abstracto
+    @Override
+    public String mostrarse() {
+        return ("Libro: " + this.getNombre() + " Escrito por: " + this.getAutor());
+    }
 }
