@@ -18,14 +18,12 @@ public class UiMenuDevoluciones {
         do {
 
             if(prestamos.size() == 0){
-                JOptionPane.showMessageDialog(null, "Aun no realizas prestamos");
-                //System.out.println("Aun no realizas prestamos");
+                System.out.println("Aun no realizas prestamos");
                 UiMenu.showMenu();
                 break;
             }
 
-            //System.out.println("Selecciona el titulo que deseas devolver");
-            JOptionPane.showMessageDialog(null, "Selecciona el titulo que deseas devolver");
+            System.out.println("Selecciona el titulo que deseas devolver");
             //Ciclo para recorrer la lista de prestamos y mostrar las opciones para devolver
             System.out.println("");
             for (int i = 0; i < prestamos.size(); i++) {
@@ -37,8 +35,8 @@ public class UiMenuDevoluciones {
             respuesta = Integer.valueOf(sc.nextLine());
 
             if (respuesta<0 || respuesta>prestamos.size()){
-                //System.out.println("Por favor selecciona una de las opciones indicadas");
-                JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
+                System.out.println("Por favor selecciona una de las opciones indicadas");
+
                 continue;
             } else if(respuesta==0){
                 UiMenu.showMenu();

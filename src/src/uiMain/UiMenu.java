@@ -22,7 +22,7 @@ public class UiMenu {
         System.out.println("Selecciona la opcion deseada");
         System.out.println("");
         //JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
-        JOptionPane.showMessageDialog(null, "Selecciona una de las opciones:");
+        System.out.println("Selecciona una de las opciones");
 
         String respuesta = "0";
         do {
@@ -60,11 +60,11 @@ public class UiMenu {
                     break;
                 case "0":
                     //System.out.println("Gracias por visitarnos");
-                    JOptionPane.showMessageDialog(null, "Gracias por visitarnos");
+                    System.out.println("Gracias por visitarnos");
                     break;
                 default:
                     //System.out.println("Por favor selecciona una de las opciones indicadas");
-                    JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
+                    System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         }while(!respuesta.equals("0"));
     }

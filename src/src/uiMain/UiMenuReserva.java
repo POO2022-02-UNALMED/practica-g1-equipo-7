@@ -41,8 +41,7 @@ public class UiMenuReserva {
                     UiMenu.showMenu();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
-                    //System.out.println("Por favor selecciona una de las opciones indicadas");
+                    System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         }while (!respuesta.equals("0"));
     }
@@ -51,8 +50,7 @@ public class UiMenuReserva {
         Scanner sc = new Scanner(System.in);
 
         if(UiMenu.getUsuario().isMulta()) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
-            //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            System.out.println("Lo sentimos, no puede realizar esta accion porque tiene una multa");
         }else{
 
             mostrarEjemplaresLibro();
@@ -62,8 +60,7 @@ public class UiMenuReserva {
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 1) {
-                    JOptionPane.showMessageDialog(null, "Por favor escoja un número valido");
-                    //System.out.println("Por favor escoja un número valido");
+                    System.out.println("Por favor escoja un número valido");
                 } else {
 
                      //Eleccion de las fechas
@@ -85,8 +82,7 @@ public class UiMenuReserva {
 
                     int opcion;
                     do {
-                        //System.out.println("Cuanto tiempo lo va a reservar?");
-                        JOptionPane.showMessageDialog(null, "¿Cuanto tiempo lo va a reservar?");
+                        System.out.println("Cuanto tiempo lo va a reservar?");
                         System.out.println("""
                                             1. 7 dias
                                             2. 14 dias
@@ -141,9 +137,7 @@ public class UiMenuReserva {
                             break;
 
                         case 4:
-                            JOptionPane.showMessageDialog(null, "Usted ha cancelado la operación");
-                            //System.out.println("Usted ha cancelado la operación");
-
+                            System.out.println("Usted ha cancelado la operacion");
                             UiMenu.showMenu();
                             break;
                     }
@@ -160,14 +154,13 @@ public class UiMenuReserva {
         Scanner sc = new Scanner(System.in);
 
         if(UiMenu.getUsuario().isMulta()) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
-            //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            System.out.println("Lo sentimos, no puede realizar esta accion porque tiene una multa");
         }else{
             mostrarEjemplaresRevista();
             int resp_submenu = 0;
             while (resp_submenu < 1 || resp_submenu >= Servicio.ejemplarRevistaDisponibles.size() ) {
                 System.out.println("");
-                System.out.println("¿Cual quiere reservar?");
+                System.out.println("Cual quiere reservar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 1) {
                     System.out.println("Por favor escoja un número valido");
@@ -217,13 +210,6 @@ public class UiMenuReserva {
                             }
                             break;
 
-                          /*  if (dias_devolucion > 30) {
-                                mes_reserva++;
-                                dias_devolucion = dias_devolucion - 30;
-
-                            }
-                            fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            break;*/
 
                         case 2:
                             dias_devolucion = dia_reserva + 14;
@@ -251,8 +237,8 @@ public class UiMenuReserva {
                             break;
 
                         case 4:
-                            JOptionPane.showMessageDialog(null, "Usted ha cancelado la operación");
-                            //System.out.println("Usted ha cancelado la operación");
+
+                            System.out.println("Usted ha cancelado la operación");
                             UiMenu.showMenu();
                             break;
                     }

@@ -42,8 +42,7 @@ public class UiMenuPrestamo {
                     UiMenu.showMenu();
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "Por favor selecciona una de las opciones indicadas");
-                    // System.out.println("Por favor selecciona una de las opciones indicadas");
+                    System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         } while (!respuesta.equals("0"));
     }
@@ -85,8 +84,7 @@ public class UiMenuPrestamo {
         Scanner sc = new Scanner(System.in);
 
         if (UiMenu.getUsuario().isMulta()) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
-            // System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         } else if (Servicio.ejemplarLibroDisponibles.size() == 0) {
             System.out.println("No hay libros disponibles");
         } else {
@@ -105,8 +103,7 @@ public class UiMenuPrestamo {
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 0) {
-                    //JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
-                    System.out.println("Por favor escoja un número válido");
+                    System.out.println("Por favor escoja un número valido");
                 } else if (resp_submenu == 0) {
                     showMenuPrestamo();
                 } else {
@@ -117,30 +114,13 @@ public class UiMenuPrestamo {
                     // todo al usuario que hay en UiMain, además de quitar el Ejemplar
                 }
             } while (resp_submenu != 0);
-
-            /*
-            while (resp_submenu < 1 || resp_submenu > Servicio.ejemplarLibroDisponibles.size() ){
-                System.out.println("Cual quiere prestar?");
-                resp_submenu = Integer.parseInt(sc.nextLine());
-                if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 1){
-                    //JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
-                    System.out.println("Por favor escoja un número válido");
-                }
-                else {
-                    generarPrestamoLibro(resp_submenu);
-                    System.out.println("\n");
-                                // Escoge un número correcto y se le crea un tiquete, se le genera el préstamo y se agrega
-                                 // todo al usuario que hay en UiMain, además de quitar el Ejemplar
-                }
-             }*/
         }
     }
 
     public static void prestarRevista() {
         Scanner sc = new Scanner(System.in);
         if (UiMenu.getUsuario().isMulta()) {
-            JOptionPane.showMessageDialog(null, "Lo sentimos, no puede realizar esta acción porque tiene una multa");
-            //System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
+            System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         } else if (Servicio.ejemplarRevistaDisponibles.size() == 0) {
             System.out.println("No hay Revistas disponibles");
         } else {
@@ -158,8 +138,7 @@ public class UiMenuPrestamo {
                 resp_submenu = Integer.parseInt(sc.nextLine());
 
                 if (resp_submenu > Servicio.ejemplarRevistaDisponibles.size() || resp_submenu < 0) {
-                    JOptionPane.showMessageDialog(null, "Por favor escoja un número válido");
-                    //System.out.println("Por favor escoja un número válido");
+                    System.out.println("Por favor escoja un número valido");
                 } else if (resp_submenu == 0) {
                     showMenuPrestamo();
                 } else {
