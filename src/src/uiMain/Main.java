@@ -12,20 +12,20 @@ public class Main {
 
         //Creacion de objetos
 
-        Libro libro_soledad = new Libro("100 anios de soledad", "Gabriel Garcia Marquez", 373512323, "Fantasia");
-        Libro libro_noches = new Libro("Las mil y una noches", "Varios autores",391212871, "Cuento");
-        Libro guerra_y_paz = new Libro("Guerra y paz", "Leon Tolstoi", 391212291, "Histórica");
-        Libro orgullo = new Libro("Orgullo y prejuicio","Jane Austen",391219123,"Novela");
-        Libro extranjero = new Libro("Extranjero", "Albert Camus",221212871,"Filosofia");
-        Libro esperanzas = new Libro("Grandes esperanzas","Charles Dickens",981212871,"Novela");
-        Libro el_hombre = new Libro("El hombre sin atributos","Robert Musil",398712871,"Novela");
+        Libro libro_soledad = new Libro("100 anios de soledad", "Gabriel Garcia Marquez", 373512323, GENERO.FANTASIA);
+        Libro libro_noches = new Libro("Las mil y una noches", "Varios autores",391212871, GENERO.CUENTO);
+        Libro guerra_y_paz = new Libro("Guerra y paz", "Leon Tolstoi", 391212291, GENERO.HISTORICA);
+        Libro orgullo = new Libro("Orgullo y prejuicio","Jane Austen",391219123,GENERO.NOVELA);
+        Libro extranjero = new Libro("Extranjero", "Albert Camus",221212871,GENERO.FILOSOFIA);
+        Libro esperanzas = new Libro("Grandes esperanzas","Charles Dickens",981212871,GENERO.NOVELA);
+        Libro el_hombre = new Libro("El hombre sin atributos","Robert Musil",398712871,GENERO.NOVELA);
 
 
-        Revista revista_viernes = new Revista("Viernes", "El Universal", 323823999, "Entretenimiento");
-        Revista revista_semana = new Revista("Revista Semana", "Semana", 278388654, "Entretenimiento");
-        Revista revista_3 = new Revista("Entretenimiento");
+        Revista revista_viernes = new Revista("Viernes", "El Universal", 323823999, CATEGORIA.ENTRETENIMIENTO);
+        Revista revista_semana = new Revista("Revista Semana", "Semana", 278388654, CATEGORIA.ENTRETENIMIENTO);
+        Revista revista_3 = new Revista(CATEGORIA.ENTRETENIMIENTO);
         Revista revista_4 = new Revista();
-        Revista revista_5 = new Revista("Politica");
+        Revista revista_5 = new Revista(CATEGORIA.POLITICA);
 
         EjemplarLibro EjLibro1 = new EjemplarLibro(29392,new EstadoEjemplar(false,false,false,null,null), libro_soledad);
         EjemplarLibro EjLibro2 = new EjemplarLibro(29299,new EstadoEjemplar(false,false,false,null,null), libro_noches);

@@ -3,21 +3,21 @@ package gestorAplicacion.libreria;
 import java.util.ArrayList;
 
 public class Revista extends Titulo{
-    private String categoria;
+    private CATEGORIA categoria;
     private ArrayList<EjemplarRevista> ejemplares = new ArrayList<>();
 
     //Lista de revistas existentes
     private static ArrayList<Revista> revistas = new ArrayList<>();
 
-    public Revista(String categoria) {
+    public Revista(CATEGORIA categoria) {
         this("Independiente","Escritor anónimo",(int) (Math.random() * 10000), categoria);
     }
 
     public Revista() {
-        this("Revista UNAL","Universidad Nacional de Colombia", (int) (Math.random() * 10000),"Actualidad");
+        this("Revista UNAL","Universidad Nacional de Colombia", (int) (Math.random() * 10000),CATEGORIA.ACTUALIDAD);
     }
 
-    public Revista(String nombre, String autor, int ISBN, String categoria) {
+    public Revista(String nombre, String autor, int ISBN, CATEGORIA categoria) {
         super(nombre, autor, ISBN);
         this.categoria = categoria;
         revistas.add(this);
@@ -25,11 +25,11 @@ public class Revista extends Titulo{
 
     //setters y getters
 
-    public String getCategoria() {
+    public CATEGORIA getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CATEGORIA categoria) {
         this.categoria = categoria;
     }
 

@@ -3,13 +3,13 @@ package gestorAplicacion.libreria;
 import java.util.ArrayList;
 
 public class Libro extends Titulo{
-    private String genero;
+    private GENERO genero;
     private  ArrayList<EjemplarLibro> ejemplares = new ArrayList<>();
 
     //Libros existentes
     private static ArrayList<Libro> libros = new ArrayList<>();
 
-    public Libro(String nombre, String autor, int ISBN, String genero) {
+    public Libro(String nombre, String autor, int ISBN,  GENERO genero) {
         super(nombre, autor, ISBN);
         this.genero = genero;
         libros.add(this);
@@ -17,11 +17,11 @@ public class Libro extends Titulo{
 
     //getters y setters
 
-    public String getGenero() {
+    public GENERO getGenero() {
         return genero;
     }
 
-    public void setGenero(String genero) {
+    public void setGenero(GENERO genero) {
         this.genero = genero;
     }
 
