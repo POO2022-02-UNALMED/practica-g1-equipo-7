@@ -5,11 +5,15 @@ import gestorAplicacion.servicios.Prestamo;
 import gestorAplicacion.servicios.Reserva;
 import gestorAplicacion.servicios.Servicio;
 import gestorAplicacion.servicios.Usuario;
+import static gestorAplicacion.libreria.Libro.filtrarLibros;
+import static gestorAplicacion.libreria.Revista.filtrarRevistas;
 
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
+
+
 
 public class UiMenuBusqueda {
     public static void showMenuBusqueda() {
@@ -235,64 +239,12 @@ public class UiMenuBusqueda {
     }
 
     /**
-     * Esta funcion se encarga de filtrar los libros creados de la clase libros segÃºn el filtro pasado como parametro
+     * Esta funcion se encarga de filtrar los libros creados de la clase libros segun el filtro pasado como parametro
      * @param filtro
      * @param palabra
      * @return
      */
-    private static ArrayList<Libro> filtrarLibros(String filtro, String palabra) {
-        ArrayList<Libro> resultadosBusqueda = new ArrayList<>();
-        palabra = palabra.toLowerCase();
 
-        switch (filtro) {
-            case "nombre":
-                for (Libro libro:Libro.getLibros()) {
-                    if (libro.getNombre().toLowerCase().contains(palabra)){resultadosBusqueda.add(libro);}
-                }
-                break;
-            case "autor":
-                for (Libro libro:Libro.getLibros()) {
-                    if (libro.getAutor().toLowerCase().contains(palabra)){resultadosBusqueda.add(libro);}
-                }
-                break;
-            case "genero":
-                GENERO generoElegido = GENERO.values()[Integer.valueOf(palabra)-1];
-                for (Libro libro:Libro.getLibros()) {
-                    if (libro.getGenero().equals(generoElegido)){
-                        resultadosBusqueda.add(libro);
-                    }
-                }
-                break;
-        }
 
-        return resultadosBusqueda;
-    }
 
-    private static ArrayList<Revista> filtrarRevistas(String filtro, String palabra){
-        ArrayList<Revista> resultadosBusqueda = new ArrayList<>();
-        palabra = palabra.toLowerCase();
-
-        switch (filtro) {
-            case "nombre":
-                for (Revista revista:Revista.getRevistas()) {
-                    if (revista.getNombre().toLowerCase().contains(palabra)){resultadosBusqueda.add(revista);}
-                }
-                break;
-            case "autor":
-                for (Revista revista:Revista.getRevistas()) {
-                    if (revista.getAutor().toLowerCase().contains(palabra)){resultadosBusqueda.add(revista);}
-                }
-                break;
-            case "categoria":
-                CATEGORIA categoriaElegida = CATEGORIA.values()[Integer.valueOf(palabra)-1];
-                for (Revista revista: Revista.getRevistas()) {
-                    if (revista.getCategoria().equals(categoriaElegida)) {
-                        resultadosBusqueda.add(revista);
-                    }
-                }
-                break;
-        }
-
-        return resultadosBusqueda;
-    }
 }

@@ -42,6 +42,34 @@ public class Libro extends Titulo{
     }
     //Metodos
 
+    public static ArrayList<Libro> filtrarLibros(String filtro, String palabra) {
+        ArrayList<Libro> resultadosBusqueda = new ArrayList<>();
+        palabra = palabra.toLowerCase();
+
+        switch (filtro) {
+            case "nombre":
+                for (Libro libro:Libro.getLibros()) {
+                    if (libro.getNombre().toLowerCase().contains(palabra)){resultadosBusqueda.add(libro);}
+                }
+                break;
+            case "autor":
+                for (Libro libro:Libro.getLibros()) {
+                    if (libro.getAutor().toLowerCase().contains(palabra)){resultadosBusqueda.add(libro);}
+                }
+                break;
+            case "genero":
+                GENERO generoElegido = GENERO.values()[Integer.valueOf(palabra)-1];
+                for (Libro libro:Libro.getLibros()) {
+                    if (libro.getGenero().equals(generoElegido)){
+                        resultadosBusqueda.add(libro);
+                    }
+                }
+                break;
+        }
+
+        return resultadosBusqueda;
+    }
+
     public String toString(){
         return "nombre: " + getNombre() + " autor: " + getAutor() + " ISBN: " + getISBN() + " genero: " + genero;
     }

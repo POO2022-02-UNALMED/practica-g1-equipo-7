@@ -49,6 +49,37 @@ public class Revista extends Titulo{
         Revista.revistas = revistas;
     }
 
+    // funcion
+
+    public static ArrayList<Revista> filtrarRevistas(String filtro, String palabra){
+        ArrayList<Revista> resultadosBusqueda = new ArrayList<>();
+        palabra = palabra.toLowerCase();
+
+        switch (filtro) {
+            case "nombre":
+                for (Revista revista:Revista.getRevistas()) {
+                    if (revista.getNombre().toLowerCase().contains(palabra)){resultadosBusqueda.add(revista);}
+                }
+                break;
+            case "autor":
+                for (Revista revista:Revista.getRevistas()) {
+                    if (revista.getAutor().toLowerCase().contains(palabra)){resultadosBusqueda.add(revista);}
+                }
+                break;
+            case "categoria":
+                CATEGORIA categoriaElegida = CATEGORIA.values()[Integer.valueOf(palabra)-1];
+                for (Revista revista: Revista.getRevistas()) {
+                    if (revista.getCategoria().equals(categoriaElegida)) {
+                        resultadosBusqueda.add(revista);
+                    }
+                }
+                break;
+        }
+
+        return resultadosBusqueda;
+    }
+
+
     public String toString(){
         return "nombre: " + this.getNombre() + " autor: " + this.getAutor() + " ISBN: " + this.getISBN() + " Categoria: " + categoria;
     }
