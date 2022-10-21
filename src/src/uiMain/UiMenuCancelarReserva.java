@@ -1,6 +1,7 @@
 package uiMain;
 
 import gestorAplicacion.servicios.Reserva;
+import gestorAplicacion.servicios.Tiquete;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -45,20 +46,22 @@ public class UiMenuCancelarReserva {
             }else {
                 //Logica de devolcuion, el -1 es por el indice inicial en 0
                 cancelarReserva((respuesta-1));
+                System.out.println("Se ha cancelado satisfactoriamebte la reserva");
+                UiMenu.showMenu();
                 respuesta = 0;
             }
         }while(respuesta!=0);
     }
 
     private static void cancelarReserva(int indiceCancelarReserva){
-        /*LO QUE HAY QUE HACER AQUÍ:
-        acordémonos que para indexar
-        tiene que ser con un -1 (respuesta-1) porque la lista empieza en 0.
-         Luego, lo que tenemos que hacer es primero acceder a la lista de reservas y quitarla. Luego
-         hay que quitar también el tiquete correspondiente a esa reserva.
-         Para esto último hay que coger el servicio correspondiente a esa reserva y
-         compararlo con la lista de tiquetes de Usuario, hacerle getServicio a cada uno de ellos ver cuál es el mismo
-         */
-
+        Tiquete tiqueteVacio = null;
+        Reserva reservaAEliminar = UiMenu.getUsuario().getReservas().get(indiceCancelarReserva);
+        for (Tiquete tiquete: UiMenu.getUsuario().getTiquetes()){
+            if (tiquete.getServicio().equals(reservaAEliminar)){
+                tiqueteVacio = tiquete;
+            }
+        }
+        UiMenu.getUsuario().getReservas().remove(reservaAEliminar);
+        UiMenu.getUsuario().getTiquetes().remove(tiqueteVacio);
     }
 }
