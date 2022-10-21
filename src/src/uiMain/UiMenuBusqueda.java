@@ -1,9 +1,6 @@
 package uiMain;
 
-import gestorAplicacion.libreria.Ejemplar;
-import gestorAplicacion.libreria.Libro;
-import gestorAplicacion.libreria.Revista;
-import gestorAplicacion.libreria.Titulo;
+import gestorAplicacion.libreria.*;
 import gestorAplicacion.servicios.Prestamo;
 import gestorAplicacion.servicios.Reserva;
 import gestorAplicacion.servicios.Servicio;
@@ -82,7 +79,7 @@ public class UiMenuBusqueda {
 
 
             Scanner sc = new Scanner(System.in);
-             respuesta =  sc.nextLine();
+            respuesta =  sc.nextLine();
             //respuesta = Integer.valueOf(sc.nextLine());
 
             switch (respuesta) {
@@ -100,9 +97,18 @@ public class UiMenuBusqueda {
                     break;
                 case "3":
                     respuesta = "0";
-                    System.out.println("Escribe el genero del libro que buscas");
+                    System.out.println("");
+                    System.out.println("Selecciona el genero del libro que buscas");
+
+                    //Se recorre el Enum para mostrar las opciones
+                    int indice = 1;
+                    for (GENERO genero: GENERO.values()) {
+                        System.out.println(indice + ". " + genero);
+                        indice++;
+                    }
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarLibros("genero", palabraClave);
+
                     break;
                 case "0":
                     respuesta = "0";
@@ -163,15 +169,23 @@ public class UiMenuBusqueda {
                 case "3":
                     respuesta = "0";
                     System.out.println("");
-                    System.out.println("Escribe la categoria de la revista que buscas");
+                    System.out.println("Selecciona la categoria de la revista que buscas");
+
+                    //Se recorre el Enum para mostrar las opciones
+                    int indice = 1;
+                    for (CATEGORIA categoria: CATEGORIA.values()) {
+                        System.out.println(indice + ". " + categoria);
+                        indice++;
+                    }
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarRevistas("categoria", palabraClave);
+
                     break;
                 case "0":
                     showMenuBusqueda();
                     break;
                 default:
-                   System.out.println("Por favor selecciona una de las opciones indicadas");
+                    System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         } while (!respuesta.equals("0"));
 
@@ -221,7 +235,7 @@ public class UiMenuBusqueda {
     }
 
     /**
-     * Esta funcion se encarga de filtrar los libros creados de la clase libros según el filtro pasado como parametro
+     * Esta funcion se encarga de filtrar los libros creados de la clase libros segÃºn el filtro pasado como parametro
      * @param filtro
      * @param palabra
      * @return
@@ -242,8 +256,11 @@ public class UiMenuBusqueda {
                 }
                 break;
             case "genero":
+                GENERO generoElegido = GENERO.values()[Integer.valueOf(palabra)-1];
                 for (Libro libro:Libro.getLibros()) {
-                    if (libro.getGenero().toLowerCase().contains(palabra)){resultadosBusqueda.add(libro);}
+                    if (libro.getGenero().equals(generoElegido)){
+                        resultadosBusqueda.add(libro);
+                    }
                 }
                 break;
         }
@@ -267,8 +284,11 @@ public class UiMenuBusqueda {
                 }
                 break;
             case "categoria":
-                for (Revista revista:Revista.getRevistas()) {
-                    if (revista.getCategoria().toLowerCase().contains(palabra)){resultadosBusqueda.add(revista);}
+                CATEGORIA categoriaElegida = CATEGORIA.values()[Integer.valueOf(palabra)-1];
+                for (Revista revista: Revista.getRevistas()) {
+                    if (revista.getCategoria().equals(categoriaElegida)) {
+                        resultadosBusqueda.add(revista);
+                    }
                 }
                 break;
         }
