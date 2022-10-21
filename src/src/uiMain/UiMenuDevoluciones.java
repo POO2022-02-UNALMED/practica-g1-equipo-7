@@ -2,6 +2,7 @@ package uiMain;
 
 import gestorAplicacion.libreria.Titulo;
 import gestorAplicacion.servicios.Prestamo;
+import gestorAplicacion.servicios.Tiquete;
 import gestorAplicacion.servicios.Usuario;
 
 import javax.swing.*;
@@ -44,12 +45,24 @@ public class UiMenuDevoluciones {
             }else {
                 //Logica de devolcuion, el -1 es por el indice inicial en 0
                 devolucion((respuesta-1));
+                System.out.println("Devolucion realizada satisfactoriamente");
+                UiMenu.showMenu();
                 respuesta = 0;
             }
         }while (respuesta!=0);
     }
 
     private static void devolucion(int indiceTituloDevolucion){
+        Prestamo prestamoAEliminar = UiMenu.getUsuario().getPrestamos().get(indiceTituloDevolucion);
+        Tiquete tiqueteAEliminar = null;
 
+        for (Tiquete tiquete: UiMenu.getUsuario().getTiquetes()) {
+            if (tiquete.getServicio().equals(prestamoAEliminar)){
+                tiqueteAEliminar = tiquete;
+            }
+        }
+
+        UiMenu.getUsuario().getPrestamos().remove(prestamoAEliminar);
+        UiMenu.getUsuario().getTiquetes().remove((tiqueteAEliminar));
     }
 }
