@@ -9,28 +9,28 @@ import java.util.Scanner;
 public class UiMenuCancelarReserva {
     public static void showMenuCancelarReserva(){
         System.out.println(":: Cancelar Reserva");
-
+        System.out.println("");
         int respuesta = 0;
         ArrayList<Reserva> reservas= UiMenu.getUsuario().getReservas();
         do {
 
             if(reservas.size() == 0){
-                System.out.println("\n\n");
+                System.out.println("");
                 System.out.println("Aun no realizas reservas");
-                System.out.println("\n\n");
+                System.out.println("");
                 UiMenu.showMenu();
                 break;
             }
 
             System.out.println("Selecciona la reserva que deseas cancelar");
-
+            System.out.println("");
             //Ciclo para recorrer la lista de prestamos y mostrar las opciones para reservar
             for (int i = 0; i < reservas.size(); i++) {
                 System.out.println((i+1) + ". Nombre: " + reservas.get(i).getTituloEscogido().getNombre() + " Fecha de reserva: " +
                         reservas.get(i).getFechaReserva() + " Fecha de devolucion: " + reservas.get(i).getFechaDevolucion());
             }
             System.out.println("0. Regresar");
-            System.out.println("");
+
 
             Scanner sc = new Scanner(System.in);
             respuesta = Integer.valueOf(sc.nextLine());
@@ -45,6 +45,7 @@ public class UiMenuCancelarReserva {
             }else {
                 //Logica de devolcuion, el -1 es por el indice inicial en 0
                 cancelarReserva((respuesta-1));
+                UiMenu.showMenu();
                 respuesta = 0;
             }
         }while(respuesta!=0);

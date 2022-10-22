@@ -19,11 +19,9 @@ public class UiMenu {
         System.out.println("");
         System.out.println(":: Bienvenido a la Biblioteca");
         System.out.println("");
-        System.out.println("Selecciona la opcion deseada");
-        System.out.println("");
         //JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
         System.out.println("Selecciona una de las opciones");
-
+        System.out.println("");
         String respuesta = "0";
         do {
             System.out.println("1. Hacer una consulta");

@@ -19,8 +19,8 @@ public class UiMenuBusqueda {
     public static void showMenuBusqueda() {
         System.out.println("");
         System.out.println(":: Consulta");
+        System.out.println("");
         System.out.println("Que deseas consultar?");
-        //System.out.println("Que deseas consultar?");
 
         String respuesta = "0";
         do {
@@ -69,6 +69,7 @@ public class UiMenuBusqueda {
     private static void buscarLibro() {
         System.out.println("");
         System.out.println("::Buscar Libro");
+        System.out.println("");
         System.out.println("Que filtro deseas usar?");
 
         String respuesta = "0";
@@ -138,6 +139,7 @@ public class UiMenuBusqueda {
     private static void buscarRevista(){
         System.out.println("");
         System.out.println("::Buscar Revista");
+        System.out.println("");
         System.out.println("Que filtro deseas usar?");
 
         String respuesta = "0";

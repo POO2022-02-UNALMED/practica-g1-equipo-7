@@ -23,7 +23,6 @@ public class UiMenuReserva {
             System.out.println("1. Reservar Libro");
             System.out.println("2. Reservar Revista");
             System.out.println("0. Regresar");
-            System.out.println("");
 
             Scanner sc = new Scanner(System.in);
             respuesta = sc.nextLine();
@@ -58,6 +57,7 @@ public class UiMenuReserva {
 
             int resp_submenu = 0;
             do {
+                System.out.println("");
                 System.out.println("Cual quiere prestar?");
                 resp_submenu = Integer.parseInt(sc.nextLine());
                 if (resp_submenu > Servicio.ejemplarLibroDisponibles.size() || resp_submenu < 0) {
@@ -101,34 +101,70 @@ public class UiMenuReserva {
                     switch (opcion) {
                         case 1:
                             int dias_devolucion = dia_reserva + 7;
-                            if(mes_reserva!=12 && dias_devolucion > 30 ){
-                                mes_reserva++;
-                                dias_devolucion = dias_devolucion - 30;
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            }
-                            else if (mes_reserva==12 && dias_devolucion < 30 ) {
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            } else{
-                                mes_reserva=1;
-                                fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
-                            }
-                            break;
+                            if(mes_reserva==2) { // condiciones especial para algunos meses del año
+                                if (dias_devolucion == 29 || dias_devolucion == 30) { // Mes 2 (febrero), hacemos que la reserva quede para el mes siguiente
+                                    dias_devolucion = 1;
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dias_devolucion);
+                                }
+                                else {
+                                    if (dias_devolucion > 31) {
+                                        mes_reserva++;
+                                        dias_devolucion = dias_devolucion - 30;};
 
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }
+
+                            else if(mes_reserva < 12) {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva++;
+                                    dias_devolucion = dias_devolucion - 30;
+                                }
+                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                            }
+                            else  {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva = 1;
+                                    dias_devolucion = dias_devolucion - 30;
+                                    fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
+                                }
+                                else {
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }break;
                         case 2:
                             dias_devolucion = dia_reserva + 14;
-                            if(mes_reserva!=12 && dias_devolucion > 30 ){
-                                mes_reserva++;
-                                dias_devolucion = dias_devolucion - 30;
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            }
-                            else if (mes_reserva==12 && dias_devolucion < 30 ) {
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            } else{
-                                mes_reserva=1;
-                                fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
-                            }
-                            break;
+                            if(mes_reserva==2) { // condiciones especial para algunos meses del año
+                                if (dias_devolucion == 29 || dias_devolucion == 30) { // Mes 2 (febrero), hacemos que la reserva quede para el mes siguiente
+                                    dias_devolucion = 1;
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dias_devolucion);
+                                }
+                                else {
+                                    if (dias_devolucion > 31) {
+                                        mes_reserva++;
+                                        dias_devolucion = dias_devolucion - 30;};
 
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }
+
+                            else if(mes_reserva < 12) {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva++;
+                                    dias_devolucion = dias_devolucion - 30;
+                                }
+                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                            }
+                            else  {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva = 1;
+                                    dias_devolucion = dias_devolucion - 30;
+                                    fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
+                                }
+                                else {
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }break;
                         case 3:
                             if(mes_reserva!=12){
                                 fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dia_reserva);
@@ -138,7 +174,6 @@ public class UiMenuReserva {
                                 fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
                             }
                             break;
-
                         case 4:
                             System.out.println("Usted ha cancelado la operacion");
                             UiMenu.showMenu();
@@ -205,35 +240,70 @@ public class UiMenuReserva {
                     switch (opcion) {
                         case 1:
                             int dias_devolucion = dia_reserva + 7;
-                            if(mes_reserva!=12 && dias_devolucion > 30 ){
-                                mes_reserva++;
-                                dias_devolucion = dias_devolucion - 30;
+                            if(mes_reserva==2) { // condiciones especial para algunos meses del año
+                                if (dias_devolucion == 29 || dias_devolucion == 30) { // Mes 2 (febrero), hacemos que la reserva quede para el mes siguiente
+                                    dias_devolucion = 1;
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dias_devolucion);
+                                }
+                                else {
+                                    if (dias_devolucion > 31) {
+                                        mes_reserva++;
+                                        dias_devolucion = dias_devolucion - 30;};
+
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }
+
+                            else if(mes_reserva < 12) {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva++;
+                                    dias_devolucion = dias_devolucion - 30;
+                                }
                                 fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
                             }
-                            else if (mes_reserva==12 && dias_devolucion < 30 ) {
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            } else{
-                                mes_reserva=1;
-                                fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
-                            }
-                            break;
-
-
+                            else  {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva = 1;
+                                    dias_devolucion = dias_devolucion - 30;
+                                    fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
+                                }
+                                else {
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }break;
                         case 2:
                             dias_devolucion = dia_reserva + 14;
-                            if(mes_reserva!=12 && dias_devolucion > 30 ){
-                                mes_reserva++;
-                                dias_devolucion = dias_devolucion - 30;
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            }
-                            else if (mes_reserva==12 && dias_devolucion < 30 ) {
-                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
-                            } else{
-                                mes_reserva=1;
-                                fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
-                            }
-                            break;
+                            if(mes_reserva==2) { // condiciones especial para algunos meses del año
+                                if (dias_devolucion == 29 || dias_devolucion == 30) { // Mes 2 (febrero), hacemos que la reserva quede para el mes siguiente
+                                    dias_devolucion = 1;
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dias_devolucion);
+                                }
+                                else {
+                                     if (dias_devolucion > 31) {
+                                        mes_reserva++;
+                                        dias_devolucion = dias_devolucion - 30;};
 
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }
+
+                            else if(mes_reserva < 12) {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva++;
+                                    dias_devolucion = dias_devolucion - 30;
+                                }
+                                fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                            }
+                            else  {
+                                if (dias_devolucion > 31) {
+                                    mes_reserva = 1;
+                                    dias_devolucion = dias_devolucion - 30;
+                                    fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
+                                }
+                                else {
+                                    fecha_devolucion = LocalDate.of(2022, mes_reserva, dias_devolucion);
+                                }
+                            }break;
                         case 3:
                             if(mes_reserva!=12){
                                 fecha_devolucion = LocalDate.of(2022, mes_reserva + 1, dia_reserva);
@@ -243,9 +313,7 @@ public class UiMenuReserva {
                                 fecha_devolucion = LocalDate.of(2023, mes_reserva, dia_reserva);
                             }
                             break;
-
                         case 4:
-
                             System.out.println("Usted ha cancelado la operación");
                             UiMenu.showMenu();
                             break;
