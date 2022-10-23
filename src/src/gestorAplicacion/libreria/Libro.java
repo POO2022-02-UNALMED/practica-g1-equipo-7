@@ -66,8 +66,8 @@ public class Libro extends Titulo implements Serializable {
     public static ArrayList<Libro> masSolicitados(Biblioteca biblioteca, GENERO genero) {
         ArrayList<Libro> libros = new ArrayList<>();
 
-        for (Libro libro:biblioteca.getLibros()) {
-            if (libro.getGenero()==genero){
+        for (Libro libro:biblioteca.getHistorialLibrosUsados()) {
+            if (libro.getGenero()==genero && !libros.contains(libro)){
                 libros.add(libro);
             }
         }
@@ -78,8 +78,16 @@ public class Libro extends Titulo implements Serializable {
     }
 
     public static ArrayList<Libro> masSolicitados(Biblioteca biblioteca){
-        ArrayList<Libro> libros = new ArrayList<>();
+    	ArrayList<Libro> libros = new ArrayList<>();
+
+        for (Libro libro:biblioteca.getHistorialLibrosUsados()) {
+            if (!libros.contains(libro)){
+                libros.add(libro);
+            }
+        }
+
         Collections.sort(libros);
+
         return libros;
     }
 

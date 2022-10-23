@@ -63,8 +63,8 @@ public class Revista extends Titulo implements Serializable {
     public static ArrayList<Revista> masSolicitadas(Biblioteca biblioteca, CATEGORIA categoria) {
         ArrayList<Revista> revistas = new ArrayList<>();
 
-        for (Revista revista:biblioteca.getRevistas()) {
-            if (revista.getCategoria()==categoria){
+        for (Revista revista:biblioteca.getHistorialRevistasUsadas()) {
+            if (revista.getCategoria()==categoria && !revistas.contains(revista)){
                 revistas.add(revista);
             }
         }
@@ -74,7 +74,14 @@ public class Revista extends Titulo implements Serializable {
     }
 
     public static ArrayList<Revista> masSolicitadas(Biblioteca biblioteca){
-        ArrayList<Revista> revistas = biblioteca.getRevistas();
+    	ArrayList<Revista> revistas = new ArrayList<>();
+
+        for (Revista revista:biblioteca.getHistorialRevistasUsadas()) {
+            if (!revistas.contains(revista)){
+                revistas.add(revista);
+            }
+        }
+
         Collections.sort(revistas);
         return revistas;
     }
