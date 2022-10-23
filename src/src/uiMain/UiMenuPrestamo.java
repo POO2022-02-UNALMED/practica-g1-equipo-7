@@ -49,7 +49,7 @@ public class UiMenuPrestamo {
     public static void prestarLibro() {
         Scanner sc = new Scanner(System.in);
 
-        if (UiMenu.getBiblioteca().getUsuario().isMulta()) {
+        if (UiMenu.getUsuario().isMulta()) {
             System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         } else if (Servicio.getEjemplarLibroDisponibles().size() == 0) {
             System.out.println("No hay libros disponibles");
@@ -74,7 +74,7 @@ public class UiMenuPrestamo {
                     showMenuPrestamo();
                 } else {
                     EjemplarLibro ejemplarLibro = Servicio.getEjemplarLibroDisponibles().get(resp_submenu - 1);
-                    Prestamo.generarPrestamoLibro(ejemplarLibro, UiMenu.getBiblioteca());
+                    Prestamo.generarPrestamoLibro(UiMenu.getUsuario(), ejemplarLibro, UiMenu.getBiblioteca());
                     System.out.println("Usted ha escogido el libro: " + ejemplarLibro.getLibro().getNombre() +
                             " y se le ha generado el prestamo con el id " + ejemplarLibro.getEstadoEjemplar().getPrestamo().getTiquete().getId());
                     System.out.println("\n");
@@ -90,7 +90,7 @@ public class UiMenuPrestamo {
 
     public static void prestarRevista() {
         Scanner sc = new Scanner(System.in);
-        if (UiMenu.getBiblioteca().getUsuario().isMulta()) {
+        if (UiMenu.getUsuario().isMulta()) {
             System.out.println("Lo sentimos, no puede realizar esta acción porque tiene una multa");
         } else if (Servicio.getEjemplarRevistaDisponibles().size() == 0) {
             System.out.println("No hay Revistas disponibles");
@@ -114,7 +114,7 @@ public class UiMenuPrestamo {
                     showMenuPrestamo();
                 } else {
                     EjemplarRevista ejemplarRevista = Servicio.getEjemplarRevistaDisponibles().get(resp_submenu - 1);
-                    Prestamo.generarPrestamoRevista(ejemplarRevista, UiMenu.getBiblioteca());
+                    Prestamo.generarPrestamoRevista(UiMenu.getUsuario(), ejemplarRevista, UiMenu.getBiblioteca());
                     System.out.println("Usted ha escogido la revista: " + ejemplarRevista.getRevista().getNombre() +
                             " y se le ha generado el prestamo con el id " + ejemplarRevista.getEstadoEjemplar().getPrestamo().getTiquete().getId());
                     System.out.println("\n");

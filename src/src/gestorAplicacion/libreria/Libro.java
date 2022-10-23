@@ -2,6 +2,9 @@ package gestorAplicacion.libreria;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Libro extends Titulo implements Serializable {
     private GENERO genero;
@@ -59,4 +62,27 @@ public class Libro extends Titulo implements Serializable {
     public String mostrarse() {
         return ("Libro: " + this.getNombre() + " Escrito por: " + this.getAutor());
     }
+
+    public static ArrayList<Libro> masSolicitados(Biblioteca biblioteca, GENERO genero) {
+        ArrayList<Libro> libros = new ArrayList<>();
+
+        for (Libro libro:biblioteca.getLibros()) {
+            if (libro.getGenero()==genero){
+                libros.add(libro);
+            }
+        }
+
+        Collections.sort(libros);
+
+        return libros;
+    }
+
+    public static ArrayList<Libro> masSolicitado(Biblioteca biblioteca){
+        ArrayList<Libro> libros = new ArrayList<>();
+        Collections.sort(libros);
+        return libros;
+    }
+
+
 }
+

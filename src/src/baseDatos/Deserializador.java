@@ -70,7 +70,31 @@ public class Deserializador {
                 try {
                     fis = new FileInputStream(file);
                     ois = new ObjectInputStream(fis);
-                    biblioteca.setUsuario((Usuario) ois.readObject());
+                    biblioteca.setUsuarios((ArrayList<Usuario>) ois.readObject());
+                } catch (FileNotFoundException e){
+                    e.printStackTrace();
+                } catch (IOException e){
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e){
+                    e.printStackTrace();
+                }
+            } else if (file.getAbsolutePath().contains("historialLibrosUsados")) {
+                try {
+                    fis = new FileInputStream(file);
+                    ois = new ObjectInputStream(fis);
+                    biblioteca.setHistorialLibrosUsados((ArrayList<Libro>) ois.readObject());
+                } catch (FileNotFoundException e){
+                    e.printStackTrace();
+                } catch (IOException e){
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e){
+                    e.printStackTrace();
+                }
+            } else if (file.getAbsolutePath().contains("historialRevistasUsadas")) {
+                try {
+                    fis = new FileInputStream(file);
+                    ois = new ObjectInputStream(fis);
+                    biblioteca.setHistorialRevistasUsadas((ArrayList<Revista>) ois.readObject());
                 } catch (FileNotFoundException e){
                     e.printStackTrace();
                 } catch (IOException e){

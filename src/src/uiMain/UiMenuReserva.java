@@ -51,7 +51,7 @@ public class UiMenuReserva {
     public static void reservarLibro(){
         Scanner sc = new Scanner(System.in);
 
-        if(UiMenu.getBiblioteca().getUsuario().isMulta()) {
+        if(UiMenu.getUsuario().isMulta()) {
             System.out.println("Lo sentimos, no puede realizar esta accion porque tiene una multa");
         }else{
 
@@ -183,7 +183,7 @@ public class UiMenuReserva {
                             break;
                     }
                     EjemplarLibro ejemplarLibro= Servicio.getEjemplarLibroDisponibles().get(resp_submenu - 1);
-                    Reserva.generarReservaLibro(ejemplarLibro, UiMenu.getBiblioteca(), fecha_reserva, fecha_devolucion);
+                    Reserva.generarReservaLibro(UiMenu.getUsuario(), ejemplarLibro, UiMenu.getBiblioteca(), fecha_reserva, fecha_devolucion);
                     System.out.println("Se ha realizado con exito su reserva del libro " + ejemplarLibro.getLibro().getNombre() +
                             ". El id de esta operacion es " + ejemplarLibro.getEstadoEjemplar().getReserva().getTiquete().getId());
                     System.out.println("\n");
@@ -200,7 +200,7 @@ public class UiMenuReserva {
     public static void reservarRevista(){
         Scanner sc = new Scanner(System.in);
 
-        if(UiMenu.getBiblioteca().getUsuario().isMulta()) {
+        if(UiMenu.getUsuario().isMulta()) {
             System.out.println("Lo sentimos, no puede realizar esta accion porque tiene una multa");
         }else{
             mostrarEjemplaresRevista();
@@ -326,7 +326,7 @@ public class UiMenuReserva {
                             break;
                     }
                     EjemplarRevista ejemplarRevista = Servicio.getEjemplarRevistaDisponibles().get(resp_submenu - 1);
-                    Reserva.generarReservaRevista(ejemplarRevista, UiMenu.getBiblioteca(), fecha_reserva, fecha_devolucion);
+                    Reserva.generarReservaRevista(UiMenu.getUsuario(), ejemplarRevista, UiMenu.getBiblioteca(), fecha_reserva, fecha_devolucion);
                     System.out.println("Se ha realizado con exito su reserva de la revista " + ejemplarRevista.getRevista().getNombre() +
                             ". El id de esta operacion es " + ejemplarRevista.getEstadoEjemplar().getReserva().getTiquete().getId());
                     System.out.println("\n");

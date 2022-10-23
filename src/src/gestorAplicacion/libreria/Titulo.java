@@ -1,11 +1,13 @@
 package gestorAplicacion.libreria;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public abstract class Titulo implements Serializable {
+public abstract class Titulo implements Serializable, Comparable<Titulo> {
     private String nombre;
     private String autor;
     private int ISBN;
+    private int usos = 0;
 
     public Titulo(String nombre, String autor, int ISBN) {
         this.nombre = nombre;
@@ -42,6 +44,29 @@ public abstract class Titulo implements Serializable {
         this.ISBN = ISBN;
     }
 
+    public int getUsos() {
+        return usos;
+    }
+
+    public void setUsos(int usos) {
+        this.usos = usos;
+    }
+
     //Metodo abstracto
     public abstract String mostrarse();
+
+    public void usado(){
+        usos++;
+    }
+
+    @Override
+    public int compareTo(Titulo titulo) {
+        if (titulo.getUsos()>usos){
+            return 1;
+        } else if (titulo.getUsos()>usos) {
+            return 0;
+        }else {
+            return -1;
+        }
+    }
 }

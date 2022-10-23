@@ -211,7 +211,7 @@ public class UiMenuBusqueda {
     private static void consultarPrestamos(){
         System.out.println("");
         System.out.println("::Mis Prestamos");
-        ArrayList<Prestamo> prestamos = UiMenu.getBiblioteca().getUsuario().getPrestamos();
+        ArrayList<Prestamo> prestamos = UiMenu.getUsuario().getPrestamos();
 
         if (prestamos.size() == 0){
             System.out.println("");
@@ -228,7 +228,7 @@ public class UiMenuBusqueda {
     private static void consultarReservas(){
         System.out.println("");
         System.out.println("::Mis Reservas");
-        ArrayList<Reserva> reservas = UiMenu.getBiblioteca().getUsuario().getReservas();
+        ArrayList<Reserva> reservas = UiMenu.getUsuario().getReservas();
 
         if (reservas.size() == 0){
             System.out.println("Aun no realizas reservas");

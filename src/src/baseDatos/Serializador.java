@@ -72,7 +72,27 @@ public class Serializador {
                 try {
                     fos = new FileOutputStream(file);
                     oos = new ObjectOutputStream(fos);
-                    oos.writeObject(biblioteca.getUsuario());
+                    oos.writeObject(biblioteca.getUsuarios());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (file.getAbsolutePath().contains("historialLibrosUsados")) {
+                try {
+                    fos = new FileOutputStream(file);
+                    oos = new ObjectOutputStream(fos);
+                    oos.writeObject(biblioteca.getHistorialLibrosUsados());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (file.getAbsolutePath().contains("historialRevistasUsadas")) {
+                try {
+                    fos = new FileOutputStream(file);
+                    oos = new ObjectOutputStream(fos);
+                    oos.writeObject(biblioteca.getHistorialRevistasUsadas());
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } catch (IOException e) {

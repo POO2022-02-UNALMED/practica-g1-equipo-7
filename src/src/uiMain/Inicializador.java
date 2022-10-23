@@ -110,6 +110,5 @@ public class Inicializador {
         UiMenu.getBiblioteca().añadirEjemplarRevista(ejRev17);
         UiMenu.getBiblioteca().añadirEjemplarRevista(ejRev18);
 
-        UiMenu.getBiblioteca().setUsuario(new Usuario("", 1));
     }
 }

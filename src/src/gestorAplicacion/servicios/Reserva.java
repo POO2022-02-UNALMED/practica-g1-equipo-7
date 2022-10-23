@@ -41,43 +41,52 @@ public class Reserva extends Servicio implements Serializable {
 
     //Esta función lo que hace es añadir la reserva al usuario, generar un tiquete y actualizar el estado del libro que//
     //el usuario reservó. Se le pasan esos parámetros porque son necesarios en el contexto del método//
-    public static void generarReservaLibro(EjemplarLibro ejemplarLibroReservado, Biblioteca biblioteca, LocalDate fecha_reserva, LocalDate fecha_devolucion){
+    public static void generarReservaLibro(Usuario usuario, EjemplarLibro ejemplarLibroReservado, Biblioteca biblioteca, LocalDate fecha_reserva, LocalDate fecha_devolucion){
 
-        Reserva reserva = new Reserva(biblioteca.getUsuario(), ejemplarLibroReservado, ejemplarLibroReservado.getLibro(), fecha_reserva, fecha_devolucion);
+        Reserva reserva = new Reserva(usuario, ejemplarLibroReservado, ejemplarLibroReservado.getLibro(), fecha_reserva, fecha_devolucion);
         int id_reserva = (int) (Math.random() * 10000);
         Tiquete tiquete = new Tiquete(reserva, id_reserva);
         reserva.setTiquete(tiquete);
         ejemplarLibroReservado.getEstadoEjemplar().setReserva(reserva);
         ejemplarLibroReservado.getEstadoEjemplar().setReservado(true);
+        //Se agrega al historial de libros usados de bublioteca y usuario,y se aumenta su indice de uso
+        biblioteca.añadirHistorialLibrosUsados(ejemplarLibroReservado.getLibro());
+        usuario.getHistorialLibrosUsados().add(ejemplarLibroReservado.getLibro());
+        ejemplarLibroReservado.getLibro().usado();
+        //se elmimina de disponible
         Servicio.getEjemplarLibroDisponibles().remove(ejemplarLibroReservado);
-        biblioteca.getUsuario().getReservas().add(reserva);
-        biblioteca.getUsuario().getTiquetes().add(tiquete);
+        usuario.getReservas().add(reserva);
+        usuario.getTiquetes().add(tiquete);
     }
 
-    public static void generarReservaRevista(EjemplarRevista ejemplarRevistaReservada, Biblioteca biblioteca, LocalDate fecha_reserva, LocalDate fecha_devolucion){
-        Reserva reserva = new Reserva(biblioteca.getUsuario(),ejemplarRevistaReservada, ejemplarRevistaReservada.getRevista(), fecha_reserva, fecha_devolucion);
+    public static void generarReservaRevista(Usuario usuario, EjemplarRevista ejemplarRevistaReservada, Biblioteca biblioteca, LocalDate fecha_reserva, LocalDate fecha_devolucion){
+        Reserva reserva = new Reserva(usuario,ejemplarRevistaReservada, ejemplarRevistaReservada.getRevista(), fecha_reserva, fecha_devolucion);
         int id_reserva = (int) (Math.random() * 10000);
         Tiquete tiquete = new Tiquete(reserva, id_reserva);
         reserva.setTiquete(tiquete);
         ejemplarRevistaReservada.getEstadoEjemplar().setReserva(reserva);
         ejemplarRevistaReservada.getEstadoEjemplar().setReservado(true);
+        //Se agrega al historial de revistas usadas de bublioteca y usuario,y se aumenta su indice de uso
+        biblioteca.añadirHistorialRevistasUsadas(ejemplarRevistaReservada.getRevista());
+        usuario.getHistorialRevistasUsadas().add(ejemplarRevistaReservada.getRevista());
+        ejemplarRevistaReservada.getRevista().usado();
+        //Se remueve de la lista de disponibles
         Servicio.getEjemplarRevistaDisponibles().remove(ejemplarRevistaReservada);
-        biblioteca.getUsuario().getReservas().add(reserva);
-        biblioteca.getUsuario().getTiquetes().add(tiquete);
+        usuario.getReservas().add(reserva);
+        usuario.getTiquetes().add(tiquete);
     }
 
-    public static void cancelarReserva(int indiceCancelarReserva, Biblioteca biblioteca){
+    public static void cancelarReserva(int indiceCancelarReserva, Biblioteca biblioteca, Usuario usuario){
         Tiquete tiqueteVacio = null;
-        Reserva reservaAEliminar = biblioteca.getUsuario().getReservas().get(indiceCancelarReserva);
-        for (Tiquete tiquete: biblioteca.getUsuario().getTiquetes()){
+        Reserva reservaAEliminar = usuario.getReservas().get(indiceCancelarReserva);
+        for (Tiquete tiquete: usuario.getTiquetes()){
             if (tiquete.getServicio().equals(reservaAEliminar)){
                 tiqueteVacio = tiquete;
             }
         }
-
         reservaAEliminar.getEjemplarEscogido().getEstadoEjemplar().setReservado(false);
-        biblioteca.getUsuario().getReservas().remove(reservaAEliminar);
-        biblioteca.getUsuario().getTiquetes().remove(tiqueteVacio);
+        usuario.getReservas().remove(reservaAEliminar);
+        usuario.getTiquetes().remove(tiqueteVacio);
     }
 
     @Override

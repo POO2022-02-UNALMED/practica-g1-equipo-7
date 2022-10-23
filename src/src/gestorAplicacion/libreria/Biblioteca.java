@@ -5,6 +5,7 @@ import gestorAplicacion.servicios.Usuario;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Biblioteca implements Serializable{
 
@@ -14,11 +15,15 @@ public class Biblioteca implements Serializable{
 
     private ArrayList<Libro> libros = new ArrayList<>();
     private ArrayList<Revista> revistas = new ArrayList<>();
+    private ArrayList<Usuario> usuarios = new ArrayList<>();
+
+    private ArrayList<Libro> historialLibrosUsados = new ArrayList<>();
+    private ArrayList<Revista> historialRevistasUsadas = new ArrayList<>();
 
     //Constructor, escribimos los array guardados en los archivos
-    public Biblioteca(){Deserializador.deserializar(this);}
-
-    private static Usuario usuario;
+    public Biblioteca(){
+        Deserializador.deserializar(this);
+        }
 
     //getters y setters
 
@@ -54,12 +59,28 @@ public class Biblioteca implements Serializable{
         this.revistas = revistas;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public ArrayList<Usuario> getUsuarios() {
+        return usuarios;
     }
 
-    public void setUsuario(Usuario usuario) {
-        Biblioteca.usuario = usuario;
+    public void setUsuarios(ArrayList<Usuario> usuario) {
+        this.usuarios = usuario;
+    }
+
+    public ArrayList<Libro> getHistorialLibrosUsados() {
+        return historialLibrosUsados;
+    }
+
+    public void setHistorialLibrosUsados(ArrayList<Libro> historialLibrosUsados) {
+        this.historialLibrosUsados = historialLibrosUsados;
+    }
+
+    public ArrayList<Revista> getHistorialRevistasUsadas() {
+        return historialRevistasUsadas;
+    }
+
+    public void setHistorialRevistasUsadas(ArrayList<Revista> historialRevistasUsadas) {
+        this.historialRevistasUsadas = historialRevistasUsadas;
     }
 
     //Metodos
@@ -78,5 +99,15 @@ public class Biblioteca implements Serializable{
 
     public void añadirEjemplarRevista(EjemplarRevista ejemplarRevista){
         this.ejemplaresRevistas.add(ejemplarRevista);
+    }
+
+    public void añadirUsuario(Usuario usuario){this.usuarios.add(usuario);}
+
+    public void añadirHistorialLibrosUsados(Libro libro){
+        historialLibrosUsados.add(libro);
+    }
+
+    public void añadirHistorialRevistasUsadas(Revista revista){
+        historialRevistasUsadas.add(revista);
     }
 }

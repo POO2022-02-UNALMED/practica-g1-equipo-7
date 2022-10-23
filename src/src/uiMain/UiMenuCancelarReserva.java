@@ -13,7 +13,7 @@ public class UiMenuCancelarReserva {
         System.out.println(":: Cancelar Reserva");
         System.out.println("");
         int respuesta = 0;
-        ArrayList<Reserva> reservas= UiMenu.getBiblioteca().getUsuario().getReservas();
+        ArrayList<Reserva> reservas= UiMenu.getUsuario().getReservas();
         do {
 
             if(reservas.size() == 0){
@@ -46,7 +46,7 @@ public class UiMenuCancelarReserva {
                 break;
             }else {
                 //Logica de devolcuion, el -1 es por el indice inicial en 0
-                Reserva.cancelarReserva((respuesta-1), UiMenu.getBiblioteca());
+                Reserva.cancelarReserva((respuesta-1), UiMenu.getBiblioteca(), UiMenu.getUsuario());
                 System.out.println("Se ha cancelado satisfactoriamebte la reserva");
 
                 UiMenu.showMenu();

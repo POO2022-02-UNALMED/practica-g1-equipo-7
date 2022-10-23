@@ -16,7 +16,7 @@ public class UiMenuDevoluciones {
 
 
         int respuesta = 0;
-        ArrayList<Prestamo> prestamos = UiMenu.getBiblioteca().getUsuario().getPrestamos();
+        ArrayList<Prestamo> prestamos = UiMenu.getUsuario().getPrestamos();
         do {
 
             if(prestamos.size() == 0){
@@ -45,7 +45,7 @@ public class UiMenuDevoluciones {
                 break;
             }else {
                 //Logica de devolcuion, el -1 es por el indice inicial en 0
-                Prestamo.devolucion((respuesta-1), UiMenu.getBiblioteca());
+                Prestamo.devolucion((respuesta-1), UiMenu.getBiblioteca(), UiMenu.getUsuario());
                 System.out.println("Devolucion realizada satisfactoriamente");
                 UiMenu.showMenu();
                 respuesta = 0;

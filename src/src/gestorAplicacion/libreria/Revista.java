@@ -2,6 +2,7 @@ package gestorAplicacion.libreria;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Revista extends Titulo implements Serializable {
     private CATEGORIA categoria;
@@ -59,6 +60,24 @@ public class Revista extends Titulo implements Serializable {
         return resultadosBusqueda;
     }
 
+    public static ArrayList<Revista> masSolicitados(Biblioteca biblioteca, CATEGORIA categoria) {
+        ArrayList<Revista> revistas = new ArrayList<>();
+
+        for (Revista revista:biblioteca.getRevistas()) {
+            if (revista.getCategoria()==categoria){
+                revistas.add(revista);
+            }
+        }
+
+        Collections.sort(revistas);
+        return revistas;
+    }
+
+    public static ArrayList masSolicitadas(Biblioteca biblioteca){
+        ArrayList<Revista> revistas = biblioteca.getRevistas();
+        Collections.sort(revistas);
+        return revistas;
+    }
 
     public String toString(){
         return "nombre: " + this.getNombre() + " autor: " + this.getAutor() + " ISBN: " + this.getISBN() + " Categoria: " + categoria;

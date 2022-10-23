@@ -10,6 +10,7 @@ public class UiMenu {
     //Esta variable es para manejar todas las listas de prestamos y reservas, luego veremos si es mejor instanciar solo un usuario para ver las funcionalidades así o hacer un log con el nombre
     //No sé si eso sea recaer en multiusuarios
     private static Biblioteca biblioteca = new Biblioteca();
+    private static Usuario usuario = biblioteca.getUsuarios().get(0);
     //public static Inicializador inicializador = new Inicializador();
 
 
@@ -18,6 +19,7 @@ public class UiMenu {
         return biblioteca;
     }
 
+    public static Usuario getUsuario() {return usuario;}
 
     public static void showMenu(){
         //inicializador.inicializar();
@@ -34,8 +36,8 @@ public class UiMenu {
             System.out.println("1. Hacer una consulta");
             System.out.println("2. Realizar una reserva");
             System.out.println("3. Realizar un prestamo");
-            System.out.println("4. Hacer devolucion");
-            System.out.println("5. Cancelar una reserva");
+            System.out.println("4. Recomendaciones de libros o revistas");
+            System.out.println("5. Gestionar Servicios");
             System.out.println("0. Salir del sistema");
 
 
@@ -57,11 +59,11 @@ public class UiMenu {
                     break;
                 case "4":
                     respuesta = "0";
-                    UiMenuDevoluciones.showMenuDevoluciones();
+                    UiMenuRecomendar.showMenuRecomendar();
                     break;
                 case "5":
                     respuesta = "0";
-                    UiMenuCancelarReserva.showMenuCancelarReserva();
+                    UiMenuGestionarServicios.showMenuGestion();
                     break;
                 case "0":
                     //System.out.println("Gracias por visitarnos");
