@@ -63,12 +63,14 @@ public class UiMenuRecomendar {
         System.out.println("Estos son las revistas que encontramos para ti: ");
         System.out.println("");
 
-        usuario.getCategoriaFavorita();
-        ArrayList<Revista> revistasMasSolicitadas= Revista.masSolicitados(biblioteca, usuario.getCategoriaFavorita());
+        usuario.encontrarCategoriaFavorita();
+        ArrayList<Revista> revistasMasSolicitadas= Revista.masSolicitadas(biblioteca, usuario.getCategoriaFavorita());
 
+        System.out.println(revistasMasSolicitadas.size());
         for (int i = 0; i < 3; i++) {
             System.out.println("");
-            System.out.println((i+1) + ". Libro: " + revistasMasSolicitadas.get(i).getNombre() + " Autor: " +
+
+            System.out.println((i+1) + ". Revista: " + revistasMasSolicitadas.get(i).getNombre() + " Autor: " +
                     revistasMasSolicitadas.get(i).getAutor() + " Categoria: " + revistasMasSolicitadas.get(i).getCategoria());
         }
 

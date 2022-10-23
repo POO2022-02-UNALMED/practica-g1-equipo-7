@@ -184,8 +184,7 @@ public class UiMenuReserva {
                     }
                     EjemplarLibro ejemplarLibro= Servicio.getEjemplarLibroDisponibles().get(resp_submenu - 1);
                     Reserva.generarReservaLibro(UiMenu.getUsuario(), ejemplarLibro, UiMenu.getBiblioteca(), fecha_reserva, fecha_devolucion);
-                    System.out.println("Se ha realizado con exito su reserva del libro " + ejemplarLibro.getLibro().getNombre() +
-                            ". El id de esta operacion es " + ejemplarLibro.getEstadoEjemplar().getReserva().getTiquete().getId());
+                    System.out.println("Se ha realizado con exito su reserva del libro " + ejemplarLibro.getLibro().getNombre());
                     System.out.println("\n");
 
                     UiMenu.showMenu();

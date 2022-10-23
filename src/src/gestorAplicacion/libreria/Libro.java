@@ -77,7 +77,7 @@ public class Libro extends Titulo implements Serializable {
         return libros;
     }
 
-    public static ArrayList<Libro> masSolicitado(Biblioteca biblioteca){
+    public static ArrayList<Libro> masSolicitados(Biblioteca biblioteca){
         ArrayList<Libro> libros = new ArrayList<>();
         Collections.sort(libros);
         return libros;

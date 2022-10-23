@@ -45,7 +45,7 @@ public class UiMenuPrestamo {
             }
         } while (!respuesta.equals("0"));
     }
-
+    
     public static void prestarLibro() {
         Scanner sc = new Scanner(System.in);
 
@@ -75,8 +75,7 @@ public class UiMenuPrestamo {
                 } else {
                     EjemplarLibro ejemplarLibro = Servicio.getEjemplarLibroDisponibles().get(resp_submenu - 1);
                     Prestamo.generarPrestamoLibro(UiMenu.getUsuario(), ejemplarLibro, UiMenu.getBiblioteca());
-                    System.out.println("Usted ha escogido el libro: " + ejemplarLibro.getLibro().getNombre() +
-                            " y se le ha generado el prestamo con el id " + ejemplarLibro.getEstadoEjemplar().getPrestamo().getTiquete().getId());
+                    System.out.println("Usted ha escogido el libro: " + ejemplarLibro.getLibro().getNombre());
                     System.out.println("\n");
 
                     UiMenu.showMenu();
@@ -115,8 +114,8 @@ public class UiMenuPrestamo {
                 } else {
                     EjemplarRevista ejemplarRevista = Servicio.getEjemplarRevistaDisponibles().get(resp_submenu - 1);
                     Prestamo.generarPrestamoRevista(UiMenu.getUsuario(), ejemplarRevista, UiMenu.getBiblioteca());
-                    System.out.println("Usted ha escogido la revista: " + ejemplarRevista.getRevista().getNombre() +
-                            " y se le ha generado el prestamo con el id " + ejemplarRevista.getEstadoEjemplar().getPrestamo().getTiquete().getId());
+                    System.out.println("Usted ha escogido la revista: " + ejemplarRevista.getRevista().getNombre());
+
                     System.out.println("\n");
 
                     UiMenu.showMenu();

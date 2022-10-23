@@ -60,7 +60,7 @@ public class Revista extends Titulo implements Serializable {
         return resultadosBusqueda;
     }
 
-    public static ArrayList<Revista> masSolicitados(Biblioteca biblioteca, CATEGORIA categoria) {
+    public static ArrayList<Revista> masSolicitadas(Biblioteca biblioteca, CATEGORIA categoria) {
         ArrayList<Revista> revistas = new ArrayList<>();
 
         for (Revista revista:biblioteca.getRevistas()) {
@@ -73,7 +73,7 @@ public class Revista extends Titulo implements Serializable {
         return revistas;
     }
 
-    public static ArrayList masSolicitadas(Biblioteca biblioteca){
+    public static ArrayList<Revista> masSolicitadas(Biblioteca biblioteca){
         ArrayList<Revista> revistas = biblioteca.getRevistas();
         Collections.sort(revistas);
         return revistas;
