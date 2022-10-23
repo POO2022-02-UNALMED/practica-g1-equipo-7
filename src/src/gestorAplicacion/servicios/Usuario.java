@@ -124,12 +124,6 @@ public class Usuario implements Serializable {
             generosLeidos.put(libro.getGenero(), (j == null) ? 1 : j + 1);
         }
 
-        // displaying the occurrence of elements in the arraylist
-        for (Map.Entry<GENERO, Integer> val : generosLeidos.entrySet()) {
-            System.out.println("Element " + val.getKey() + " "
-                    + "occurs"
-                    + ": " + val.getValue() + " times");
-        }
 
         //se busca el genero favorito con el hashMap
         for (GENERO genero: generosLeidos.keySet()) {
@@ -153,12 +147,7 @@ public class Usuario implements Serializable {
             categoriasLeidas.put(revista.getCategoria(), (j == null) ? 1 : j + 1);
         }
 
-        // displaying the occurrence of elements in the arraylist
-        for (Map.Entry<CATEGORIA, Integer> val : categoriasLeidas.entrySet()) {
-            System.out.println("Element " + val.getKey() + " "
-                    + "occurs"
-                    + ": " + val.getValue() + " times");
-        }
+
 
         //se busca el genero favorito con el hashMap
         for (CATEGORIA categoria: categoriasLeidas.keySet()) {
