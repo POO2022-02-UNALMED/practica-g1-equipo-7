@@ -50,7 +50,7 @@ public class UiMenuRecomendar {
         usuario.encontrarGeneroFavorito();
         ArrayList<Libro> librosMasSolicitados= Libro.masSolicitados(biblioteca, usuario.getGeneroFavorito());
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("");
             System.out.println((i+1) + ". Libro: " + librosMasSolicitados.get(i).getNombre() + " Autor: " +
                     librosMasSolicitados.get(i).getAutor() + " Genero: " + librosMasSolicitados.get(i).getGenero());
@@ -67,7 +67,7 @@ public class UiMenuRecomendar {
         ArrayList<Revista> revistasMasSolicitadas= Revista.masSolicitadas(biblioteca, usuario.getCategoriaFavorita());
 
         System.out.println(revistasMasSolicitadas.size());
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
             System.out.println("");
 
             System.out.println((i+1) + ". Revista: " + revistasMasSolicitadas.get(i).getNombre() + " Autor: " +
