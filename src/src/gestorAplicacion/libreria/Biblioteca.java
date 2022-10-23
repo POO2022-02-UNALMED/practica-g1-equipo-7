@@ -22,7 +22,8 @@ public class Biblioteca implements Serializable{
 
     //Constructor, escribimos los array guardados en los archivos
     public Biblioteca(){
-        Deserializador.deserializar(this);
+        //Deserializador.deserializar(this);
+        usuarios.add(new Usuario("alejandro", 1));
         }
 
     //getters y setters
