@@ -1,12 +1,11 @@
 package gestorAplicacion.libreria;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public abstract class Titulo implements Serializable, Comparable<Titulo> {
     private String nombre;
     private String autor;
-    private int ISBN;
+    private final int ISBN;
     private int usos = 0;
 
     public Titulo(String nombre, String autor, int ISBN) {
@@ -15,7 +14,8 @@ public abstract class Titulo implements Serializable, Comparable<Titulo> {
         this.ISBN = ISBN;
     }
 
-    public Titulo() {
+    public Titulo(int isbn) {
+        ISBN = isbn;
     }
 
     //getters y setters
@@ -40,9 +40,6 @@ public abstract class Titulo implements Serializable, Comparable<Titulo> {
         return ISBN;
     }
 
-    public void setISBN(int ISBN) {
-        this.ISBN = ISBN;
-    }
 
     public int getUsos() {
         return usos;
