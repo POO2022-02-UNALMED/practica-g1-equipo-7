@@ -20,7 +20,7 @@ public class Revista extends Titulo implements Serializable {
         this.categoria = categoria;
     }
 
-    //setters y getters
+    //Getters y Setters
 
     public CATEGORIA getCategoria() {
         return categoria;
@@ -30,8 +30,15 @@ public class Revista extends Titulo implements Serializable {
         this.categoria = categoria;
     }
 
-    // funcion
+    //Metodos
 
+    /**
+     * Esta función permite filtrar las revistas disponibles a las preferencias que indique el usuario 
+     * @param filtro Filtro (según el 'nombre', 'autor' o 'categoria') seleccionado por el usuario para buscar revistas
+     * @param palabra Palabra clave para buscar revistas (brindada por el usuario)
+     * @param biblioteca Biblioteca donde se encuentran las revistas disponible a filtrar
+     * @return Retorna una lista con todos los resultados que se encontraron con el filtro
+     */
     public static ArrayList<Revista> filtrarRevistas(String filtro, String palabra, Biblioteca biblioteca){
         ArrayList<Revista> resultadosBusqueda = new ArrayList<>();
         palabra = palabra.toLowerCase();
@@ -59,7 +66,13 @@ public class Revista extends Titulo implements Serializable {
 
         return resultadosBusqueda;
     }
-
+    
+    /**
+     * Esta función sirve para filtrar las revistas más utilizadas por categoria (tomando en cuenta el historial de revistas usadas) 
+     * @param biblioteca Biblioteca en la que se encuentran las revistas a filtrar
+     * @param categoria Categoria de las revistas
+     * @return Retorna los resultados que se encontraron compatibles con el filtro aplicado
+     */
     public static ArrayList<Revista> masSolicitadas(Biblioteca biblioteca, CATEGORIA categoria) {
         ArrayList<Revista> revistas = new ArrayList<>();
 
@@ -73,6 +86,11 @@ public class Revista extends Titulo implements Serializable {
         return revistas;
     }
 
+    /**
+     * Esta función sirve para filtrar las revistas más utilizadas en general (tomando en cuenta el historial de revistas usadas)
+     * @param biblioteca Bibliote en la que se encuentran las revistas a filtrar
+     * @return Retorna los resultados que se encontraron compatibles con el filtro aplicado
+     */
     public static ArrayList<Revista> masSolicitadas(Biblioteca biblioteca){
     	ArrayList<Revista> revistas = new ArrayList<>();
 

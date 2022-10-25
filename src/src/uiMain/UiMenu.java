@@ -7,14 +7,11 @@ import javax.swing.JOptionPane;
 import java.util.Scanner;
 
 public class UiMenu {
-    //Esta variable es para manejar todas las listas de prestamos y reservas, luego veremos si es mejor instanciar solo un usuario para ver las funcionalidades así o hacer un log con el nombre
-    //No sé si eso sea recaer en multiusuarios
+    //Esta variable es para manejar todas las listas de prestamos y reservas
     private static Biblioteca biblioteca = new Biblioteca();
     private static Usuario usuario = biblioteca.getUsuarios().get(0);
-    //public static Inicializador inicializador = new Inicializador();
 
-
-    //getters, solo necesitamos este
+    //Getters (solo necesitamos este)
     public static Biblioteca getBiblioteca() {
         return biblioteca;
     }
@@ -22,13 +19,11 @@ public class UiMenu {
     public static Usuario getUsuario() {return usuario;}
 
     public static void showMenu(){
-        //inicializador.inicializar();
         System.out.println("");
         System.out.println(":: Bienvenido a la Biblioteca");
         System.out.println("");
         System.out.println("Selecciona la opcion deseada");
         System.out.println("");
-        //JOptionPane.showMessageDialog(null, ":: Bienvenido a la Biblioteca JJ_SALES");
         System.out.println("Selecciona una de las opciones");
 
         String respuesta = "0";
@@ -40,7 +35,7 @@ public class UiMenu {
             System.out.println("5. Gestionar Servicios");
             System.out.println("0. Salir del sistema");
 
-
+            //Almacena la respuesta del usuario 
             Scanner sc = new Scanner(System.in);
             respuesta = (String) sc.nextLine();
 
@@ -66,7 +61,6 @@ public class UiMenu {
                     UiMenuGestionarServicios.showMenuGestion();
                     break;
                 case "0":
-                    //System.out.println("Gracias por visitarnos");
                     System.out.println("Gracias por visitarnos");
 
                     //Al salir se guarda lo que se hizo
@@ -74,7 +68,6 @@ public class UiMenu {
                     System.exit(0);
                     break;
                 default:
-                    //System.out.println("Por favor selecciona una de las opciones indicadas");
                     System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         }while(!respuesta.equals("0"));

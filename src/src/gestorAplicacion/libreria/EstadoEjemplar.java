@@ -12,6 +12,7 @@ public class EstadoEjemplar implements Serializable {
     private Prestamo prestamo;
     private Reserva reserva;
 
+    //Estado en el que se puede encontrar un ejemplar (libro o revista)
     public EstadoEjemplar(boolean prestado, boolean reservado, boolean retraso, Prestamo prestamo, Reserva reserva) {
         this.prestado = prestado;
         this.reservado = reservado;

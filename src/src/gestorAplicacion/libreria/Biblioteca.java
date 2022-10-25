@@ -23,10 +23,9 @@ public class Biblioteca implements Serializable{
     //Constructor, escribimos los array guardados en los archivos
     public Biblioteca(){
         Deserializador.deserializar(this);
-        //usuarios.add(new Usuario("alejandro", 1));
         }
 
-    //getters y setters
+    //Getters y Setters
 
     public ArrayList<EjemplarLibro> getEjemplaresLibros() {
         return ejemplaresLibros;

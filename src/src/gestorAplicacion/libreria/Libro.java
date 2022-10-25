@@ -14,7 +14,7 @@ public class Libro extends Titulo implements Serializable {
         this.genero = genero;
     }
 
-    //getters y setters
+    //Getters y Setters
 
     public GENERO getGenero() {
         return genero;
@@ -23,8 +23,16 @@ public class Libro extends Titulo implements Serializable {
     public void setGenero(GENERO genero) {
         this.genero = genero;
     }
-    //Metodos
 
+    //Metodos
+    
+    /**
+     * Esta función permite filtrar los libros disponibles a las preferencias que indique el usuario
+     * @param filtro Filtro (según el 'nombre', 'autor' o 'genero') seleccionado por el usuario para buscar libros 
+     * @param palabra Palabra clave para buscar revistas (brindada por el usuario)
+     * @param biblioteca Biblioteca donde se encuentran los libros disponible a filtrar
+     * @return Retorna una lista con todos los resultados que se encontraron con el filtro
+     */
     public static ArrayList<Libro> filtrarLibros(String filtro, String palabra, Biblioteca biblioteca) {
         ArrayList<Libro> resultadosBusqueda = new ArrayList<>();
         palabra = palabra.toLowerCase();
@@ -63,6 +71,12 @@ public class Libro extends Titulo implements Serializable {
         return ("Libro: " + this.getNombre() + " Escrito por: " + this.getAutor());
     }
 
+    /**
+     * Esta función sirve para filtrar los libros más utilizados por gnereo (tomando en cuenta el historial de libros usados) 
+     * @param biblioteca Biblioteca en la que se encuentran los libros a filtrar
+     * @param genero Genero de los libros
+     * @return Retorna los resultados que se encontraron compatibles con el filtro aplicado
+     */
     public static ArrayList<Libro> masSolicitados(Biblioteca biblioteca, GENERO genero) {
         ArrayList<Libro> libros = new ArrayList<>();
 
@@ -77,6 +91,11 @@ public class Libro extends Titulo implements Serializable {
         return libros;
     }
 
+    /**
+     * Esta función sirve para filtrar los libros más utilizadas en general (tomando en cuenta el historial de libros usados)
+     * @param biblioteca Biblioteca en la que se encuentran los libros a filtrar
+     * @return Retorna los resultados que se encontraron compatibles con el filtro aplicado
+     */
     public static ArrayList<Libro> masSolicitados(Biblioteca biblioteca){
     	ArrayList<Libro> libros = new ArrayList<>();
 

@@ -18,7 +18,7 @@ public abstract class Titulo implements Serializable, Comparable<Titulo> {
         ISBN = isbn;
     }
 
-    //getters y setters
+    //Getters y Setters
 
     public String getNombre() {
         return nombre;
