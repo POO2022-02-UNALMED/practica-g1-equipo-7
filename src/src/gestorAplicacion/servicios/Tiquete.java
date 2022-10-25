@@ -12,7 +12,7 @@ public class Tiquete implements Serializable {
         this.servicio = servicio;
     }
 
-    //getters y setters
+    //Getters y Setters
 
     public int getId() {
         return id;
@@ -29,6 +29,4 @@ public class Tiquete implements Serializable {
     public void setServicio(Servicio servicio) {
         this.servicio = servicio;
     }
-
-    //metodos
 }

@@ -20,14 +20,14 @@ public class Usuario implements Serializable {
     private GENERO generoFavorito;
     private CATEGORIA categoriaFavorita;
 
-    //constructor
+    //Constructor
 
     public Usuario(String nombre, int id) {
         this.nombre = nombre;
         this.id = id;
     }
 
-    //getters y setters
+    //Getters y Setters
     public String getNombre() {
         return nombre;
     }
@@ -108,13 +108,15 @@ public class Usuario implements Serializable {
         this.categoriaFavorita = categoriaFavorita;
     }
 
-    //metodos
+    //Metodos
 
     /**
-     *
+     * Se recorre la lista 'historialLibrosUsados' para posteriormente crear un diccionario que contendra 
+       la cantidad de veces que se repite cada genero. Teniendo ya este diccionario creado, se busca cuál
+        es el genero que más aparece y este se define como el favorito
      */
     public void encontrarGeneroFavorito(){
-        // hashmap para guardar la frecuencia de lectura de genero
+        //hashMap para guardar la frecuencia de lectura de genero
         Map<GENERO, Integer> generosLeidos = new HashMap<GENERO, Integer>();
         GENERO generoFavorito = null;
         int maxLeido = 0;
@@ -124,8 +126,7 @@ public class Usuario implements Serializable {
             generosLeidos.put(libro.getGenero(), (j == null) ? 1 : j + 1);
         }
 
-
-        //se busca el genero favorito con el hashMap
+        //Se busca el genero favorito con el hashMap
         for (GENERO genero: generosLeidos.keySet()) {
             if(generosLeidos.get(genero)>maxLeido){
                 generoFavorito = genero;
@@ -133,11 +134,15 @@ public class Usuario implements Serializable {
             }
         }
         setGeneroFavorito(generoFavorito);
-
     }
 
+    /**
+     * Se recorre la lista 'historialRevistasUsadas' para posteriormente crear un diccionario que contendra
+       la cantidad de veces que se repite cada categoria. Teniendo ya este diccionario creado, se busca 
+       cuál es la categoria que más aparece y esta se define como la favorita
+     */
     public void encontrarCategoriaFavorita(){
-        // hashmap para guardar la frecuencia de lectura de genero
+        //hashMap para guardar la frecuencia de lectura de genero
         Map<CATEGORIA, Integer> categoriasLeidas = new HashMap<CATEGORIA, Integer>();
         CATEGORIA categoriaFavorita = null;
         int maxLeido = 0;
@@ -147,9 +152,7 @@ public class Usuario implements Serializable {
             categoriasLeidas.put(revista.getCategoria(), (j == null) ? 1 : j + 1);
         }
 
-
-
-        //se busca el genero favorito con el hashMap
+        //Se busca el genero favorito con el hashMap
         for (CATEGORIA categoria: categoriasLeidas.keySet()) {
             if(categoriasLeidas.get(categoria)>maxLeido){
                 categoriaFavorita = categoria;

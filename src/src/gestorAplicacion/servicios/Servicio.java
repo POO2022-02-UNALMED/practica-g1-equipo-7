@@ -23,7 +23,8 @@ public abstract class Servicio implements Serializable {
         this.tituloEscogido = tituloEscogido;
     }
 
-    //getters y setters
+    //Getters y Setters
+
     public static ArrayList<EjemplarRevista> getEjemplarRevistaDisponibles() {
         return ejemplarRevistaDisponibles;
     }
@@ -72,7 +73,13 @@ public abstract class Servicio implements Serializable {
         this.tiquete = tiquete;
     }
 
-    //metodos
+    //Metodos
+
+    /**
+     * Funcionalidad para mostrar los libros disponibles (los que no se encuentran prestados o reservados)
+     * @param biblioteca Biblioteca que contendra los libros para aplicar el filtro
+     */
+    
     public static void filtrarLibrosDisponibles(Biblioteca biblioteca){
         ArrayList<EjemplarLibro> ejemplares = new ArrayList<>();
         for(EjemplarLibro ejemplar: UiMenu.getBiblioteca().getEjemplaresLibros()){
@@ -82,6 +89,11 @@ public abstract class Servicio implements Serializable {
         }
         setEjemplarLibroDisponibles(ejemplares);
     }
+    
+    /**
+     * Funcionalidad para mostrar las revistas disponibles (las que no se encuentran prestadas o reservadas)
+     * @param biblioteca Biblioteca que contendra las revistas para aplicar el filtro
+     */
 
     public static void filtrarRevistasDisponibles(Biblioteca biblioteca){
         ArrayList<EjemplarRevista> ejemplares = new ArrayList<>();

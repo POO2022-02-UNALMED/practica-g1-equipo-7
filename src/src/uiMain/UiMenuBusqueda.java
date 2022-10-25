@@ -31,33 +31,39 @@ public class UiMenuBusqueda {
             System.out.println("4. Mis Reservas");
             System.out.println("0. Regresar");
 
-
+            //Se almacena la respuesta del usuario
             Scanner sc = new Scanner(System.in);
             respuesta = sc.nextLine();
 
+            /**
+             * El condicional multiple recibe la respuesta del usuario y en los cuatro primeros casos se le 
+               da el valor de '0' a la variable 'respuesta' para que se ejecute nuevamente el ciclo en el
+               caso '0', lo cual hace que después de hacer la busqueda pertinente el programa no finalice 
+               y se abra nuevamente el menu inicial  
+             */
             switch (respuesta) {
                 case "1":
                     respuesta = "0";
-                    buscarLibro();
-                    showMenuBusqueda();
+                    buscarLibro(); //Se abre el menu para buscar un libro
+                    showMenuBusqueda(); 
                     break;
                 case "2":
                     respuesta = "0";
-                    buscarRevista();
-                    showMenuBusqueda();
+                    buscarRevista(); //Se abre el menu para buscar una revista
+                    showMenuBusqueda(); 
                     break;
                 case "3":
                     respuesta = "0";
-                    consultarPrestamos();
-                    showMenuBusqueda();
+                    consultarPrestamos(); //Se abre el menu para consultar un prestamo
+                    showMenuBusqueda(); 
                     break;
                 case "4":
                     respuesta = "0";
-                    consultarReservas();
-                    showMenuBusqueda();
+                    consultarReservas(); //Se abre el menu para consultar una reserva
+                    showMenuBusqueda(); 
                     break;
                 case "0":
-                    UiMenu.showMenu();
+                    UiMenu.showMenu(); //Se abre el menu general de busquedas
                     break;
                 default:
                     System.out.println("Por favor selecciona una de las opciones indicadas");
@@ -85,8 +91,13 @@ public class UiMenuBusqueda {
 
             Scanner sc = new Scanner(System.in);
             respuesta =  sc.nextLine();
-            //respuesta = Integer.valueOf(sc.nextLine());
 
+            /**
+             * El condicional multiple recibe la respuesta del usuario y realiza la busqueda de acuerdo al
+               filtro que este selcciono (los cuales son 'Nombre', 'Autor' y 'Genero' respectivamente) y la
+               y la palabra clave que digito por pantalla. Después de esto se crea una lista llamada 
+               'resultadoBusqueda' con los resultados encontrados
+             */
             switch (respuesta) {
                 case "1":
                     respuesta = "0";
@@ -113,24 +124,27 @@ public class UiMenuBusqueda {
                     }
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarLibros("genero", palabraClave,UiMenu.getBiblioteca());
-
                     break;
                 case "0":
                     respuesta = "0";
-                    showMenuBusqueda();
+                    showMenuBusqueda(); //Abre el menu inicial
                     break;
                 default:
                     System.out.println("Por favor selecciona una de las opciones indicadas");
             }
         } while (!respuesta.equals("0"));
 
+        /**
+         * Se evalua que el tamaño de la lista 'resultadoBusqueda' sea igual a '0' para verificar que no se 
+           encontraron resultados con el filtro y la palabra clave correspondientes
+         */
         if (resultadoBusqueda.size() == 0){
             System.out.println("No se encontraron resultados");
             UiMenu.showMenu();
         }else {
-            System.out.println("::Resultado de los libros encontrados");
+            System.out.println("::Resultado de los libros encontrados"); 
             System.out.println("");
-            for (int i = 0; i < resultadoBusqueda.size(); i++) {
+            for (int i = 0; i < resultadoBusqueda.size(); i++) { //Se recorre la lista y se van imprimiendo cada uno de los resultados de la busqueda
                 System.out.println((i+1) + ". " + resultadoBusqueda.get(i));
             }
         }
@@ -156,6 +170,12 @@ public class UiMenuBusqueda {
             Scanner sc = new Scanner(System.in);
             respuesta = sc.nextLine();
 
+            /**
+             * El condicional multiple recibe la respuesta del usuario y realiza la busqueda de acuerdo al
+               filtro que este selcciono (los cuales son 'Nombre', 'Autor' y 'Categoria' respectivamente) y la
+               y la palabra clave que digito por pantalla. Después de esto se crea una lista llamada 
+               'resultadoBusqueda' con los resultados encontrados
+             */
             switch (respuesta) {
                 case "1":
                     respuesta = "0";
@@ -185,7 +205,6 @@ public class UiMenuBusqueda {
                     }
                     palabraClave = String.valueOf(sc.nextLine());
                     resultadoBusqueda = filtrarRevistas("categoria", palabraClave, UiMenu.getBiblioteca());
-
                     break;
                 case "0":
                     showMenuBusqueda();
@@ -195,14 +214,16 @@ public class UiMenuBusqueda {
             }
         } while (!respuesta.equals("0"));
 
-
+        /**
+         * Se evalua que el tamaño de la lista 'resultadoBusqueda' sea igual a '0' para verificar que no se 
+           encontraron resultados con el filtro y la palabra clave correspondientes
+         */
         if (resultadoBusqueda.size() == 0){
             System.out.println("No se encontraron resultados");
         }else{
             System.out.println("::Resultado de las revistas encontradas");
             System.out.println("");
-            for (int i = 0; i < resultadoBusqueda.size(); i++) {
-
+            for (int i = 0; i < resultadoBusqueda.size(); i++) { //Se recorre la lista y se van imprimiendo cada uno de los resultados de la busqueda
                 System.out.println((i+1) + ". " + resultadoBusqueda.get(i));
             }
         }
@@ -219,7 +240,7 @@ public class UiMenuBusqueda {
             showMenuBusqueda();
         } else {
             System.out.println("");
-            for (int i = 0; i < prestamos.size(); i++) {
+            for (int i = 0; i < prestamos.size(); i++) { //Se recorre la lista 'prestamos' (almacenada en la clase 'Prestamo') y se van imprimiendo cada uno de los elementos que conforman a esta
                 System.out.println((i+1) + ". " + prestamos.get(i));
             }
         }
@@ -234,7 +255,7 @@ public class UiMenuBusqueda {
             System.out.println("Aun no realizas reservas");
             showMenuBusqueda();
         } else {
-            for (int i = 0; i < reservas.size(); i++) {
+            for (int i = 0; i < reservas.size(); i++) { //Se recorre la lista 'reservas' (almacenada en la clase 'Reserva') y se van imprimiendo cada uno de los elementos que conforman a esta
                 System.out.println((i+1) + ". " + reservas.get(i));
             }
         }
