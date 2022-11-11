@@ -1,3 +1,6 @@
+from revista import Revista
+from libro import Libro
+
 class Titulo():
 
     def __init__(self, nombre: str, autor: str, ISBN: int):
@@ -29,3 +32,6 @@ class Titulo():
 
     def usado(self):
         self._usos += 1
+
+    def mostrarse(self):
+        pass

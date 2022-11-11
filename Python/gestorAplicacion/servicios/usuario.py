@@ -1,14 +1,15 @@
-from gestorAplicacion.libreria.categoria import CATEGORIA
-from gestorAplicacion.libreria.genero import GENERO
-from gestorAplicacion.libreria.libro import Libro
-from gestorAplicacion.libreria.revista import Revista
-from gestorAplicacion.servicios.prestamo import Prestamo
-from gestorAplicacion.servicios.reserva import Reserva
-from gestorAplicacion.servicios.tiquete import Tiquete
+from Python.gestorAplicacion.libreria.categoria import CATEGORIA
+from Python.gestorAplicacion.libreria.genero import GENERO
+from Python.gestorAplicacion.libreria.libro import Libro
+from Python.gestorAplicacion.libreria.revista import Revista
+from Python.gestorAplicacion.servicios.prestamo import Prestamo
+from Python.gestorAplicacion.servicios.reserva import Reserva
+from Python.gestorAplicacion.servicios.tiquete import Tiquete
 
 
 class Usuario():
-    def __init__(self, nombre: str, id: int, prestamos = [], reservas = [], tiquetes = [], historialLibrosUsados = [], historialResvistasUsadas = [], multa = False, generoFavorito = "Novela", categoriaFavorita = "Actualidad"):
+    def __init__(self, nombre: str, id: int, prestamos: list, reservas: list, tiquetes: list, historialLibrosUsados: list,
+                 historialResvistasUsadas: list, multa = False, generoFavorito = GENERO.NOVELA, categoriaFavorita = CATEGORIA.ACTUALIDAD):
         self._nombre = nombre
         self._id = id
         self._prestamos = prestamos
@@ -16,6 +17,7 @@ class Usuario():
         self._tiquetes = tiquetes
         self._historialLibrosUsados = historialLibrosUsados
         self._historialRevistasUsadas = historialResvistasUsadas
+        self._multa = multa
         self._generoFavorito = generoFavorito
         self._categoriaFavorita = categoriaFavorita
 

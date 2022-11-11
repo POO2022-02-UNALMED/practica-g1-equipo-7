@@ -1,13 +1,13 @@
-from gestorAplicacion.libreria.biblioteca import Biblioteca
-from gestorAplicacion.libreria.ejemplar import Ejemplar
-from gestorAplicacion.libreria.titulo import Titulo
-from gestorAplicacion.servicios.tiquete import Tiquete
-from gestorAplicacion.servicios.usuario import Usuario
+from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
+from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
+from Python.gestorAplicacion.libreria.titulo import Titulo
+from Python.gestorAplicacion.servicios.tiquete import Tiquete
+from Python.gestorAplicacion.servicios.usuario import Usuario
 
 
 class Servicio():
-    _ejemplarRevistaDisponibles = [];
-    _ejemplarLibroDisponibles = [];
+    _ejemplarRevistaDisponibles = []
+    _ejemplarLibroDisponibles = []
 
     def __init__(self, usuario: Usuario, ejemplarEscogido: Ejemplar, tituloEscogido: Titulo, tiquete = None):
         self._usuario = usuario
@@ -65,7 +65,7 @@ class Servicio():
 
         self.setEjemplarLibroDisponibles(ejemplares)
 
-    def filtrarRevistasDisponibles(self, biblioteca:Biblioteca):
+    def filtrarRevistasDisponibles(self, biblioteca: Biblioteca):
         ejemplares = []
         for ejemplar in biblioteca.getEjemplaresRevistas():
             if (ejemplar.getEstadoEjemplar().isPrestado() == False and ejemplar.getEstadoEjemplar().isReservado() == False):

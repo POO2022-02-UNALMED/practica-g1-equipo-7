@@ -1,13 +1,13 @@
 import random
 
-from gestorAplicacion.libreria.biblioteca import Biblioteca
-from gestorAplicacion.libreria.ejemplar import Ejemplar
-from gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
-from gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
-from gestorAplicacion.libreria.titulo import Titulo
-from gestorAplicacion.servicios.servicio import Servicio
-from gestorAplicacion.servicios.tiquete import Tiquete
-from gestorAplicacion.servicios.usuario import Usuario
+from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
+from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
+from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
+from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
+from Python.gestorAplicacion.libreria.titulo import Titulo
+from Python.gestorAplicacion.servicios.servicio import Servicio
+from Python.gestorAplicacion.servicios.tiquete import Tiquete
+from Python.gestorAplicacion.servicios.usuario import Usuario
 
 
 class Reserva(Servicio):

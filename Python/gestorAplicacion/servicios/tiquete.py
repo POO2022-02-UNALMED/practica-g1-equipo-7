@@ -1,4 +1,4 @@
-from gestorAplicacion.servicios.servicio import Servicio
+from Python.gestorAplicacion.servicios.servicio import Servicio
 
 
 class Tiquete():
