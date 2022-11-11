@@ -3,9 +3,9 @@ from estadoEjemplar import EstadoEjemplar
 from libro import Libro
 
 class EjemplarLibro(Ejemplar):
-    def __init__(self, id: int, estadoEjemplar: EstadoEjemplar, libro: Libro):
-        super(EjemplarLibro, self).__init__(id, estadoEjemplar)
-        self._id = id
+    def __init__(self, identificador: int, estadoEjemplar: EstadoEjemplar, libro: Libro):
+        super(EjemplarLibro, self).__init__(identificador, estadoEjemplar)
+        self._identificador = identificador
         self._estadoEjemplar = estadoEjemplar
         self._libro = libro
 

@@ -4,9 +4,9 @@ from revista import Revista
 
 
 class EjemplarRevista(Ejemplar):
-    def __init__(self, id: int, estadoEjemplar: EstadoEjemplar, revista: Revista):
-        super().__init__(id, estadoEjemplar)
-        self._id = id
+    def __init__(self, identificador: int, estadoEjemplar: EstadoEjemplar, revista: Revista):
+        super().__init__(identificador, estadoEjemplar)
+        self._identificador = identificador
         self._estadoEjemplar = estadoEjemplar
         self._revista = revista
 

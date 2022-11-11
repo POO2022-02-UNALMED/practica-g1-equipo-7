@@ -29,5 +29,3 @@ class Titulo():
 
     def usado(self):
         self._usos += 1
-
-
