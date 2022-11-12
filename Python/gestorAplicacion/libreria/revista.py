@@ -12,3 +12,4 @@ class Revista(Titulo):
 
     def setCategoria(self, categoria: CATEGORIA):
         self._categoria = categoria
+

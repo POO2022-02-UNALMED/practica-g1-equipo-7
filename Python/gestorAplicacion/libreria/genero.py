@@ -1,4 +1,6 @@
-class GENERO():
+from enum import Enum
+
+class GENERO(Enum):
     NOVELA = "Novela"
     CIENCIA = "Ciencia"
     HISTORICA = "Historica"
@@ -6,3 +8,4 @@ class GENERO():
     ROMANTICISMO = "Romaticismo"
     FANTASIA = "Fantasia"
     CUENTO = "Cuento"
+

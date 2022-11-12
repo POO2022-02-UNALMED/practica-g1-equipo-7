@@ -1,5 +1,6 @@
 from titulo import Titulo
 from genero import GENERO
+from biblioteca import Biblioteca
 
 class Libro(Titulo):
     def __init__(self, nombre, autor, ISBN, genero: GENERO):
@@ -11,3 +12,10 @@ class Libro(Titulo):
 
     def setGenero(self, genero: GENERO):
         self._genero = genero
+
+
+    @classmethod
+    def filtrarLibros(cls, filtro: str, palabra: str, biblioteca: Biblioteca):
+        pass
+
+

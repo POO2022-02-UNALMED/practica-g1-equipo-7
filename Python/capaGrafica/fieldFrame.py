@@ -4,7 +4,9 @@ from tkinter import ttk
 from tkinter import messagebox
 
 class FieldFrame(Frame):
-    def __init__(self, frame, tituloFuncion, descripcion, tituloCriterios, criterios, tituloValores, valores,val=None, habilitados=None):
+    def __init__(self, frame, tituloFuncion, descripcion, tituloCriterios, criterios, tituloValores, valores, val=None,
+                 habilitados=None):
+        super().__init__(frame)
         self._tituloFuncion = tituloFuncion # titulo funcionalidad
         self._descripcion = descripcion # descripcion de la funcionalidad
         self._tituloCriterios = tituloCriterios
