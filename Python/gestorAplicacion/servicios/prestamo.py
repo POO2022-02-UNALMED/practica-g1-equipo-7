@@ -1,18 +1,15 @@
 import random
 
-from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
-from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
-from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
-from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
-from Python.gestorAplicacion.libreria.titulo import Titulo
+
+
 from Python.gestorAplicacion.servicios.servicio import Servicio
 from Python.gestorAplicacion.servicios.tiquete import Tiquete
-from Python.gestorAplicacion.servicios.usuario import Usuario
+
 from datetime import datetime
 
 
 class Prestamo(Servicio):
-    def __init__(self, usuario: Usuario, ejemplar: Ejemplar, tituloEscogido: Titulo, fecha):
+    def __init__(self, usuario, ejemplar, tituloEscogido, fecha):
         super(Prestamo, self).__init__(usuario, ejemplar, tituloEscogido)
         self._fecha = fecha
 
@@ -23,7 +20,9 @@ class Prestamo(Servicio):
     def setFecha(self,fecha):
         self._fecha = fecha
 
-    def generarPrestamoLibro(self, usuario: Usuario, ejemplarPrestado: EjemplarLibro, biblioteca: Biblioteca):
+
+    @classmethod
+    def generarPrestamoLibro(cls, usuario, ejemplarPrestado, biblioteca):
         prestamo = Prestamo(usuario, ejemplarPrestado, ejemplarPrestado.getLibro(), datetime.now())
         id_prestamo = random.randint(0,10000)
         tiquete = Tiquete(prestamo, id_prestamo)
@@ -37,11 +36,12 @@ class Prestamo(Servicio):
         ejemplarPrestado.getLibro().usado()
 
         #se remueve de disponibles
+
         Servicio.eliminarDeLibrosDisponibles(ejemplarPrestado)
         usuario.añadirPrestamo(prestamo)
         usuario.añadirTiquete(tiquete)
 
-    def generarPrestamoRevista(self, usuario: Usuario, ejemplarPrestado: EjemplarRevista, biblioteca: Biblioteca):
+    def generarPrestamoRevista(self, usuario, ejemplarPrestado, biblioteca):
         prestamo = Prestamo(usuario, ejemplarPrestado, ejemplarPrestado.getRevista(), datetime.now())
         id_prestamo = random.randint(0,10000)
         tiquete = Tiquete(prestamo, id_prestamo)
@@ -59,7 +59,8 @@ class Prestamo(Servicio):
         usuario.añadirPrestamo(prestamo)
         usuario.añadirTiquete(tiquete)
 
-    def devolucion(self, indiceDevolcion: int, biblioteca:Biblioteca, usuario: Usuario):
+    @classmethod
+    def devolucion(cls, indiceDevolcion: int, biblioteca, usuario):
         prestamoAEliminar = usuario.getPrestamos()[indiceDevolcion]
         tiqueteAEliminar = None
 

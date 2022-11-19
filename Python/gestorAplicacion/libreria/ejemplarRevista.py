@@ -1,14 +1,13 @@
-from ejemplar import Ejemplar
-from estadoEjemplar import EstadoEjemplar
-from revista import Revista
+from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
+
 
 
 class EjemplarRevista(Ejemplar):
-    def __init__(self, identificador: int, estadoEjemplar: EstadoEjemplar, revista: Revista):
+    def __init__(self, identificador: int, estadoEjemplar, revista):
         super().__init__(identificador, estadoEjemplar)
         self._identificador = identificador
         self._estadoEjemplar = estadoEjemplar
         self._revista = revista
 
-    def getRevista(self) -> Revista:
+    def getRevista(self):
         return self._revista

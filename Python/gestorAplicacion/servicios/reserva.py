@@ -1,17 +1,14 @@
 import random
 
-from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
-from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
-from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
-from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
-from Python.gestorAplicacion.libreria.titulo import Titulo
+
+
 from Python.gestorAplicacion.servicios.servicio import Servicio
 from Python.gestorAplicacion.servicios.tiquete import Tiquete
-from Python.gestorAplicacion.servicios.usuario import Usuario
+
 
 
 class Reserva(Servicio):
-    def __init__(self, usuario: Usuario, ejemplar: Ejemplar, tituloEscogido: Titulo, fechaReserva, fechaDevolucion):
+    def __init__(self, usuario, ejemplar, tituloEscogido, fechaReserva, fechaDevolucion):
         super(Reserva, self).__init__(usuario, ejemplar, tituloEscogido)
         self._fechaReserva = fechaReserva
         self._fechaDevolucion = fechaDevolucion
@@ -29,7 +26,7 @@ class Reserva(Servicio):
     def setFechaDevolucion(self, fecha):
         self._fechaDevolucion = fecha
 
-    def generarReservaLibro(self, usuario: Usuario, ejemplarLibroReservado: EjemplarLibro, biblioteca: Biblioteca, fechaReserva, fechaDevolucion):
+    def generarReservaLibro(self, usuario, ejemplarLibroReservado, biblioteca, fechaReserva, fechaDevolucion):
         reserva = Reserva(usuario, ejemplarLibroReservado, ejemplarLibroReservado.getLibro(), fechaReserva, fechaDevolucion)
         idReserva = random.randint(0, 10000)
         tiquete = Tiquete(reserva, idReserva)
@@ -46,8 +43,8 @@ class Reserva(Servicio):
         Servicio.eliminarDeLibrosDisponibles(ejemplarLibroReservado)
         usuario.añadirReserva(reserva)
         usuario.añadirTiquete(tiquete)
-
-    def generarReservaRevista(self, usuario: Usuario, ejemplarRevistaReservada: EjemplarRevista, biblioteca: Biblioteca, fechaReserva, fechaDevolucion):
+    @classmethod
+    def generarReservaRevista(cls, usuario, ejemplarRevistaReservada, biblioteca , fechaReserva, fechaDevolucion):
         reserva = Reserva(usuario, ejemplarRevistaReservada, ejemplarRevistaReservada.getRevista(), fechaReserva, fechaDevolucion)
         idReserva = random.randint(0, 10000)
         tiquete = Tiquete(reserva, idReserva)
@@ -65,7 +62,8 @@ class Reserva(Servicio):
         usuario.añadirReserva(reserva)
         usuario.añadirTiquete(tiquete)
 
-    def cancelarReserva(self, indiceCancelarReserva: int, biblioteca: Biblioteca, usuario:Usuario):
+    @classmethod
+    def cancelarReserva(cls, indiceCancelarReserva: int, biblioteca, usuario):
         reservaAEliminar = usuario.getReservas()[indiceCancelarReserva]
         tiqueteAEliminar = None
 
@@ -73,8 +71,8 @@ class Reserva(Servicio):
             if tiquete.getServicio() == reservaAEliminar:
                 tiqueteAEliminar = tiquete
 
-        reservaAEliminar.getEjemplarEscogido().getEstadoEjemplar.setReservado(False)
-        usuario.eliminarPrestamo(reservaAEliminar)
+        reservaAEliminar.getEjemplarEscogido().getEstadoEjemplar().setReservado(False)
+        usuario.eliminarReserva(reservaAEliminar)
         usuario.eliminarTiquete(tiqueteAEliminar)
 
     def toString(self):

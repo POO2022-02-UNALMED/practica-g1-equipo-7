@@ -1,59 +1,92 @@
+from Python.gestorAplicacion.servicios.reserva import Reserva
+from Python.gestorAplicacion.servicios.prestamo import Prestamo
+from Python.gestorAplicacion.servicios.servicio import Servicio
+from Python.gestorAplicacion.servicios.tiquete import Tiquete
+from Python.gestorAplicacion.servicios.usuario import Usuario
+
+from Python.gestorAplicacion.libreria.categoria import CATEGORIA
+from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
+from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
+from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
+from Python.gestorAplicacion.libreria.estadoEjemplar import EstadoEjemplar
+from Python.gestorAplicacion.libreria.genero import GENERO
+from Python.gestorAplicacion.libreria.libro import Libro
+from Python.gestorAplicacion.libreria.revista import Revista
+from Python.gestorAplicacion.libreria.titulo import Titulo
+
+
+
 class Biblioteca:
+    _ejemplaresLibros = []
+    _ejemplaresRevistas = []
+    _libros = []
+    _revistas = []
+    _usuarios = []
+    _historialLibrosUsados = []
+    _historialRevistasUsadas = []
 
-    def __init__(self, ejemplaresLibros: list, ejemplaresRevistas: list, libros: list, revistas: list, usuarios: list, historialLibrosUsados: list, historialRevistasUsadas: list):
-        self._ejemplaresLibros = ejemplaresLibros
-        self._ejemplaresRevistas = ejemplaresRevistas
-        self._libros = libros
-        self._revistas = revistas
-        self._usuarios = usuarios
-        self._historialLibrosUsados = historialLibrosUsados
-        self._historialRevistasUsadas = historialRevistasUsadas
+    def __init__(self):
+        #deserializarTodo()
+        pass
 
 
-    #getters y setters
-    def getEjemplaresLibros(self):
-        return self._ejemplaresLibros
+    # getters y setters
+    @classmethod
+    def getEjemplaresLibros(cls):
+        return cls._ejemplaresLibros
 
-    def getEjemplaresRevistas(self):
-        return self._ejemplaresRevistas
+    @classmethod
+    def getEjemplaresRevistas(cls):
+        return cls._ejemplaresRevistas
 
-    def getLibros(self):
-        return self._libros
+    @classmethod
+    def getLibros(cls):
+        return cls._libros
 
-    def getRevistas(self):
-        return self._revistas
+    @classmethod
+    def getRevistas(cls):
+        return cls._revistas
 
-    def getUsuarios(self):
-        return self._usuarios
+    @classmethod
+    def getUsuarios(cls):
+        return cls._usuarios
 
-    def getHistorialLibrosUsados(self):
-        return self._historialLibrosUsados
+    @classmethod
+    def getHistorialLibrosUsados(cls):
+        return cls._historialLibrosUsados
 
-    def getHistorialRevistasUsadas(self):
-        return self._historialRevistasUsadas
+    @classmethod
+    def getHistorialRevistasUsadas(cls):
+        return cls._historialRevistasUsadas
 
-    def setEjemplaresLibros(self, ejemplares):
-        self._ejemplaresLibros = ejemplares
+    @classmethod
+    def setEjemplaresLibros(cls, ejemplares):
+        cls._ejemplaresLibros = ejemplares
 
-    def setEjemplaresRevistas(self, ejemplares):
-        self._ejemplaresRevistas = ejemplares
+    def setEjemplaresRevistas(cls, ejemplares):
+        cls._ejemplaresRevistas = ejemplares
 
-    def setLibros(self, libros):
-        self._libros = libros
+    @classmethod
+    def setLibros(cls, libros):
+        cls._libros = libros
 
-    def setRevistas(self, revistas):
-        self._revistas = revistas
+    @classmethod
+    def setRevistas(cls, revistas):
+        cls._revistas = revistas
 
-    def setUsuarios(self, usuarios):
-        self._usuarios = usuarios
+    @classmethod
+    def setUsuarios(cls, usuarios):
+        cls._usuarios = usuarios
 
-    def setHistorialLibrosUsados(self, historial):
-        self._historialLibrosUsados = historial
+    @classmethod
+    def setHistorialLibrosUsados(cls, historial):
+        cls._historialLibrosUsados = historial
 
-    def setHistorialRevistasUsadas(self, historial):
-        self._historialRevistasUsadas = historial
+    @classmethod
+    def setHistorialRevistasUsadas(cls, historial):
+        cls._historialRevistasUsadas = historial
 
-    #Metodos
+    # Metodos
     def añadirLibro(self, libro):
         self._libros.append(libro)
 

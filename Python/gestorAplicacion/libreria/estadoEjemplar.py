@@ -2,7 +2,7 @@ from Python.gestorAplicacion.servicios.prestamo import Prestamo
 from Python.gestorAplicacion.servicios.reserva import Reserva
 
 class EstadoEjemplar():
-    def __init__(self, prestado: bool, reservado: bool, retraso: bool, prestamo: Prestamo, reserva: Reserva):
+    def __init__(self, prestado: bool, reservado: bool, retraso: bool, prestamo = None, reserva = None):
         self._prestado = prestado
         self._reservado = reservado
         self._retraso = retraso

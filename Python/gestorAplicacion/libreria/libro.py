@@ -1,21 +1,20 @@
-from titulo import Titulo
-from genero import GENERO
-from biblioteca import Biblioteca
+from Python.gestorAplicacion.libreria.titulo import Titulo
+
 
 class Libro(Titulo):
-    def __init__(self, nombre, autor, ISBN, genero: GENERO):
+    def __init__(self, nombre, autor, ISBN, genero):
         super().__init__(nombre, autor, ISBN)
         self._genero = genero
 
-    def getGenero(self) -> GENERO:
+    def getGenero(self):
         return self._genero
 
-    def setGenero(self, genero: GENERO):
+    def setGenero(self, genero):
         self._genero = genero
 
 
     @classmethod
-    def filtrarLibros(cls, filtro: str, palabra: str, biblioteca: Biblioteca):
+    def filtrarLibros(cls, filtro: str, palabra: str, biblioteca):
         pass
 
 

@@ -1,31 +1,28 @@
-from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
-from Python.gestorAplicacion.libreria.ejemplar import Ejemplar
-from Python.gestorAplicacion.libreria.titulo import Titulo
-from Python.gestorAplicacion.servicios.tiquete import Tiquete
-from Python.gestorAplicacion.servicios.usuario import Usuario
+
+
 
 
 class Servicio():
     _ejemplarRevistaDisponibles = []
     _ejemplarLibroDisponibles = []
 
-    def __init__(self, usuario: Usuario, ejemplarEscogido: Ejemplar, tituloEscogido: Titulo, tiquete = None):
+    def __init__(self, usuario, ejemplarEscogido, tituloEscogido, tiquete = None):
         self._usuario = usuario
         self._ejemplarEscogido = ejemplarEscogido
         self._tituloEscogido = tituloEscogido
         self._tiquete = tiquete
 
     #Getters y setters
-    def getUsuario(self) -> Usuario:
+    def getUsuario(self):
         return self._usuario
 
-    def getEjemplarEscogido(self) -> Ejemplar:
+    def getEjemplarEscogido(self):
         return self._ejemplarEscogido
 
-    def getTituloEscogido(self) -> Titulo:
+    def getTituloEscogido(self):
         return self._tituloEscogido
 
-    def getTiquete(self) -> Tiquete:
+    def getTiquete(self):
         return self._tiquete
 
     @classmethod
@@ -36,16 +33,16 @@ class Servicio():
     def getEjemplarLibroDisponibles(cls) -> list:
         return cls._ejemplarLibroDisponibles
 
-    def setUsuario(self, usuario: Usuario):
+    def setUsuario(self, usuario):
         self._usuario = usuario
 
-    def setEjemplarEscogido(self, ejemplar: Ejemplar):
+    def setEjemplarEscogido(self, ejemplar):
         self._ejemplarEscogido = ejemplar
 
-    def setTituloEscogido(self, titulo: Titulo):
+    def setTituloEscogido(self, titulo):
         self._tituloEscogido = titulo
 
-    def setTiquete(self, tiquete: Tiquete):
+    def setTiquete(self, tiquete):
         self._tiquete = tiquete
 
     @classmethod
@@ -57,7 +54,7 @@ class Servicio():
         cls._ejemplarLibroDisponibles = ejemplarLibroDisponibles
 
     #Metodos
-    def filtrarLibrosDisponibles(self, biblioteca: Biblioteca):
+    def filtrarLibrosDisponibles(self, biblioteca):
         ejemplares = []
         for ejemplar in biblioteca.getEjemplaresLibros():
             if (ejemplar.getEstadoEjemplar().isPrestado() == False and ejemplar.getEstadoEjemplar().isReservado() == False):
@@ -65,7 +62,7 @@ class Servicio():
 
         self.setEjemplarLibroDisponibles(ejemplares)
 
-    def filtrarRevistasDisponibles(self, biblioteca: Biblioteca):
+    def filtrarRevistasDisponibles(self, biblioteca):
         ejemplares = []
         for ejemplar in biblioteca.getEjemplaresRevistas():
             if (ejemplar.getEstadoEjemplar().isPrestado() == False and ejemplar.getEstadoEjemplar().isReservado() == False):
@@ -77,9 +74,13 @@ class Servicio():
         return self.getTituloEscogido().mostrarse()
 
     @classmethod
-    def eliminarDeLibrosDisponibles(cls, ejemplarLibro: Ejemplar):
-        cls._ejemplarLibroDisponibles.remove(ejemplarLibro)
+    def eliminarDeLibrosDisponibles(cls, ejemplarLibro):
+        for ejemplarL in cls._ejemplarLibroDisponibles:
+            if ejemplarLibro == ejemplarL:
+                cls._ejemplarLibroDisponibles.remove(ejemplarLibro)
 
     @classmethod
-    def eliminarDeRevistasDisponibles(cls, ejemplarRevista: Ejemplar):
-        cls._ejemplarRevistaDisponibles.remove(ejemplarRevista)
+    def eliminarDeRevistasDisponibles(cls, ejemplarRevista):
+        for ejemplarR in cls._ejemplarRevistaDisponibles:
+            if ejemplarRevista == ejemplarR:
+                cls._ejemplarRevistaDisponibles.remove(ejemplarRevista)

@@ -119,10 +119,14 @@ class Usuario():
         self._tiquetes.append(tiquete)
 
     def eliminarReserva(self, reserva: Reserva):
-        self._reservas.remove(reserva)
+        for r in self._reservas:
+            if reserva == r:
+                self._reservas.remove(reserva)
 
     def eliminarPrestamo(self, prestamo: Prestamo):
-        self._prestamos.remove(prestamo)
+        for p in self._prestamos:
+            if prestamo == p:
+                self._prestamos.remove(prestamo)
 
     def eliminarTiquete(self, tiquete: Tiquete):
         self._tiquetes.remove(tiquete)

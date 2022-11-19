@@ -1,5 +1,4 @@
-from revista import Revista
-from libro import Libro
+
 
 class Titulo():
 
