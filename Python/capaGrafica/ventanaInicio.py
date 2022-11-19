@@ -15,6 +15,7 @@ class VentanaInicio(tk.Tk):
         super().__init__()
         self.geometry("1024x720")
         self.title("Ventana Inicio JJ Library")
+        self.option_add("*tearOff", False)
         self.resizable(False,False)
         #Cargar el archivo de icono e imagen
         iconoChico = tk.PhotoImage(file=self.absolute_image_chica_path)
