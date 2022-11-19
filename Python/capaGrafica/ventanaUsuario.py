@@ -3,6 +3,7 @@ import pathlib
 from random import randint
 from tkinter import *
 import tkinter
+from Python.baseDatos.serializador import serializarTodo
 
 from Python.capaGrafica.fieldFrame import FieldFrame
 
@@ -127,7 +128,7 @@ class VentanaUsuario(Tk):
 
 
         def Guardar():
-            #aca se serializa
+            serializarTodo()
             self.destroy()
 
         def cambiarFrame(frameUtilizado):
@@ -135,5 +136,3 @@ class VentanaUsuario(Tk):
                 frame.pack_forget()
             frameUtilizado.pack(fill=BOTH,expand=True, pady = (10,10))
 
-nuevo = VentanaUsuario([])
-nuevo.mainloop()
