@@ -1,0 +1,10 @@
+JJ Library es una aplicacion de gestion de biblioteca.
+el usuario de la biblioteca que contrate la aplicacion 
+tendra acceso a un software en el cual podra realizar
+la gestion de los servicios ofrecidos por la biblioteca
+tales como:
+- Busqueda de libros y revistas.
+- Consulta de prestamos y reservas.
+- Realizacion de prestamos.
+- Realizacion de reservas.
+- Gestion de sus prestamos y reservas.

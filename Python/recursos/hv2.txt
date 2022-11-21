@@ -1,12 +1,9 @@
-llllll
-Correo@unal.edu.co
-Ciudad, Depa, Pais
+Esteban Espinosa Parra
+esespinosap@unal.edu.co
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris
-nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-dolor in reprehenderit in voluptate velit esse cillumdolore eu 
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-proident, sunt in culpa qui officia deserunt mollit anim 
-id est laborum."
+Estudiante de Ingenieria de Sistemas en la Unal 
+sede Medellin. Me gustan mucho las nuevas 
+tecnologias que van saliendo en el mundo que 
+nos permiten mejorar nuestra calidad de vida. 
+Practico ciclomontanismo en los tiempos libres 
+y me apasionan los paisajes andinos.

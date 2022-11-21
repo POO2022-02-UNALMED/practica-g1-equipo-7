@@ -1,12 +1,10 @@
-nnnnnnnnn
-Correo@unal.edu.co
-Ciudad, Depa, Pais
+Alejandro Castro Parra
+alcastrop@unal.edu.co
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris
-nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-dolor in reprehenderit in voluptate velit esse cillumdolore eu 
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-proident, sunt in culpa qui officia deserunt mollit anim 
-id est laborum."
+Estudiante de ingenieria de sistemas en una Unal sede Medellin.
+Me llaman mucho la atencion el desarrollo de software y la 
+inteligencia artificial. Soy aficionado a los deportes, en 
+especial el Basket y el futbol, anteriormente practicaba 
+varios de ellos. En mis tiempos libres me dedico a jugar 
+videojuegos, hacer ejercicio y recientemente estoy 
+empezando a leer.

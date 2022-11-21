@@ -1,12 +1,8 @@
-kkkkk
-Correo@unal.edu.co
-Ciudad, Depa, Pais
+Samuel Meza Tabares
+smezat@unal.edu.co
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris
-nisi ut aliquip ex ea commodo consequat. Duis aute irure 
-dolor in reprehenderit in voluptate velit esse cillumdolore eu 
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non 
-proident, sunt in culpa qui officia deserunt mollit anim 
-id est laborum."
+Estudiante de ingenieria de sistemas de la universidad nacional 
+sede Medellin. Me gusta mucho la implementacion de nuevas 
+tendencias tecnologicas como las criptomonedas. Apasionado 
+por la gastronomia y actualmente trabajo en mi emprendimiento 
+y mi restaurante de hamburguesas artesanales Pan y Pedazo.

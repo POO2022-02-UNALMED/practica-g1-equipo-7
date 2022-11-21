@@ -56,7 +56,7 @@ class VentanaInicio(tk.Tk):
         
         #entrada a la aplicación y saludos
         self.mensajeBienvenida = "Bienvendio a la aplicación JJ library\n\n Biblioteca: Libreria POO"
-        self.labelBienvenida = tk.Label(frameP1, text=self.mensajeBienvenida, font=("verdana", 16), fg="white",bg="#61727C", width=30, height=5, borderwidth=5, relief="groove")
+        self.labelBienvenida = tk.Label(frameP1, text=self.mensajeBienvenida, font=("verdana", 16), fg="white",bg="#61727C", width=30, height=5, borderwidth=5, relief="groove", justify="left")
         self.labelBienvenida.grid(row=0, column=0,padx=20, pady=20)
         self.labelImagenInicio = tk.Label(frameP1, image=self.imagenes[0],width=400, height=375)
         self.labelImagenInicio.grid(row=1, column=0, padx=20, pady=20)
@@ -129,8 +129,14 @@ class VentanaInicio(tk.Tk):
             self.labelsImgHV[i].configure(image=self.imagenesHV[self.indiceImagenesHVActuales][i])
         
     def mostrarDescripcion(self):
-        ventanaDescripcion()
-        self.destroy()
+        absolute_desc_path = os.path.join(self.absolute_folder_path, '../recursos/descripcion.txt')
+        with open(absolute_desc_path, "r+") as descripcion:
+            self.labelBienvenida.configure(text=descripcion.read(), font=("verdana", 8), width=55, height=12, justify="left")
+            
+        self.labelBienvenida.bind('<Button-1>', self.mostrarBienvenida)
+        
+    def mostrarBienvenida(self, args):
+            self.labelBienvenida.configure(text=self.mensajeBienvenida, font=("verdana", 16), width=30, height=5)
 
 class ventanaDescripcion(tk.Tk):
 
@@ -145,3 +151,4 @@ class ventanaDescripcion(tk.Tk):
         self.labelDescripcion.pack(expand=True)
         self.mainloop()
 
+VentanaInicio()
