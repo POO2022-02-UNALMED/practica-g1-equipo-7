@@ -628,4 +628,3 @@ def inicializar(biblioteca):
     Reserva.cancelarReserva(0, biblioteca, usuario7)
 
 
-

@@ -7,6 +7,7 @@ from Python.gestorAplicacion.servicios.servicio import Servicio
 from Python.gestorAplicacion.servicios.tiquete import Tiquete
 
 
+
 from datetime import datetime
 from Python.capaGrafica.fieldFrame import FieldFrame
 
@@ -44,7 +45,8 @@ class Prestamo(Servicio):
         usuario.añadirPrestamo(prestamo)
         usuario.añadirTiquete(tiquete)
 
-    def generarPrestamoRevista(self, usuario, ejemplarPrestado, biblioteca):
+    @classmethod
+    def generarPrestamoRevista(cls, usuario, ejemplarPrestado, biblioteca):
         prestamo = Prestamo(usuario, ejemplarPrestado, ejemplarPrestado.getRevista(), datetime.now())
         id_prestamo = random.randint(0,10000)
         tiquete = Tiquete(prestamo, id_prestamo)
@@ -79,7 +81,7 @@ class Prestamo(Servicio):
         return self.mostrarTituloEscogido() + "Fecha prestamo: " + self.getFecha()
 
     @classmethod
-    def generarFramePrestamo(cls, usuario, biblioteca):
+    def generarFramePrestamoLibro(cls, usuario, biblioteca):
 
 
         frameTotal = tk.Frame(width = 1080, height=720)
@@ -96,10 +98,8 @@ class Prestamo(Servicio):
 
         def prestarLibro():
             indice = fieldFrameDer.getValue("Numero")
-            print(len(Servicio.getEjemplarLibroDisponibles()))
             ejemplar = Servicio.getEjemplarLibroDisponibles()[int(indice) - 1]
             Prestamo.generarPrestamoLibro(usuario, ejemplar, biblioteca)
-            print(len(Servicio.getEjemplarLibroDisponibles()))
             print(usuario.getHistorialLibrosUsados())
 
 
@@ -122,6 +122,53 @@ class Prestamo(Servicio):
 
             label_total = Label(frame_libro_info, text= f"{r+1}. Nombre: {nombre_libro}      Autor: {nombre_autor}      "
                                                         f"Genero: {nombre_genero}")
+            label_total.grid(row=0, column=0)
+        return frameTotal
+
+    @classmethod
+    def generarFramePrestamoRevista(cls, usuario, biblioteca):
+
+        frameTotal = tk.Frame(width=1080, height=720)
+        frameTotal.grid()
+
+        frameIZQ = tk.Frame(frameTotal, width=500, height=700, bg="red")
+        frameDER = tk.Frame(frameTotal, width=500, height=700, bg="green")
+        frameDER.grid(column=1, row=0, padx=5)
+        frameIZQ.grid(column=0, row=0, padx=5)
+
+        fieldFrameDer = FieldFrame(frameDER, "Prestar Revista", ["Numero"], None, None,
+                                   [True])
+        fieldFrameDer.grid(row=0, column=0)
+
+        def prestarRevista():
+            indice = fieldFrameDer.getValue("Numero")
+            print(len(Servicio.getEjemplarRevistaDisponibles()))
+            ejemplar = Servicio.getEjemplarRevistaDisponibles()[int(indice) - 1]
+            Prestamo.generarPrestamoRevista(usuario, ejemplar, biblioteca)
+            print(len(Servicio.getEjemplarRevistaDisponibles()))
+            print(usuario.getHistorialRevistasUsadas())
+
+        botonPrestar = Button(fieldFrameDer, text="Prestar", font=("Helvetica", 16), fg="white", bg="Blue",
+                              command=prestarRevista)
+        botonPrestar.grid(column=1, row=1)
+
+        frame_revista_info = Frame(frameIZQ, width=400, height=40, borderwidth=1, padx=5, pady=5)
+        frame_revista_info.grid(column=0, row=0, padx=4, pady=5, columnspan=10)
+
+        label_total = Label(frame_revista_info, text="Numeral      Nombre       Autor      Genero")
+        label_total.grid(row=0, column=0)
+
+        for r in range(len(Servicio.getEjemplarRevistaDisponibles())):
+            nombre_revista = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getNombre()
+            nombre_autor = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getAutor()
+            nombre_genero = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getCategoria()
+
+            frame_revista_info = Frame(frameIZQ, width=400, height=40, borderwidth=1, padx=5, pady=5)
+            frame_revista_info.grid(column=0, row=r + 1, padx=4, pady=5, columnspan=10)
+
+            label_total = Label(frame_revista_info,
+                                text=f"{r + 1}. Nombre: {nombre_revista}      Autor: {nombre_autor}      "
+                                     f"Genero: {nombre_genero}")
             label_total.grid(row=0, column=0)
 
         return frameTotal

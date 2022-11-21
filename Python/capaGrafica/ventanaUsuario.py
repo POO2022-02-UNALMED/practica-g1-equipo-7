@@ -1,11 +1,10 @@
-import os
-import pathlib
-from random import randint
+
 from tkinter import *
 import tkinter as tk
 from Python.baseDatos.serializador import serializarTodo
-from Python.gestorAplicacion.servicios.servicio import Servicio
+
 from Python.gestorAplicacion.servicios.prestamo import Prestamo
+from Python.gestorAplicacion.libreria.libro import Libro
 
 
 
@@ -65,7 +64,7 @@ class VentanaUsuario(Tk):
         #2. Prestamos
         realizar_prestamo = Menu(self._barra_del_menu)
         realizar_prestamo.add_command(label="Prestar libro", command=lambda: cambiarFrame(FramePrestarLibro))
-        realizar_prestamo.add_command(label="Prestar revista", command=lambda: cambiarFrame(Frame()))
+        realizar_prestamo.add_command(label="Prestar revista", command=lambda: cambiarFrame(FramePrestarRevista))
         procesos_consultas.add_cascade(label="Realizar prestamo", menu=realizar_prestamo)
 
         #3. Recomendaciones
@@ -100,9 +99,12 @@ class VentanaUsuario(Tk):
 
         #GENERACIÓN DE FRAMES
 
-        FramePrestarLibro = Prestamo.generarFramePrestamo(self._usuario, self._biblioteca_main)
+        FramePrestarLibro = Prestamo.generarFramePrestamoLibro(self._usuario, self._biblioteca_main)
+        FramePrestarRevista = Prestamo.generarFramePrestamoRevista(self._usuario, self._biblioteca_main)
+
         VentanaUsuario.frames.append(FramePrestarLibro)
-        FramePrestarLibro.pack()
+        VentanaUsuario.frames.append(FramePrestarRevista)
+
 
 
 
@@ -148,6 +150,6 @@ class VentanaUsuario(Tk):
 
         def cambiarFrame(frameUtilizado):
             for frame in VentanaUsuario.frames:
-                frame.pack_forget()
-            frameUtilizado.pack(fill=BOTH,expand=True, pady = (10,10))
+                frame.grid_forget()
+            frameUtilizado.grid_configure()
 

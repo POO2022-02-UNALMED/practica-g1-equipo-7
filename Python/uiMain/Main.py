@@ -10,6 +10,7 @@ deserializarTodo()
 biblioteca_main = Biblioteca()
 usuario = Usuario("Juan", 238283, [],[],[],[],[],[])
 
+
 Servicio.setEjemplarLibroDisponibles(biblioteca_main.getEjemplaresLibros())
 Servicio.setEjemplarRevistaDisponibles(biblioteca_main.getEjemplaresRevistas())
 

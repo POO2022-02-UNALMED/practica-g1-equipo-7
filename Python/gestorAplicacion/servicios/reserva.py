@@ -53,7 +53,7 @@ class Reserva(Servicio):
         ejemplarRevistaReservada.getEstadoEjemplar().setReservado(True)
 
         #Se agrega al historial
-        biblioteca.añadirHistorialLibrosUsados(ejemplarRevistaReservada.getRevista())
+        biblioteca.añadirHistorialRevistasUsadas(ejemplarRevistaReservada.getRevista())
         usuario.añadirHistorialRevistas(ejemplarRevistaReservada.getRevista())
         ejemplarRevistaReservada.getRevista().usado()
 

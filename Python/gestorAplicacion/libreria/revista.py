@@ -14,3 +14,14 @@ class Revista(Titulo):
     def setCategoria(self, categoria):
         self._categoria = categoria
 
+    @classmethod
+    def masSolicitadas(cls, biblioteca, categoria):
+        revistas = []
+
+        for revista in biblioteca.getHistorialRevistasUsadas():
+            if revista.getCategoria() == categoria and revista not in revistas:
+                revistas.append(revista)
+
+        revistas.sort()
+        return revistas
+

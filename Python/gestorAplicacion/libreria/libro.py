@@ -1,5 +1,6 @@
 from Python.gestorAplicacion.libreria.titulo import Titulo
-
+import tkinter as tk
+from tkinter import *
 
 class Libro(Titulo):
     def __init__(self, nombre, autor, ISBN, genero):
@@ -14,7 +15,19 @@ class Libro(Titulo):
 
 
     @classmethod
-    def filtrarLibros(cls, filtro: str, palabra: str, biblioteca):
-        pass
+    def masSolicitados(cls, biblioteca, genero):
+        libros = []
+
+        for libro in biblioteca.getHistorialLibrosUsados():
+            if libro.getGenero() == genero and libro not in libros:
+                libros.append(libro)
+
+        libros.sort()
+
+        return libros
 
 
+
+
+    def __str__(self):
+        return(f"{self.getNombre()}  {self.getAutor()}")

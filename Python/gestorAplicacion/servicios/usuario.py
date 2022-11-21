@@ -131,20 +131,5 @@ class Usuario():
     def eliminarTiquete(self, tiquete: Tiquete):
         self._tiquetes.remove(tiquete)
 
-    def encontrarGeneroFavorito(self):
-        diccionario = {}
-        generoFavorito = None
-        for libro in self._historialLibrosUsados:
-            if libro.getGenero() not in diccionario:
-                diccionario[libro.getGenero()] = 0
-            else:
-                diccionario[libro.getGenero()] += 1
 
-        maxLeido = 0
-        for genero in diccionario:
-            if diccionario[genero] > maxLeido:
-                generoFavorito = genero
-                maxLeido = diccionario[genero]
-
-        return generoFavorito
 
