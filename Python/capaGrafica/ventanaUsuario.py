@@ -2,17 +2,24 @@ import os
 import pathlib
 from random import randint
 from tkinter import *
-import tkinter
+import tkinter as tk
 from Python.baseDatos.serializador import serializarTodo
+from Python.gestorAplicacion.servicios.servicio import Servicio
+from Python.gestorAplicacion.servicios.prestamo import Prestamo
 
-from Python.capaGrafica.fieldFrame import FieldFrame
+
+
+
 
 class VentanaUsuario(Tk):
 
+
     frames = []
 
-    def __init__(self, biblioteca):
+    def __init__(self, biblioteca, usuario ):
         super().__init__()
+        self._biblioteca_main = biblioteca
+        self._usuario = usuario
 
         self.title("JJ-Sales - Ventana del Usuario")
         self.geometry("1080x720")
@@ -57,7 +64,7 @@ class VentanaUsuario(Tk):
 
         #2. Prestamos
         realizar_prestamo = Menu(self._barra_del_menu)
-        realizar_prestamo.add_command(label="Prestar libro", command=lambda: cambiarFrame(Frame()))
+        realizar_prestamo.add_command(label="Prestar libro", command=lambda: cambiarFrame(FramePrestarLibro))
         realizar_prestamo.add_command(label="Prestar revista", command=lambda: cambiarFrame(Frame()))
         procesos_consultas.add_cascade(label="Realizar prestamo", menu=realizar_prestamo)
 
@@ -91,7 +98,11 @@ class VentanaUsuario(Tk):
 
         self.config(menu = self._barra_del_menu)
 
+        #GENERACIÓN DE FRAMES
 
+        FramePrestarLibro = Prestamo.generarFramePrestamo(self._usuario, self._biblioteca_main)
+        VentanaUsuario.frames.append(FramePrestarLibro)
+        FramePrestarLibro.pack()
 
 
 
@@ -108,7 +119,7 @@ class VentanaUsuario(Tk):
                     f"de recomendaciones adecuadas a sus gustos para que se lleve la mejor experiencia posible"
 
             info = Label(ventana, text = texto, font = ("Helvetica", 11))
-            info.pack(fill = tkinter.Y, expand = True)
+            info.pack(fill = tk.Y, expand = True)
 
 
         def Ayuda():
@@ -124,12 +135,16 @@ class VentanaUsuario(Tk):
                         f"• Samuel Meza\n" \
                         f"• Alejandro Castro Parra"
             devs = Label(ventanaAyuda, text= textoAyuda, justify="left", font=("Helvetica", 12))
-            devs.pack(fill=tkinter.Y, expand=True)
+            devs.pack(fill=tk.Y, expand=True)
+
+
 
 
         def Guardar():
             serializarTodo()
             self.destroy()
+
+
 
         def cambiarFrame(frameUtilizado):
             for frame in VentanaUsuario.frames:

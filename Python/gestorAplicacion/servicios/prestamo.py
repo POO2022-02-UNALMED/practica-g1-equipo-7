@@ -1,11 +1,14 @@
 import random
 
-
+import tkinter as tk
+from tkinter import *
 
 from Python.gestorAplicacion.servicios.servicio import Servicio
 from Python.gestorAplicacion.servicios.tiquete import Tiquete
 
+
 from datetime import datetime
+from Python.capaGrafica.fieldFrame import FieldFrame
 
 
 class Prestamo(Servicio):
@@ -72,5 +75,53 @@ class Prestamo(Servicio):
         usuario.eliminarPrestamo(prestamoAEliminar)
         usuario.eliminarTiquete(tiqueteAEliminar)
 
-    def toString(self):
+    def __str__(self):
         return self.mostrarTituloEscogido() + "Fecha prestamo: " + self.getFecha()
+
+    @classmethod
+    def generarFramePrestamo(cls, usuario, biblioteca):
+
+
+        frameTotal = tk.Frame(width = 1080, height=720)
+        frameTotal.grid()
+
+        frameIZQ = tk.Frame(frameTotal, width=500, height=700, bg="red")
+        frameDER = tk.Frame(frameTotal, width=500, height=700, bg="green")
+        frameDER.grid(column=1, row=0, padx=5)
+        frameIZQ.grid(column=0, row=0, padx=5)
+
+        fieldFrameDer = FieldFrame(frameDER, "Prestar Libro", ["Numero"], None, None,
+                                   [True])
+        fieldFrameDer.grid(row=0, column=0)
+
+        def prestarLibro():
+            indice = fieldFrameDer.getValue("Numero")
+            print(len(Servicio.getEjemplarLibroDisponibles()))
+            ejemplar = Servicio.getEjemplarLibroDisponibles()[int(indice) - 1]
+            Prestamo.generarPrestamoLibro(usuario, ejemplar, biblioteca)
+            print(len(Servicio.getEjemplarLibroDisponibles()))
+            print(usuario.getHistorialLibrosUsados())
+
+
+        botonPrestar = Button(fieldFrameDer, text= "Prestar", font= ("Helvetica", 16), fg = "white", bg = "Blue", command= prestarLibro)
+        botonPrestar.grid(column=1, row=1)
+
+        frame_libro_info = Frame(frameIZQ, width=400, height=40, borderwidth=1, padx=5, pady=5)
+        frame_libro_info.grid(column=0, row=0, padx=4, pady=5, columnspan=10)
+
+        label_total = Label(frame_libro_info, text="Numeral      Nombre       Autor      Genero")
+        label_total.grid(row=0, column=0)
+
+        for r in range(len(Servicio.getEjemplarLibroDisponibles())):
+            nombre_libro = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getNombre()
+            nombre_autor = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getAutor()
+            nombre_genero = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getGenero()
+
+            frame_libro_info = Frame(frameIZQ, width=400, height= 40, borderwidth=1, padx=5, pady=5)
+            frame_libro_info.grid(column=0, row=r+1, padx=4, pady=5, columnspan=10)
+
+            label_total = Label(frame_libro_info, text= f"{r+1}. Nombre: {nombre_libro}      Autor: {nombre_autor}      "
+                                                        f"Genero: {nombre_genero}")
+            label_total.grid(row=0, column=0)
+
+        return frameTotal
