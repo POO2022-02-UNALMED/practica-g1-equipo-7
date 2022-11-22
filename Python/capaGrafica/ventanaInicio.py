@@ -13,7 +13,7 @@ class VentanaInicio(tk.Tk):
 
     def __init__(self):
         super().__init__()
-        self.geometry("1024x720")
+        self.geometry("1024x750")
         self.title("Ventana Inicio JJ Library")
         self.option_add("*tearOff", False)
         self.resizable(False,False)
@@ -150,3 +150,6 @@ class ventanaDescripcion(tk.Tk):
         self.labelDescripcion = tk.Label(self, text="Soy la descripcion")
         self.labelDescripcion.pack(expand=True)
         self.mainloop()
+
+a = VentanaInicio()
+a.mainloop()
