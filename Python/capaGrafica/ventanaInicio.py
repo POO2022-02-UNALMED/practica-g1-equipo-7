@@ -150,6 +150,3 @@ class ventanaDescripcion(tk.Tk):
         self.labelDescripcion = tk.Label(self, text="Soy la descripcion")
         self.labelDescripcion.pack(expand=True)
         self.mainloop()
-
-a = VentanaInicio()
-a.mainloop()

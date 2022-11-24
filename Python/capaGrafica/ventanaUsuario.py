@@ -23,7 +23,7 @@ class VentanaUsuario(Tk):
         self.title("JJ-Sales - Ventana del Usuario")
         self.geometry("1080x720")
         self.option_add("*tearOff", False)
-        self.resizable(True,True)
+        self.resizable(False, False)
 
         #Creando el menú
 
@@ -107,7 +107,6 @@ class VentanaUsuario(Tk):
 
 
 
-
         def informacion():
             ventana = Tk()
             ventana.geometry("640x360")
@@ -152,4 +151,3 @@ class VentanaUsuario(Tk):
             for frame in VentanaUsuario.frames:
                 frame.grid_forget()
             frameUtilizado.grid_configure()
-
