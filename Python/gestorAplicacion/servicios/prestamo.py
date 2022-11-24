@@ -25,6 +25,9 @@ class Prestamo(Servicio):
         self._fecha = fecha
 
 
+
+
+
     @classmethod
     def generarPrestamoLibro(cls, usuario, ejemplarPrestado, biblioteca):
         prestamo = Prestamo(usuario, ejemplarPrestado, ejemplarPrestado.getLibro(), datetime.now())
@@ -91,17 +94,27 @@ class Prestamo(Servicio):
         frameDER = tk.Frame(frameTotal, width=400, height=650, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
         frameDER.grid(row=0, column=1, padx=50, pady=250, sticky="n")
         frameIZQ.grid(row=0, column=0, padx=20)
-        """def prestarLibro():
-            indice = fieldFrameDer.getValue("Numero")
-            ejemplar = Servicio.getEjemplarLibroDisponibles()[int(indice) - 1]
-            Prestamo.generarPrestamoLibro(usuario, ejemplar, biblioteca)
-            print(usuario.getHistorialLibrosUsados())"""
+
+
 
         # Frame de la derecha
         msg = "Escribe el numero del Libro\n que desea prestar"
         entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
         entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
-        botonPrestar = tk.Button(frameDER, text="Prestar", font=("verdana", 12), background="#61727C", fg="white")
+        def prestarLibro():
+            indice = int(entryPrestar.get())
+
+            if indice > len(Servicio.getEjemplarLibroDisponibles()) - 1 or indice < 0:
+                print("RAISEAR UN ERROR: no se encontró ese libro")
+            else:
+                Ejemplar = Servicio.getEjemplarLibroDisponibles()[indice]
+                Prestamo.generarPrestamoLibro(usuario, Ejemplar, biblioteca)
+                entryPrestar.delete(0,END)
+                print("PRÉSTAMO EXITOSO")
+
+
+
+        botonPrestar = tk.Button(frameDER, text="Prestar", font=("verdana", 12), background="#61727C", fg="white", command = prestarLibro)
 
         botonPrestar.grid(row=4, column=0, padx=5, pady=10)
         entryPrestar.grid(row=3, column=0, padx=5, pady=10)
@@ -159,19 +172,24 @@ class Prestamo(Servicio):
         frameDER.grid(row = 0, column=1, padx=50, pady=250, sticky = "n")
         frameIZQ.grid(row = 0, column=0, padx=20)
 
-        """def prestarRevista():
-            indice = fieldFrameDer.getValue("Numero")
-            print(len(Servicio.getEjemplarRevistaDisponibles()))
-            ejemplar = Servicio.getEjemplarRevistaDisponibles()[int(indice) - 1]
-            Prestamo.generarPrestamoRevista(usuario, ejemplar, biblioteca)
-            print(len(Servicio.getEjemplarRevistaDisponibles()))
-            print(usuario.getHistorialRevistasUsadas())"""
+
+
 
         #Frame de la derecha
         msg = "Escribe el numero de la Revista\n que desea prestar"
         entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx = 10, pady = 10)
         entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
-        botonPrestar = tk.Button(frameDER, text="Prestar", font = ("verdana", 12),background="#61727C", fg= "white")
+        def prestarRevista():
+            indice = int(entryPrestar.get())
+
+            if indice > len(Servicio.getEjemplarRevistaDisponibles()) - 1 or indice < 0:
+                print("RAISEAR UN ERROR: no se encontró ese libro")
+            else:
+                Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice]
+                entryPrestar.delete(0,END)
+                Prestamo.generarPrestamoRevista(usuario, Ejemplar, biblioteca)
+                print("PRÉSTAMO EXITOSO")
+        botonPrestar = tk.Button(frameDER, text="Prestar", font = ("verdana", 12),background="#61727C", fg= "white", command=prestarRevista)
         
         botonPrestar.grid(row=4, column=0, padx=5, pady=10) 
         entryPrestar.grid(row = 3, column = 0, padx=5, pady=10)

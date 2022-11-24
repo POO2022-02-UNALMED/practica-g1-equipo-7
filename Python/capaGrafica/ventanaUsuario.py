@@ -5,6 +5,8 @@ from Python.baseDatos.serializador import serializarTodo
 
 from Python.gestorAplicacion.servicios.prestamo import Prestamo
 from Python.gestorAplicacion.libreria.libro import Libro
+from Python.gestorAplicacion.servicios.servicio import Servicio
+from Python.gestorAplicacion.libreria.revista import Revista
 
 
 
@@ -46,9 +48,9 @@ class VentanaUsuario(Tk):
         #Desplegable de consultas
         #Funcionalidad 0
         info_biblioteca = Menu(self._barra_del_menu)
-        info_biblioteca.add_command(label = "Buscar libro" , command = lambda: cambiarFrame(Frame()))
-        info_biblioteca.add_command(label = "Buscar revista" , command = lambda: cambiarFrame(Frame()))
-        info_biblioteca.add_command(label = "Mis prestamos" , command = lambda: cambiarFrame(Frame()))
+        info_biblioteca.add_command(label = "Buscar libro" , command = lambda: cambiarFrame(FrameBuscarLibro))
+        info_biblioteca.add_command(label = "Buscar revista" , command = lambda: cambiarFrame(FrameBuscarRevista))
+        info_biblioteca.add_command(label = "Mis prestamos" , command = lambda: cambiarFrame(FrameMisPrestamos))
         info_biblioteca.add_command(label="Mis reservas", command=lambda: cambiarFrame(Frame()))
 
         procesos_consultas.add_cascade(label = "Consultas", menu = info_biblioteca)
@@ -99,11 +101,225 @@ class VentanaUsuario(Tk):
 
         #GENERACIÓN DE FRAMES
 
+
+
         FramePrestarLibro = Prestamo.generarFramePrestamoLibro(self._usuario, self._biblioteca_main)
         FramePrestarRevista = Prestamo.generarFramePrestamoRevista(self._usuario, self._biblioteca_main)
 
         VentanaUsuario.frames.append(FramePrestarLibro)
         VentanaUsuario.frames.append(FramePrestarRevista)
+        FrameBuscarLibro = Frame(self)
+
+
+        def despliegue(filtro):
+            entrada = Label(frame_filtro, text="Escribe el {} del libro".format(filtro), font=("verdana", 14), padx = 10, pady = 10)
+            entryBusqueda = Entry(frame_filtro, font=("verdana", 12))
+
+            def Filtrar():
+                string_Campo = entryBusqueda.get().lower()
+                entryBusqueda.delete(0, END)
+                filtro = clicked.get().lower()
+                print(filtro)
+                print(string_Campo)
+                cantidad = 0
+                if filtro == "autor":
+                    for libro in Servicio.getEjemplarLibroDisponibles():
+                        if string_Campo in libro.getLibro().getAutor().lower():
+                            cantidad += 1
+                            nombre_libro = libro.getLibro().getNombre()
+                            nombre_autor = libro.getLibro().getAutor()
+                            nombre_genero = libro.getLibro().getGenero()
+                            #IMPLEMENTAR LO DE LISTAS ACÁ
+
+
+                elif filtro == "nombre":
+                    for libro in Servicio.getEjemplarLibroDisponibles():
+                        if string_Campo in libro.getLibro().getNombre().lower():
+                            cantidad += 1
+                            nombre_libro = libro.getLibro().getNombre()
+                            nombre_autor = libro.getLibro().getAutor()
+                            nombre_genero = libro.getLibro().getGenero()
+                            #IMPLEMENTAR LO DE LISTAS ACÁ
+
+                elif filtro == "genero":
+                    for libro in Servicio.getEjemplarLibroDisponibles():
+                        if string_Campo in libro.getLibro().getGenero().lower():
+                            cantidad += 1
+                            nombre_libro = libro.getLibro().getNombre()
+                            nombre_autor = libro.getLibro().getAutor()
+                            nombre_genero = libro.getLibro().getGenero()
+                            #IMPLEMENTAR LO DE LISTAS ACÁ
+
+                if cantidad == 0:
+                    print(
+                        "EXCEPTION: NO SE ENCONTRARON RESULTADOS (esto iría en una ventana pequeña que se pueda cerrar y ya")
+
+            botonBusqueda = Button(frame_filtro, text="Buscar", font=("verdana", 12), background="#61727C",
+                                      fg="white", command=Filtrar)
+            botonBusqueda.grid(row=4, column=0, padx=10, pady=10)
+            entryBusqueda.grid(row=3, column=0, padx=10, pady=10)
+            entrada.grid(row=2, column=0, padx=10, pady=10)
+
+        clicked = StringVar()
+        frame_listas = Frame(FrameBuscarLibro, width = 600, height= 650, borderwidth=5, bg = "grey", padx=5, pady=5, highlightbackground="black",
+                     highlightthickness=2)
+        frame_listas.grid(row=0, column=0, padx=20, pady=20)
+
+        frame_filtro = Frame(FrameBuscarLibro, width= 400, height= 650, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
+        frame_filtro.grid(row = 0, column=1, padx=20, pady=20)
+
+        #Ventana de la derecha
+        labelFiltro = Label(frame_filtro, text="Filtro deseado", font=("verdana", 14), justify="center")
+        drop = tk.OptionMenu(frame_filtro, clicked, *["Nombre","Autor","Genero"], command=despliegue)
+        drop.grid(row=1, column=0, padx=10, pady=10)
+        labelFiltro.grid(row=0, column=0, padx=10, pady=10)
+        VentanaUsuario.frames.append(FrameBuscarLibro)
+
+
+
+
+
+
+
+        FrameBuscarRevista = Frame(self)
+
+        def despliegue_revista(filtro):
+            if filtro.lower() == "categoria":
+                msg = "Escribe la {} de la revista".format(filtro)
+            else:
+                msg = " Escribe el {} de la Revista ".format(filtro)
+            entrada = Label(frame_filtro_revista, text=msg, font=("verdana", 14), padx = 10, pady = 10)
+            entryBusqueda = Entry(frame_filtro_revista, font=("verdana", 12))
+
+            def Filtrar():
+                string_Campo = entryBusqueda.get().lower()
+                entryBusqueda.delete(0, END)
+                filtro = clicked_revista.get().lower()
+                print(filtro)
+                print(string_Campo)
+                cantidad = 0
+                if filtro == "autor":
+                    for revista in Servicio.getEjemplarRevistaDisponibles():
+                        if string_Campo in revista.getRevista().getAutor().lower():
+                            cantidad +=1
+                            nombre_revista = revista.getRevista().getNombre()
+                            nombre_autor = revista.getRevista().getAutor()
+                            nombre_categoria = revista.getRevista().getCategoria()
+                            # IMPLEMENTAR LO DE LISTAS ACÁ
+
+
+                elif filtro == "nombre":
+                    for revista in Servicio.getEjemplarRevistaDisponibles():
+                        if string_Campo in revista.getRevista().getNombre().lower():
+                            cantidad += 1
+                            nombre_revista = revista.getRevista().getNombre()
+                            nombre_autor = revista.getRevista().getAutor()
+                            nombre_categoria = revista.getRevista().getCategoria()
+                            # IMPLEMENTAR LO DE LISTAS ACÁ
+
+                elif filtro == "categoria":
+                    for revista in Servicio.getEjemplarRevistaDisponibles():
+                        if string_Campo in revista.getRevista().getCategoria().lower():
+                            cantidad += 1
+                            nombre_revista = revista.getRevista().getNombre()
+                            nombre_autor = revista.getRevista().getAutor()
+                            nombre_categoria = revista.getRevista().getCategoria()
+                            # IMPLEMENTAR LO DE LISTAS ACÁ
+
+                if cantidad == 0:
+                    print("EXCEPTION: NO SE ENCONTRARON RESULTADOS (esto iría en una ventana pequeña que se pueda cerrar y ya")
+
+
+            botonBusqueda = Button(frame_filtro_revista, text="Buscar", font=("verdana", 12), background="#61727C",
+                                      fg="white", command=Filtrar)
+            botonBusqueda.grid(row=4, column=0, padx=10, pady=10)
+            entryBusqueda.grid(row=3, column=0, padx=10, pady=10)
+            entrada.grid(row=2, column=0, padx=10, pady=10)
+
+        clicked_revista = StringVar()
+        frame_listas_revista = Frame(FrameBuscarRevista, width = 600, height= 650, borderwidth=5, bg = "grey", padx=5, pady=5, highlightbackground="black",
+                     highlightthickness=2)
+        frame_listas_revista.grid(row=0, column=0, padx=20, pady=20)
+
+        frame_filtro_revista = Frame(FrameBuscarRevista, width= 400, height= 650, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
+        frame_filtro_revista.grid(row = 0, column=1, padx=20, pady=20)
+
+        #Ventana de la derecha
+        labelFiltro = Label(frame_filtro_revista, text="Filtro deseado", font=("verdana", 14), justify="center")
+        drop_revista = tk.OptionMenu(frame_filtro_revista, clicked_revista, *["Nombre","Autor","Categoria"], command=despliegue_revista)
+        drop_revista.grid(row=1, column=0, padx=10, pady=10)
+        labelFiltro.grid(row=0, column=0, padx=10, pady=10)
+
+        VentanaUsuario.frames.append(FrameBuscarRevista)
+
+        FrameMisPrestamos = Frame(self)
+
+        frame_letrero = tk.Frame(FrameMisPrestamos, width=1060, height=100, borderwidth=5, highlightthickness=3,
+                                 highlightbackground="#61727C")
+        frame_letrero.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+
+        frame_libros = tk.Frame(FrameMisPrestamos, width=520, height=570, borderwidth=5, highlightbackground="#61727C",
+                                highlightthickness=3)
+        frame_libros.grid(row=1, column=0, padx=10, pady=10)
+
+        #LOGICA PARA LLENAR LA LISTA DE PRÉSTAMOS
+        def ActualizarPrestamos():
+            lista_prestamos = self._usuario.getPrestamos()
+            for prestamo in lista_prestamos:
+                ejemplar = prestamo.getEjemplarEscogido().getLibro()
+                if isinstance(ejemplar, Libro):
+                    print("hola")
+                    nombre_libro = ejemplar.getNombre()
+                    nombre_autor = ejemplar.getAutor()
+                    nombre_genero = ejemplar.getGenero()
+                    # IMPLEMENTAR LO DE LISTAS ACÁ
+
+
+                elif isinstance(ejemplar, Revista):
+                    print("hola")
+                    nombre_revista = ejemplar.getNombre()
+                    nombre_autor = ejemplar.getAutor()
+                    nombre_categoria = ejemplar.getCategoria()
+                    # IMPLEMENTAR LO DE LISTAS ACÁ
+
+
+        frame_revistas = tk.Frame(FrameMisPrestamos, width=520, height=570, borderwidth=5, highlightthickness=3,
+                                  highlightbackground="#61727C")
+        frame_revistas.grid(row=1, column=1, padx=10, pady=10)
+        boton_actualizar = Button(frame_revistas, width=30, height= 40, text = "Actualizar", command=ActualizarPrestamos)
+        boton_actualizar.grid(row = 0, column=0)
+
+
+        letrero = tk.Label(frame_letrero, text="Mis prestamos", font=("verdana", 16, "bold"), fg="white", borderwidth=3,
+                           background="#61727C", width=20, height=2)
+        letrero.grid(row=0, column=0)
+
+        letrero_libros = tk.Label(frame_libros, text="Libros", font=("verdana", 14, "bold"), fg="white", borderwidth=3,
+                                  background="#61727C", width=10, height=2)
+        letrero_libros.grid(row=0, column=0)
+        frame_libros.grid_propagate(False)
+        letrero_revista = tk.Label(frame_revistas, text="Revistas", font=("verdana", 14, "bold"), fg="white",
+                                   borderwidth=3, background="#61727C", width=10, height=2)
+        letrero_revista.grid(row=0, column=0, padx=5, pady=5)
+        frame_revistas.grid_propagate(False)
+
+
+
+
+        VentanaUsuario.frames.append(FrameMisPrestamos)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -151,3 +367,5 @@ class VentanaUsuario(Tk):
             for frame in VentanaUsuario.frames:
                 frame.grid_forget()
             frameUtilizado.grid_configure()
+
+

@@ -32,7 +32,7 @@ ensayo = Libro("Ensayo sobre la ceguera", "Jose Saramago", 387612871, GENERO.FIL
 la_colmena = Libro("La colmena", "Camilo Jose Cela", 391002871, GENERO.HISTORICA.value)
 
 guerra_mundial = Libro("Segunda Guerra Mundial", "Marta Diaz", 399991271, GENERO.HISTORICA.value)
-verdad = Libro("Yo, Claudio", "Robert Graves", 398712000, GENERO.CUENTO)
+verdad = Libro("Yo, Claudio", "Robert Graves", 398712000, GENERO.CUENTO.value)
 
 interestellar = Libro("Interestellar", "Marco Alonso", 398712981, GENERO.CIENCIA.value)
 hombre_luna = Libro("Arrivo lunar", "George Maquintosh", 398712761, GENERO.CIENCIA.value)
@@ -41,8 +41,8 @@ la_caceria = Libro("Las historias de la evolucion", "Daniel Hil", 298712761, GEN
 elamor = Libro("Una historia de amor", "Liliana Escalar", 111712761, GENERO.ROMANTICISMO.value)
 ruptura = Libro("El desapego", "Walter Riso", 398701761, GENERO.ROMANTICISMO.value)
 
-revista_viernes = Revista("Viernes", "El Universal", 323823999, CATEGORIA.ENTRETENIMIENTO)
-revista_semana = Revista("Semana", "Semana", 278388654, CATEGORIA.ENTRETENIMIENTO)
+revista_viernes = Revista("Viernes", "El Universal", 323823999, CATEGORIA.ENTRETENIMIENTO.value)
+revista_semana = Revista("Semana", "Semana", 278388654, CATEGORIA.ENTRETENIMIENTO.value)
 revista_3 = Revista(CATEGORIA.ACTUALIDAD.value)
 revista_4 = Revista()
 revista_5 = Revista(CATEGORIA.POLITICA.value)
