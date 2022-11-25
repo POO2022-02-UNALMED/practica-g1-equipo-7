@@ -102,7 +102,7 @@ class Prestamo(Servicio):
         entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
         entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
         def prestarLibro():
-            indice = int(entryPrestar.get())
+            indice = int(entryPrestar.get())-1
 
             if indice > len(Servicio.getEjemplarLibroDisponibles()) - 1 or indice < 0:
                 print("RAISEAR UN ERROR: no se encontró ese libro")
@@ -140,10 +140,10 @@ class Prestamo(Servicio):
         # label_total = Label(frame_lista, text="Formato: Numeral  -  Nombre  -  Autor  -  Genero")
         # label_total.grid(row=0, column=0, sticky="nw")
 
-        for r in range(len(Servicio.getEjemplarLibroDisponibles())):
-            nombre_libro = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getNombre()
-            nombre_autor = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getAutor()
-            nombre_genero = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getGenero()
+        for r in range(1, len(Servicio.getEjemplarLibroDisponibles())+1):
+            nombre_libro = Servicio.getEjemplarLibroDisponibles()[r-1].getLibro().getNombre()
+            nombre_autor = Servicio.getEjemplarLibroDisponibles()[r-1].getLibro().getAutor()
+            nombre_genero = Servicio.getEjemplarLibroDisponibles()[r-1].getLibro().getGenero()
 
             frame_lista = tk.Frame(frameIZQ, width=600)
             frame_lista.grid(row=r + 1, column=0, sticky="w")
@@ -181,12 +181,12 @@ class Prestamo(Servicio):
         entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx = 10, pady = 10)
         entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
         def prestarRevista():
-            indice = int(entryPrestar.get())
+            indice = int(entryPrestar.get())-1
 
             if indice > len(Servicio.getEjemplarRevistaDisponibles())  or indice <= 0:
                 print("RAISEAR UN ERROR: no se encontró ese libro")
             else:
-                Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice-1]
+                Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice]
                 entryPrestar.delete(0,END)
                 Prestamo.generarPrestamoRevista(usuario, Ejemplar, biblioteca)
                 print(f"PRÉSTAMO EXITOSO {Ejemplar.getRevista().getNombre()}")

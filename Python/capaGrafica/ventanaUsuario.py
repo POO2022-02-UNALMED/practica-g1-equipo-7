@@ -56,7 +56,7 @@ class VentanaUsuario(Tk):
         info_biblioteca.add_command(label = "Buscar libro" , command = lambda: cambiarFrame(FrameBuscarLibro))
         info_biblioteca.add_command(label = "Buscar revista" , command = lambda: cambiarFrame(FrameBuscarRevista))
         info_biblioteca.add_command(label = "Mis prestamos" , command = lambda: cambiarFrame(FrameMisPrestamos))
-        info_biblioteca.add_command(label="Mis reservas", command=lambda: cambiarFrame(Frame()))
+        info_biblioteca.add_command(label="Mis reservas", command = lambda: cambiarFrame(FrameMisReservas))
 
         procesos_consultas.add_cascade(label = "Consultas", menu = info_biblioteca)
 
@@ -444,7 +444,96 @@ class VentanaUsuario(Tk):
         frame_revistas.grid_propagate(False)
         VentanaUsuario.frames.append(FrameMisPrestamos)
 
+        #frame de mis reservas
+        FrameMisReservas = Frame(self)
 
+        frame_letrero_reservas = tk.Frame(FrameMisReservas, width=1060, height=100, borderwidth=5, highlightthickness=3,
+                                 highlightbackground="#61727C")
+        frame_letrero_reservas.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+
+        frame_libros_reservas = tk.Frame(FrameMisReservas, width=520, height=570, borderwidth=5, highlightbackground="#61727C",
+                                highlightthickness=3)
+        frame_libros_reservas.grid(row=1, column=0, padx=10, pady=10)
+
+        # LOGICA PARA LLENAR LA LISTA DE PRÉSTAMOS
+        def ActualizarReservas():
+            lista_reservas = self._usuario.getReservas()
+            contLibros = 1
+            contRevistas = 1
+            for reserva in lista_reservas:
+                ejemplar = reserva.getEjemplarEscogido()
+                if isinstance(ejemplar, EjemplarLibro):
+                    ejemplar = ejemplar.getLibro()
+                    print("hola")
+                    nombre_libro = ejemplar.getNombre()
+                    nombre_autor = ejemplar.getAutor()
+                    nombre_genero = ejemplar.getGenero()
+                    # IMPLEMENTAR LO DE LISTAS ACÁ
+                    frame_ejemplar = tk.Frame(frame_libros_reservas, width=600)
+                    label_numeral = tk.Label(frame_ejemplar, text="{}. ".format(contLibros), width=7, height=1,
+                                             anchor="w",
+                                             relief="groove")
+                    label_nombre = tk.Label(frame_ejemplar, text=nombre_libro, width=20, height=1, anchor="w",
+                                            relief="groove")
+                    label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=20, height=1, anchor="w",
+                                           relief="groove")
+                    label_genero = tk.Label(frame_ejemplar, text=nombre_genero, width=20, height=1, anchor="w",
+                                            relief="groove")
+
+                    label_numeral.grid(row=0, column=0, sticky="w")
+                    label_nombre.grid(row=0, column=1, sticky="w")
+                    label_autor.grid(row=0, column=2, sticky="w")
+                    label_genero.grid(row=0, column=3, sticky="w")
+                    frame_ejemplar.grid(row=contLibros, column=0)
+                    contLibros += 1
+
+
+                elif isinstance(ejemplar, EjemplarRevista):
+                    ejemplar = ejemplar.getRevista()
+                    print("hola")
+                    nombre_revista = ejemplar.getNombre()
+                    nombre_autor = ejemplar.getAutor()
+                    nombre_categoria = ejemplar.getCategoria()
+                    # IMPLEMENTAR LO DE LISTAS ACÁ
+                    frame_ejemplar = tk.Frame(frame_revistas_reservas, width=600)
+
+                    label_numeral = tk.Label(frame_ejemplar, text="{}. ".format(contRevistas), width=7, height=1,
+                                             anchor="w",
+                                             relief="groove")
+                    label_nombre = tk.Label(frame_ejemplar, text=nombre_revista, width=20, height=1, anchor="w",
+                                            relief="groove")
+                    label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=20, height=1, anchor="w",
+                                           relief="groove")
+                    label_genero = tk.Label(frame_ejemplar, text=nombre_categoria, width=20, height=1, anchor="w",
+                                            relief="groove")
+
+                    label_numeral.grid(row=0, column=0, sticky="w")
+                    label_nombre.grid(row=0, column=1, sticky="w")
+                    label_autor.grid(row=0, column=2, sticky="w")
+                    label_genero.grid(row=0, column=3, sticky="w")
+                    frame_ejemplar.grid(row=contRevistas, column=0, sticky="w")
+                    contRevistas += 1
+
+        frame_revistas_reservas = tk.Frame(FrameMisReservas, width=520, height=570, borderwidth=5, highlightthickness=3,
+                                  highlightbackground="#61727C")
+        frame_revistas_reservas.grid(row=1, column=1, padx=10, pady=10)
+        boton_actualizar_reservas = Button(frame_letrero_reservas, width=20, height=2, text="Actualizar", command=ActualizarReservas,
+                                  font=("verdana", 12), background="#61727C", fg="white")
+        boton_actualizar_reservas.grid(row=0, column=0, sticky="w", padx=10)
+
+        letrero_reservas = tk.Label(frame_letrero_reservas, text="Mis Reservas", font=("verdana", 16, "bold"), fg="white", borderwidth=3,
+                           background="#61727C", width=20, height=2)
+        letrero_reservas.grid(row=0, column=1, padx=10)
+
+        letrero_libros_reservas = tk.Label(frame_libros_reservas, text="Libros", font=("verdana", 14, "bold"), fg="white", borderwidth=3,
+                                  background="#61727C", width=10, height=2)
+        letrero_libros_reservas.grid(row=0, column=0, pady=10, sticky="w")
+        frame_libros_reservas.grid_propagate(False)
+        letrero_revista_reservas = tk.Label(frame_revistas_reservas, text="Revistas", font=("verdana", 14, "bold"), fg="white",
+                                   borderwidth=3, background="#61727C", width=10, height=2)
+        letrero_revista_reservas.grid(row=0, column=0, padx=5, pady=15, sticky="w")
+        frame_revistas_reservas.grid_propagate(False)
+        VentanaUsuario.frames.append(FrameMisReservas)
 
 
         FrameReservarLibro = Frame(self)
@@ -456,7 +545,7 @@ class VentanaUsuario(Tk):
             entrada = Label(frame_filtro_reserva_libro, text = msg, font=("verdana", 14), padx = 10, pady = 10)
             entryBusqueda = Entry(frame_filtro_reserva_libro, font=("verdana", 12))
             def HacerReservaLibro():
-                indice = int(entryBusqueda.get())
+                indice = int(entryBusqueda.get()) - 1
 
                 if indice > len(Servicio.getEjemplarLibroDisponibles()) or indice < 0:
                     print("RAISEAR UN ERROR: no se encontró ese libro")
@@ -491,15 +580,28 @@ class VentanaUsuario(Tk):
 
 
         clicked_reservar_libro = StringVar()
-        frame_listas_reserva_libro = Frame(FrameReservarLibro, width = 600, height= 650, borderwidth=5, padx=5, pady=5, highlightbackground="black",
-                     highlightthickness=2)
-        frame_listas_reserva_libro.grid(row = 0, column=0, padx=20, pady=20)
+        frame_listas_reserva_libro = Frame(FrameReservarLibro, width = 600, height= 650, borderwidth=5, padx=5, pady=5)
+        frame_listas_reserva_libro.grid(row = 0, column=0, padx=20, pady=20, sticky="n")
 
+        frame_lista = tk.Frame(frame_listas_reserva_libro, width=600)
+        frame_lista.grid(row=0, column=0, sticky="w", pady = 5)
+        label_numeral = tk.Label(frame_lista, text="Numeral", width=7, height=1, justify="left",
+                                 relief="groove")
+        label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right",
+                                relief="groove")
+        label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
+        label_genero = tk.Label(frame_lista, text="Genero", width=20, height=1, justify="left",
+                                relief="groove")
 
-        for r in range(len(Servicio.getEjemplarLibroDisponibles())):
-            nombre_libro = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getNombre()
-            nombre_autor = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getAutor()
-            nombre_genero = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getGenero()
+        label_numeral.grid(row=0, column=0, sticky="w")
+        label_nombre.grid(row=0, column=1, sticky="w")
+        label_autor.grid(row=0, column=2, sticky="w")
+        label_genero.grid(row=0, column=3, sticky="w")
+        frame_listas.grid_propagate(False)
+        for r in range(1, len(Servicio.getEjemplarLibroDisponibles())+1):
+            nombre_libro = Servicio.getEjemplarLibroDisponibles()[r-1].getLibro().getNombre()
+            nombre_autor = Servicio.getEjemplarLibroDisponibles()[r-1].getLibro().getAutor()
+            nombre_genero = Servicio.getEjemplarLibroDisponibles()[r-1].getLibro().getGenero()
 
             frame_listaa = Frame(frame_listas_reserva_libro, width=600)
             frame_listaa.grid(row=r + 1, column=0, sticky="w")
@@ -537,7 +639,7 @@ class VentanaUsuario(Tk):
             entrada = Label(frame_filtro_reserva_revista, text=msg, font=("verdana", 14), padx=10, pady=10)
             entryBusqueda = Entry(frame_filtro_reserva_revista, font=("verdana", 12))
             def HacerReservaRevista():
-                indice = int(entryBusqueda.get())
+                indice = int(entryBusqueda.get())-1
                 if indice > len(Servicio.getEjemplarRevistaDisponibles()) or indice < 0:
                     print("RAISEAR UN ERROR: no se encontró esa revista")
                 else:
@@ -566,14 +668,29 @@ class VentanaUsuario(Tk):
             entrada.grid(row=2, column=0, padx=5, pady=10)
 
         clicked_reservar_revista = StringVar()
-        frame_listas_reserva_revista = Frame(FrameReservarRevista, width = 600, height= 650, borderwidth=5, padx=5, pady=5, highlightbackground="black",
-                     highlightthickness=2)
+        frame_listas_reserva_revista = Frame(FrameReservarRevista, width = 600, height= 650, borderwidth=5, padx=5, pady=5)
         frame_listas_reserva_revista.grid(row = 0, column=0, padx=20, pady=20)
 
-        for r in range(len(Servicio.getEjemplarRevistaDisponibles())):
-            nombre_revista = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getNombre()
-            nombre_autor = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getAutor()
-            nombre_categoria = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getCategoria()
+        frame_lista = tk.Frame(frame_listas_reserva_revista, width=600)
+        frame_lista.grid(row=0, column=0, sticky="w", pady=5)
+        label_numeral = tk.Label(frame_lista, text="Numeral", width=7, height=1, justify="left",
+                                 relief="groove")
+        label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right",
+                                relief="groove")
+        label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
+        label_genero = tk.Label(frame_lista, text="Categoria", width=20, height=1, justify="left",
+                                relief="groove")
+
+        label_numeral.grid(row=0, column=0, sticky="w")
+        label_nombre.grid(row=0, column=1, sticky="w")
+        label_autor.grid(row=0, column=2, sticky="w")
+        label_genero.grid(row=0, column=3, sticky="w")
+        frame_listas.grid_propagate(False)
+
+        for r in range(1, len(Servicio.getEjemplarRevistaDisponibles())+1):
+            nombre_revista = Servicio.getEjemplarRevistaDisponibles()[r-1].getRevista().getNombre()
+            nombre_autor = Servicio.getEjemplarRevistaDisponibles()[r-1].getRevista().getAutor()
+            nombre_categoria = Servicio.getEjemplarRevistaDisponibles()[r-1].getRevista().getCategoria()
 
             frame_listaR = Frame(frame_listas_reserva_revista, width=600)
             frame_listaR.grid(row=r + 1, column=0, sticky="w")
