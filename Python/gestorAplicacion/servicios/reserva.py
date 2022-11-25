@@ -26,7 +26,8 @@ class Reserva(Servicio):
     def setFechaDevolucion(self, fecha):
         self._fechaDevolucion = fecha
 
-    def generarReservaLibro(self, usuario, ejemplarLibroReservado, biblioteca, fechaReserva, fechaDevolucion):
+    @classmethod
+    def generarReservaLibro(cls, usuario, ejemplarLibroReservado, biblioteca, fechaReserva, fechaDevolucion):
         reserva = Reserva(usuario, ejemplarLibroReservado, ejemplarLibroReservado.getLibro(), fechaReserva, fechaDevolucion)
         idReserva = random.randint(0, 10000)
         tiquete = Tiquete(reserva, idReserva)

@@ -119,6 +119,7 @@ class Prestamo(Servicio):
         botonPrestar.grid(row=4, column=0, padx=5, pady=10)
         entryPrestar.grid(row=3, column=0, padx=5, pady=10)
         entrada.grid(row=2, column=0, padx=5, pady=10)
+        #5 dias, 3 semanas, 2 meses
 
         # Frame de la izquierda
         frame_revista_info = Frame(frameIZQ, width=400, height=40, borderwidth=1, padx=5, pady=5)
@@ -182,13 +183,13 @@ class Prestamo(Servicio):
         def prestarRevista():
             indice = int(entryPrestar.get())
 
-            if indice > len(Servicio.getEjemplarRevistaDisponibles()) - 1 or indice < 0:
+            if indice > len(Servicio.getEjemplarRevistaDisponibles())  or indice <= 0:
                 print("RAISEAR UN ERROR: no se encontró ese libro")
             else:
-                Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice]
+                Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice-1]
                 entryPrestar.delete(0,END)
                 Prestamo.generarPrestamoRevista(usuario, Ejemplar, biblioteca)
-                print("PRÉSTAMO EXITOSO")
+                print(f"PRÉSTAMO EXITOSO {Ejemplar.getRevista().getNombre()}")
         botonPrestar = tk.Button(frameDER, text="Prestar", font = ("verdana", 12),background="#61727C", fg= "white", command=prestarRevista)
         
         botonPrestar.grid(row=4, column=0, padx=5, pady=10) 
