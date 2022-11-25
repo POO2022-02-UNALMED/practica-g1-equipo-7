@@ -4,6 +4,8 @@ from tkinter import *
 import tkinter as tk
 from Python.baseDatos.serializador import serializarTodo
 from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
+from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
+from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
 
 from Python.gestorAplicacion.servicios.prestamo import Prestamo
 from Python.gestorAplicacion.libreria.libro import Libro
@@ -366,42 +368,79 @@ class VentanaUsuario(Tk):
         #LOGICA PARA LLENAR LA LISTA DE PRÉSTAMOS
         def ActualizarPrestamos():
             lista_prestamos = self._usuario.getPrestamos()
+            contLibros = 1
+            contRevistas = 1
             for prestamo in lista_prestamos:
-                ejemplar = prestamo.getEjemplarEscogido().getLibro()
-                if isinstance(ejemplar, Libro):
+                ejemplar = prestamo.getEjemplarEscogido()
+                if isinstance(ejemplar, EjemplarLibro):
+                    ejemplar = ejemplar.getLibro()
                     print("hola")
                     nombre_libro = ejemplar.getNombre()
                     nombre_autor = ejemplar.getAutor()
                     nombre_genero = ejemplar.getGenero()
                     # IMPLEMENTAR LO DE LISTAS ACÁ
+                    frame_ejemplar = tk.Frame(frame_libros, width=600)
+                    label_numeral = tk.Label(frame_ejemplar, text="{}. ".format(contLibros), width=7, height=1, anchor="w",
+                                             relief="groove")
+                    label_nombre = tk.Label(frame_ejemplar, text=nombre_libro, width=20, height=1, anchor="w",
+                                            relief="groove")
+                    label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=20, height=1, anchor="w",
+                                           relief="groove")
+                    label_genero = tk.Label(frame_ejemplar, text=nombre_genero, width=20, height=1, anchor="w",
+                                            relief="groove")
+
+                    label_numeral.grid(row=0, column=0, sticky="w")
+                    label_nombre.grid(row=0, column=1, sticky="w")
+                    label_autor.grid(row=0, column=2, sticky="w")
+                    label_genero.grid(row=0, column=3, sticky="w")
+                    frame_ejemplar.grid(row=contLibros, column=0)
+                    contLibros+=1
 
 
-                elif isinstance(ejemplar, Revista):
+                elif isinstance(ejemplar, EjemplarRevista):
+                    ejemplar = ejemplar.getRevista()
                     print("hola")
                     nombre_revista = ejemplar.getNombre()
                     nombre_autor = ejemplar.getAutor()
                     nombre_categoria = ejemplar.getCategoria()
                     # IMPLEMENTAR LO DE LISTAS ACÁ
+                    frame_ejemplar = tk.Frame(frame_revistas, width=600)
+
+                    label_numeral = tk.Label(frame_ejemplar, text="{}. ".format(contRevistas), width=7, height=1, anchor="w",
+                                             relief="groove")
+                    label_nombre = tk.Label(frame_ejemplar, text=nombre_revista, width=20, height=1, anchor="w",
+                                            relief="groove")
+                    label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=20, height=1, anchor="w",
+                                           relief="groove")
+                    label_genero = tk.Label(frame_ejemplar, text=nombre_categoria, width=20, height=1, anchor="w",
+                                            relief="groove")
+
+                    label_numeral.grid(row=0, column=0, sticky="w")
+                    label_nombre.grid(row=0, column=1, sticky="w")
+                    label_autor.grid(row=0, column=2, sticky="w")
+                    label_genero.grid(row=0, column=3, sticky="w")
+                    frame_ejemplar.grid(row=contRevistas, column=0, sticky="w")
+                    contRevistas+=1
 
 
         frame_revistas = tk.Frame(FrameMisPrestamos, width=520, height=570, borderwidth=5, highlightthickness=3,
                                   highlightbackground="#61727C")
         frame_revistas.grid(row=1, column=1, padx=10, pady=10)
-        boton_actualizar = Button(frame_revistas, width=30, height= 40, text = "Actualizar", command=ActualizarPrestamos)
-        boton_actualizar.grid(row = 0, column=0)
+        boton_actualizar = Button(frame_letrero, width=20, height= 2, text = "Actualizar", command=ActualizarPrestamos,font = ("verdana", 12),background="#61727C", fg= "white")
+        boton_actualizar.grid(row = 0, column=0, sticky="w", padx=10)
 
 
         letrero = tk.Label(frame_letrero, text="Mis prestamos", font=("verdana", 16, "bold"), fg="white", borderwidth=3,
                            background="#61727C", width=20, height=2)
-        letrero.grid(row=0, column=0)
+        letrero.grid(row=0, column=1, padx= 10)
 
         letrero_libros = tk.Label(frame_libros, text="Libros", font=("verdana", 14, "bold"), fg="white", borderwidth=3,
                                   background="#61727C", width=10, height=2)
-        letrero_libros.grid(row=0, column=0)
+        letrero_libros.grid(row=0, column=0, pady=10, sticky="w")
         frame_libros.grid_propagate(False)
         letrero_revista = tk.Label(frame_revistas, text="Revistas", font=("verdana", 14, "bold"), fg="white",
                                    borderwidth=3, background="#61727C", width=10, height=2)
-        letrero_revista.grid(row=0, column=0, padx=5, pady=5)
+        letrero_revista.grid(row=0, column=0, padx=5, pady=15, sticky="w")
         frame_revistas.grid_propagate(False)
         VentanaUsuario.frames.append(FrameMisPrestamos)
 
