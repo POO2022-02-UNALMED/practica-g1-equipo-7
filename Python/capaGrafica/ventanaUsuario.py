@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 
 from tkinter import *
 import tkinter as tk
@@ -8,6 +9,7 @@ from Python.gestorAplicacion.servicios.prestamo import Prestamo
 from Python.gestorAplicacion.libreria.libro import Libro
 from Python.gestorAplicacion.servicios.servicio import Servicio
 from Python.gestorAplicacion.libreria.revista import Revista
+from Python.gestorAplicacion.servicios.reserva import Reserva
 
 
 
@@ -60,8 +62,8 @@ class VentanaUsuario(Tk):
         #FUNCIONALIDADES
         #1. Reservas
         realizar_reserva = Menu(self._barra_del_menu)
-        realizar_reserva.add_command(label="Reservar libro", command=lambda: cambiarFrame(Frame()))
-        realizar_reserva.add_command(label="Reservar revista", command=lambda: cambiarFrame(Frame()))
+        realizar_reserva.add_command(label="Reservar libro", command=lambda: cambiarFrame(FrameReservarLibro))
+        realizar_reserva.add_command(label="Reservar revista", command=lambda: cambiarFrame(FrameReservarRevista))
         procesos_consultas.add_cascade(label="Realizar reserva", menu=realizar_reserva)
 
         #2. Prestamos
@@ -401,12 +403,161 @@ class VentanaUsuario(Tk):
                                    borderwidth=3, background="#61727C", width=10, height=2)
         letrero_revista.grid(row=0, column=0, padx=5, pady=5)
         frame_revistas.grid_propagate(False)
-
-
-
-
         VentanaUsuario.frames.append(FrameMisPrestamos)
 
+
+
+
+        FrameReservarLibro = Frame(self)
+
+        def despliegue_reserva_libro(filtro):
+            cantidad_tiempo = int(filtro.split(" ")[0])
+            print(cantidad_tiempo)
+            msg = "Escribe el numero del libro\n que desea reservar"
+            entrada = Label(frame_filtro_reserva_libro, text = msg, font=("verdana", 14), padx = 10, pady = 10)
+            entryBusqueda = Entry(frame_filtro_reserva_libro, font=("verdana", 12))
+            def HacerReservaLibro():
+                indice = int(entryBusqueda.get())
+
+                if indice > len(Servicio.getEjemplarLibroDisponibles()) or indice < 0:
+                    print("RAISEAR UN ERROR: no se encontró ese libro")
+                else:
+                    print(indice)
+                    Ejemplar = Servicio.getEjemplarLibroDisponibles()[indice]
+                    entryBusqueda.delete(0, END)
+                    fecha_inicial = datetime.now()
+                    fecha_final = datetime.now()
+                    if cantidad_tiempo == 5:
+                        fecha_final += timedelta(days=5)
+
+                    elif cantidad_tiempo == 3:
+                        fecha_final += timedelta(weeks=3)
+
+                    elif cantidad_tiempo == 2:
+                        fecha_final += timedelta(weeks=8)
+
+                    Reserva.generarReservaLibro(self._usuario, Ejemplar, self._biblioteca_main, fecha_final, fecha_inicial)
+                    print(f"RESERVA EXITOSO {Ejemplar.getLibro().getNombre()} para el {fecha_inicial, fecha_final}")
+
+
+
+
+            botonBusqueda = Button(frame_filtro_reserva_libro, text="Reservar", font=("verdana", 12), background="#61727C",
+                                      fg="white", command=HacerReservaLibro)
+            botonBusqueda.grid(row=4, column=0, padx=5, pady=10)
+            entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
+            entrada.grid(row=2, column=0, padx=5, pady=10)
+
+
+
+
+        clicked_reservar_libro = StringVar()
+        frame_listas_reserva_libro = Frame(FrameReservarLibro, width = 600, height= 650, borderwidth=5, padx=5, pady=5, highlightbackground="black",
+                     highlightthickness=2)
+        frame_listas_reserva_libro.grid(row = 0, column=0, padx=20, pady=20)
+
+
+        for r in range(len(Servicio.getEjemplarLibroDisponibles())):
+            nombre_libro = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getNombre()
+            nombre_autor = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getAutor()
+            nombre_genero = Servicio.getEjemplarLibroDisponibles()[r].getLibro().getGenero()
+
+            frame_listaa = Frame(frame_listas_reserva_libro, width=600)
+            frame_listaa.grid(row=r + 1, column=0, sticky="w")
+
+            label_numeraal = Label(frame_listaa, text="{}. ".format(r), width=7, height=1, anchor="w", relief="groove")
+            label_nombree = Label(frame_listaa, text=nombre_libro, width=20, height=1, anchor="w", relief="groove")
+            label_autoor = Label(frame_listaa, text=nombre_autor, width=20, height=1, anchor="w", relief="groove")
+            label_generoo = Label(frame_listaa, text=nombre_genero, width=20, height=1, anchor="w", relief="groove")
+
+            label_numeraal.grid(row=0, column=0, sticky="w")
+            label_nombree.grid(row=0, column=1, sticky="w")
+            label_autoor.grid(row=0, column=2, sticky="w")
+            label_generoo.grid(row=0, column=3, sticky="w")
+
+        frame_filtro_reserva_libro = Frame(FrameReservarLibro, width= 400, height= 650, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
+        frame_filtro_reserva_libro.grid(row = 0, column=1, padx=20, pady=20)
+
+        labelFiltro_reserva_libro = Label(frame_filtro_reserva_libro, text = "Elija el tiempo de reserva", font=("verdana", 14), justify="center")
+        drop_reserva_libro = OptionMenu(frame_filtro_reserva_libro, clicked_reservar_libro, *["5 dias","3 semanas","2 meses"], command=despliegue_reserva_libro)
+        drop_reserva_libro.grid(row = 1, column= 0, padx=10, pady=10)
+        labelFiltro_reserva_libro.grid(row=0, column=0 , padx=10, pady=10)
+
+        VentanaUsuario.frames.append(FrameReservarLibro)
+
+
+
+
+
+        FrameReservarRevista = Frame(self)
+
+        def despliegue_reserva_revista(filtro):
+            cantidad_tiempo = int(filtro.split(" ")[0])
+            print(cantidad_tiempo)
+            msg = "Escribe el numero de la revista\n que desea reservar"
+            entrada = Label(frame_filtro_reserva_revista, text=msg, font=("verdana", 14), padx=10, pady=10)
+            entryBusqueda = Entry(frame_filtro_reserva_revista, font=("verdana", 12))
+            def HacerReservaRevista():
+                indice = int(entryBusqueda.get())
+                if indice > len(Servicio.getEjemplarRevistaDisponibles()) or indice < 0:
+                    print("RAISEAR UN ERROR: no se encontró esa revista")
+                else:
+                    print(indice)
+                    Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice]
+                    entryBusqueda.delete(0, END)
+                    fecha_inicial = datetime.now()
+                    fecha_final = datetime.now()
+                    if cantidad_tiempo == 5:
+                        fecha_final += timedelta(days=5)
+
+                    elif cantidad_tiempo == 3:
+                        fecha_final += timedelta(weeks=3)
+
+                    elif cantidad_tiempo == 2:
+                        fecha_final += timedelta(weeks=8)
+
+                    Reserva.generarReservaRevista(self._usuario, Ejemplar, self._biblioteca_main, fecha_final, fecha_inicial)
+                    print(f"RESERVA EXITOSO {Ejemplar.getRevista().getNombre()} para el {fecha_inicial, fecha_final}")
+
+            botonBusqueda = Button(frame_filtro_reserva_revista, text="Reservar", font=("verdana", 12),
+                                   background="#61727C",
+                                   fg="white", command=HacerReservaRevista)
+            botonBusqueda.grid(row=4, column=0, padx=5, pady=10)
+            entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
+            entrada.grid(row=2, column=0, padx=5, pady=10)
+
+        clicked_reservar_revista = StringVar()
+        frame_listas_reserva_revista = Frame(FrameReservarRevista, width = 600, height= 650, borderwidth=5, padx=5, pady=5, highlightbackground="black",
+                     highlightthickness=2)
+        frame_listas_reserva_revista.grid(row = 0, column=0, padx=20, pady=20)
+
+        for r in range(len(Servicio.getEjemplarRevistaDisponibles())):
+            nombre_revista = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getNombre()
+            nombre_autor = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getAutor()
+            nombre_categoria = Servicio.getEjemplarRevistaDisponibles()[r].getRevista().getCategoria()
+
+            frame_listaR = Frame(frame_listas_reserva_revista, width=600)
+            frame_listaR.grid(row=r + 1, column=0, sticky="w")
+
+            label_numeraalR = Label(frame_listaR, text="{}. ".format(r), width=7, height=1, anchor="w", relief="groove")
+            label_nombreeR = Label(frame_listaR, text=nombre_revista, width=20, height=1, anchor="w", relief="groove")
+            label_autoorR = Label(frame_listaR, text=nombre_autor, width=20, height=1, anchor="w", relief="groove")
+            label_generooR = Label(frame_listaR, text=nombre_categoria, width=20, height=1, anchor="w", relief="groove")
+
+            label_numeraalR.grid(row=0, column=0, sticky="w")
+            label_nombreeR.grid(row=0, column=1, sticky="w")
+            label_autoorR.grid(row=0, column=2, sticky="w")
+            label_generooR.grid(row=0, column=3, sticky="w")
+
+        frame_filtro_reserva_revista = Frame(FrameReservarRevista, width= 400, height= 650, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
+        frame_filtro_reserva_revista.grid(row = 0, column=1, padx=20, pady=20)
+
+        labelFiltro_reserva_revista = Label(frame_filtro_reserva_revista, text = "Elija el tiempo de reserva", font=("verdana", 14), justify="center")
+        drop_reserva_revista = OptionMenu(frame_filtro_reserva_revista, clicked_reservar_revista, *["5 dias","3 semanas","2 meses"], command=despliegue_reserva_revista)
+        drop_reserva_revista.grid(row=1, column=0, padx=10, pady=10)
+        labelFiltro_reserva_revista.grid(row=0, column=0, padx=10, pady=10)
+
+        VentanaUsuario.frames.append(FrameReservarRevista)
 
 
 
