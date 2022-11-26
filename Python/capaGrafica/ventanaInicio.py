@@ -1,6 +1,9 @@
 import tkinter as tk
 import os
 
+from Python.capaGrafica.ventanaUsuario import VentanaUsuario
+
+
 class VentanaInicio(tk.Tk):
     absolute_folder_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -11,8 +14,10 @@ class VentanaInicio(tk.Tk):
     imagenesHV = []
     
 
-    def __init__(self):
+    def __init__(self, biblioteca, usuario):
         super().__init__()
+        self.biblioteca = biblioteca
+        self.usuario = usuario
         self.geometry("1024x750")
         self.title("Ventana Inicio JJ Library")
         self.option_add("*tearOff", False)
@@ -62,7 +67,7 @@ class VentanaInicio(tk.Tk):
         self.labelImagenInicio.grid(row=1, column=0, padx=20, pady=20)
         self.labelImagenInicio.bind('<Enter>', self.cambiarImagenInicio)
 
-        botonAplicacion = tk.Button(frameP1, text="Ir a la aplicacion", font=("verdana", 16), fg="white", bg="#61727C")
+        botonAplicacion = tk.Button(frameP1, text="Ir a la aplicacion", font=("verdana", 16), fg="white", bg="#61727C", command = self.ejecutarApp)
         botonAplicacion.grid(row=2, column=0, padx=20, pady=20)
         
         #Hojas de vida
@@ -138,15 +143,7 @@ class VentanaInicio(tk.Tk):
     def mostrarBienvenida(self, args):
             self.labelBienvenida.configure(text=self.mensajeBienvenida, font=("verdana", 16), width=30, height=5)
 
-class ventanaDescripcion(tk.Tk):
-
-    def __init__(self):
-        super().__init__()
-        self.geometry("720x480")
-        self.title("Descripcion")
-        self.resizable(False,False)
-        
-        #Texto descripcion
-        self.labelDescripcion = tk.Label(self, text="Soy la descripcion")
-        self.labelDescripcion.pack(expand=True)
-        self.mainloop()
+    def ejecutarApp(self):
+        self.destroy()
+        ventana = VentanaUsuario(self.biblioteca, self.usuario)
+        ventana.mainloop()

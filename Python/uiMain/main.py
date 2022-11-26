@@ -14,8 +14,8 @@ usuario = Usuario("Juan", 238283, [],[],[],[],[],[])
 Servicio.setEjemplarLibroDisponibles(biblioteca_main.getEjemplaresLibros())
 Servicio.setEjemplarRevistaDisponibles(biblioteca_main.getEjemplaresRevistas())
 
-ventana = VentanaUsuario(biblioteca_main, usuario)
-
+#ventana = VentanaUsuario(biblioteca_main, usuario)
+ventana = VentanaInicio(biblioteca_main, usuario)
 ventana.mainloop()
 
 
