@@ -54,21 +54,23 @@ class Servicio():
         cls._ejemplarLibroDisponibles = ejemplarLibroDisponibles
 
     #Metodos
-    def filtrarLibrosDisponibles(self, biblioteca):
+    @classmethod
+    def filtrarLibrosDisponibles(cls, biblioteca):
         ejemplares = []
         for ejemplar in biblioteca.getEjemplaresLibros():
             if (ejemplar.getEstadoEjemplar().isPrestado() == False and ejemplar.getEstadoEjemplar().isReservado() == False):
                 ejemplares.append(ejemplar)
 
-        self.setEjemplarLibroDisponibles(ejemplares)
+        Servicio.setEjemplarLibroDisponibles(ejemplares)
 
-    def filtrarRevistasDisponibles(self, biblioteca):
+    @classmethod
+    def filtrarRevistasDisponibles(cls, biblioteca):
         ejemplares = []
         for ejemplar in biblioteca.getEjemplaresRevistas():
             if (ejemplar.getEstadoEjemplar().isPrestado() == False and ejemplar.getEstadoEjemplar().isReservado() == False):
                 ejemplares.append(ejemplar)
 
-        self.setEjemplarRevistaDisponibles(ejemplares)
+        Servicio.setEjemplarRevistaDisponibles(ejemplares)
 
     def mostrarTituloEscogido(self):
         return self.getTituloEscogido().mostrarse()

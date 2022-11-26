@@ -51,6 +51,9 @@ class GeneradorFrames():
         entrada.grid(row=2, column=0, padx=5, pady=10)
 
         def generarListaLibrosDisponibles():
+            #Esto se hace para actualizar la disponibilidad
+            Servicio.filtrarLibrosDisponibles(biblioteca)
+
             frameIZQ = tk.Frame(frameTotal, width=600, height=700, borderwidth=5, padx=5, pady=5)
             frameIZQ.grid(row=0, column=0, padx=20)
             frameIZQ.grid_propagate(False)
@@ -141,6 +144,8 @@ class GeneradorFrames():
 
         # Frame de la izquierda
         def generarListaRevistasDisponibles():
+            #Se hace para actualizar la disponibilidad
+            Servicio.filtrarRevistasDisponibles(biblioteca)
             frameIZQ = tk.Frame(frameTotal, width=600, height=700, borderwidth=5, padx=5, pady=5)
             frameIZQ.grid(row=0, column=0, padx=20)
             frameIZQ.grid_propagate(False)
@@ -238,6 +243,8 @@ class GeneradorFrames():
             botonBusqueda.grid(row=4, column=0, padx=5, pady=10)
 
         def generarListaLibroDisponibles():
+            #Se hace para actualizar la disponibilidad
+            Servicio.filtrarLibrosDisponibles(biblioteca)
             frame_listas_reserva_libro = tk.Frame(frameReservarLibro, width=600, height=700, borderwidth=5, padx=5,
                                                   pady=5)
             frame_listas_reserva_libro.grid(row=0, column=0, padx=20)
@@ -338,6 +345,8 @@ class GeneradorFrames():
 
         clicked_reservar_revista = tk.StringVar()
         def generarListaRevistasDisponibles():
+            #Se hace para actualizar la disponibilidad
+            Servicio.filtrarRevistasDisponibles(biblioteca)
             frame_listas_reserva_revista = tk.Frame(frameReservarRevista, width=600, height=650, borderwidth=5, padx=5,
                                                     pady=5)
             frame_listas_reserva_revista.grid(row=0, column=0, padx=20, pady=20)
@@ -738,6 +747,7 @@ class GeneradorFrames():
 
         #LOGICA PARA LLENAR LA LISTA DE PRÉSTAMOS
         def ActualizarPrestamos():
+
             lista_prestamos = usuario.getPrestamos()
             contLibros = 1
             contRevistas = 1
@@ -745,7 +755,7 @@ class GeneradorFrames():
                 ejemplar = prestamo.getEjemplarEscogido()
                 if isinstance(ejemplar, EjemplarLibro):
                     ejemplar = ejemplar.getLibro()
-                    print("hola")
+
                     nombre_libro = ejemplar.getNombre()
                     nombre_autor = ejemplar.getAutor()
                     nombre_genero = ejemplar.getGenero()
@@ -770,7 +780,7 @@ class GeneradorFrames():
 
                 elif isinstance(ejemplar, EjemplarRevista):
                     ejemplar = ejemplar.getRevista()
-                    print("hola")
+
                     nombre_revista = ejemplar.getNombre()
                     nombre_autor = ejemplar.getAutor()
                     nombre_categoria = ejemplar.getCategoria()
@@ -919,3 +929,185 @@ class GeneradorFrames():
 
         return frameRecomendarRevista
 
+    @classmethod
+    def generarFrameDevolucion(cls, usuario, biblioteca):
+        frameDevolucion = tk.Frame(width=1080, height=720)
+        frame_listas = tk.Frame(frameDevolucion, width=600, height=650, borderwidth=5, padx=5, pady=5)
+        frame_listas.grid(row=0, column=0, padx=20, pady=20)
+        frame_listas.grid_propagate(False)
+
+        frame_filtro = tk.Frame(frameDevolucion, width=400, height=650, borderwidth=5, highlightthickness=3,
+                                highlightbackground="#61727C")
+        frame_filtro.grid(row=0, column=1, padx=20, pady=20)
+
+        #Funcion que llama a la devolcion
+        def devolucion():
+            indice = int(entryDevolucion.get()) - 1
+            if indice > len(usuario.getPrestamos())-1 or indice < 0:
+                print("RAISE ERROR: no se encontró ese prestamo")
+
+            else:
+                Prestamo.devolucion(indice, biblioteca, usuario)
+                entryDevolucion.delete(0, tk.END)
+                print("DEVOLCION EXITOSA")
+
+            frame_listas.grid_forget()
+            generarListaPrestamos()
+
+
+        #Ventana izquierda
+        def generarListaPrestamos():
+            frame_listas = tk.Frame(frameDevolucion, width=600, height=650, borderwidth=5, padx=5, pady=5)
+            frame_listas.grid(row=0, column=0, padx=20, pady=20)
+            frame_listas.grid_propagate(False)
+
+            # 5 dias, 3 semanas, 2 meses
+
+            # Frame de la izquierda
+            # frame_revista_info = Frame(frameIZQ, width=400, height=40, borderwidth=1, padx=5, pady=5)
+            # frame_revista_info.grid(column=0, row=0, padx=4, pady=5, columnspan=10)
+
+            frame_lista = tk.Frame(frame_listas, width=600, height=20)
+            frame_lista.grid(row=0, column=0, sticky="w", pady = 5)
+            label_numeral = tk.Label(frame_lista, text="Numeral", width=7, height=1, justify="left", relief="groove")
+            label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right", relief="groove")
+            label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
+            label_genero = tk.Label(frame_lista, text="Tipo", width=20, height=1, justify="left", relief="groove")
+
+            label_numeral.grid(row=0, column=0, sticky="w")
+            label_nombre.grid(row=0, column=1, sticky="w")
+            label_autor.grid(row=0, column=2, sticky="w")
+            label_genero.grid(row=0, column=3, sticky="w")
+
+            # label_total = Label(frame_lista, text="Formato: Numeral  -  Nombre  -  Autor  -  Genero")
+            # label_total.grid(row=0, column=0, sticky="nw")
+
+            for r in range(1, len(usuario.getPrestamos()) + 1):
+                if isinstance(usuario.getPrestamos()[r - 1].getEjemplarEscogido(), EjemplarLibro):
+                    tiuloPrestado = usuario.getPrestamos()[r -1].getEjemplarEscogido().getLibro()
+                    tipo = "Libro"
+                else:
+                    tiuloPrestado = usuario.getPrestamos()[r - 1].getEjemplarEscogido().getRevista()
+                    tipo = "Revista"
+                nombre_libro = tiuloPrestado.getNombre()
+                nombre_autor = tiuloPrestado.getAutor()
+
+
+                frame_lista = tk.Frame(frame_listas, width=600)
+                frame_lista.grid(row=r + 1, column=0, sticky="w")
+
+                label_numeral = tk.Label(frame_lista, text="{}. ".format(r), width=7, height=1, anchor="w",
+                                         relief="groove")
+                label_nombre = tk.Label(frame_lista, text=nombre_libro, width=20, height=1, anchor="w", relief="groove")
+                label_autor = tk.Label(frame_lista, text=nombre_autor, width=20, height=1, anchor="w", relief="groove")
+                label_genero = tk.Label(frame_lista, text=tipo, width=20, height=1, anchor="w",
+                                        relief="groove")
+
+                label_numeral.grid(row=0, column=0, sticky="w")
+                label_nombre.grid(row=0, column=1, sticky="w")
+                label_autor.grid(row=0, column=2, sticky="w")
+                label_genero.grid(row=0, column=3, sticky="w")
+
+        generarListaPrestamos()
+        # Ventana de la derecha
+        msg = "Escriba el numero de la devolucion\n que desea realizar"
+        entrada = tk.Label(frame_filtro, text=msg, font=("verdana", 14), padx=10, pady=10)
+        entryDevolucion = tk.Entry(frame_filtro, font=("verdana", 12))
+        botonDevolcion = tk.Button(frame_filtro, text="Devolver", font=("verdana", 12), background="#61727C", fg="white", command = devolucion)
+
+        botonDevolcion.grid(row=4, column=0, padx=5, pady=10)
+        entryDevolucion.grid(row=3, column=0, padx=5, pady=10)
+        entrada.grid(row=2, column=0, padx=5, pady=10)
+
+        return frameDevolucion
+
+    @classmethod
+    def generarFrameCancelacion(cls, usuario, biblioteca):
+        frameCancelacion = tk.Frame(width=1080, height=720)
+        frame_listas = tk.Frame(frameCancelacion, width=600, height=650, borderwidth=5, padx=5, pady=5)
+        frame_listas.grid(row=0, column=0, padx=20, pady=20)
+        frame_listas.grid_propagate(False)
+
+        frame_filtro = tk.Frame(frameCancelacion, width=400, height=650, borderwidth=5, highlightthickness=3,
+                                highlightbackground="#61727C")
+        frame_filtro.grid(row=0, column=1, padx=20, pady=20)
+
+        # Funcion que llama a la devolcion
+        def cancelacion():
+            indice = int(entryDevolucion.get()) - 1
+            if indice > len(usuario.getReservas()) - 1 or indice < 0:
+                print("RAISE ERROR: no se encontró ese prestamo")
+
+            else:
+                Reserva.cancelarReserva(indice, biblioteca, usuario)
+                entryDevolucion.delete(0, tk.END)
+                print("CANCELACION EXITOSA")
+
+            frame_listas.grid_forget()
+            generarListaReservas()
+
+        # Ventana izquierda
+        def generarListaReservas():
+            frame_listas = tk.Frame(frameCancelacion, width=600, height=650, borderwidth=5, padx=5, pady=5)
+            frame_listas.grid(row=0, column=0, padx=20, pady=20)
+            frame_listas.grid_propagate(False)
+
+            # 5 dias, 3 semanas, 2 meses
+
+            # Frame de la izquierda
+            # frame_revista_info = Frame(frameIZQ, width=400, height=40, borderwidth=1, padx=5, pady=5)
+            # frame_revista_info.grid(column=0, row=0, padx=4, pady=5, columnspan=10)
+
+            frame_lista = tk.Frame(frame_listas, width=600, height=20)
+            frame_lista.grid(row=0, column=0, sticky="w", pady=5)
+            label_numeral = tk.Label(frame_lista, text="Numeral", width=7, height=1, justify="left", relief="groove")
+            label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right", relief="groove")
+            label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
+            label_genero = tk.Label(frame_lista, text="Tipo", width=20, height=1, justify="left", relief="groove")
+
+            label_numeral.grid(row=0, column=0, sticky="w")
+            label_nombre.grid(row=0, column=1, sticky="w")
+            label_autor.grid(row=0, column=2, sticky="w")
+            label_genero.grid(row=0, column=3, sticky="w")
+
+            # label_total = Label(frame_lista, text="Formato: Numeral  -  Nombre  -  Autor  -  Genero")
+            # label_total.grid(row=0, column=0, sticky="nw")
+
+            for r in range(1, len(usuario.getReservas()) + 1):
+                if isinstance(usuario.getReservas()[r - 1].getEjemplarEscogido(), EjemplarLibro):
+                    tiuloReservado = usuario.getReservas()[r - 1].getEjemplarEscogido().getLibro()
+                    tipo = "Libro"
+                else:
+                    tiuloReservado = usuario.getReservas()[r - 1].getEjemplarEscogido().getRevista()
+                    tipo = "Revista"
+                nombre_libro = tiuloReservado.getNombre()
+                nombre_autor = tiuloReservado.getAutor()
+
+                frame_lista = tk.Frame(frame_listas, width=600)
+                frame_lista.grid(row=r + 1, column=0, sticky="w")
+
+                label_numeral = tk.Label(frame_lista, text="{}. ".format(r), width=7, height=1, anchor="w",
+                                         relief="groove")
+                label_nombre = tk.Label(frame_lista, text=nombre_libro, width=20, height=1, anchor="w", relief="groove")
+                label_autor = tk.Label(frame_lista, text=nombre_autor, width=20, height=1, anchor="w", relief="groove")
+                label_genero = tk.Label(frame_lista, text=tipo, width=20, height=1, anchor="w",
+                                        relief="groove")
+
+                label_numeral.grid(row=0, column=0, sticky="w")
+                label_nombre.grid(row=0, column=1, sticky="w")
+                label_autor.grid(row=0, column=2, sticky="w")
+                label_genero.grid(row=0, column=3, sticky="w")
+
+        generarListaReservas()
+        # Ventana de la derecha
+        msg = "Escriba el numero de la reserva\n que desea cancelar"
+        entrada = tk.Label(frame_filtro, text=msg, font=("verdana", 14), padx=10, pady=10)
+        entryDevolucion = tk.Entry(frame_filtro, font=("verdana", 12))
+        botonDevolcion = tk.Button(frame_filtro, text="Cancelar", font=("verdana", 12), background="#61727C",
+                                   fg="white", command=cancelacion)
+
+        botonDevolcion.grid(row=4, column=0, padx=5, pady=10)
+        entryDevolucion.grid(row=3, column=0, padx=5, pady=10)
+        entrada.grid(row=2, column=0, padx=5, pady=10)
+
+        return frameCancelacion

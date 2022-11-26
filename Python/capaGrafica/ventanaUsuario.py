@@ -83,8 +83,8 @@ class VentanaUsuario(Tk):
 
         #4 Gestionar servicios
         gestion_servicios = Menu(self._barra_del_menu)
-        gestion_servicios.add_command(label="Realizar devolucion", command=lambda: cambiarFrame(Frame()))
-        gestion_servicios.add_command(label="Cancelar reserva ", command=lambda: cambiarFrame(Frame()))
+        gestion_servicios.add_command(label="Realizar devolucion", command=lambda: cambiarFrame(GeneradorFrames.generarFrameDevolucion(self._usuario, self._biblioteca_main)))
+        gestion_servicios.add_command(label="Cancelar reserva ", command=lambda: cambiarFrame(GeneradorFrames.generarFrameCancelacion(self._usuario, self._biblioteca_main)))
         procesos_consultas.add_cascade(label="Gestionar servicios", menu=gestion_servicios)
 
 
