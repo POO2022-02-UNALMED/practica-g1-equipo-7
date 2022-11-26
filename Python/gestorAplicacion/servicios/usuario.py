@@ -86,7 +86,7 @@ class Usuario():
                 generosLeidos[libro.getGenero()] = 1
 
         #Buscar el genero más leido
-        generoFavorito = max(generosLeidos, key=generosLeidos.get)
+        generoFavorito = max(generosLeidos, key=generosLeidos.get, default=0)
         self.setGeneroFavorito(generoFavorito)
 
     def encontrarCategoriaFavorita(self):
@@ -98,7 +98,7 @@ class Usuario():
                 categoriasLeidas[revista.getCategoria()] = 1
 
         #Buscar categoria favorita
-        categoriaFavorita = max(categoriasLeidas, key=categoriasLeidas.get)
+        categoriaFavorita = max(categoriasLeidas, key=categoriasLeidas.get, default=0)
         self.setCategoriaFavorita(categoriaFavorita)
 
     def añadirHistorialLibros(self, libro: Libro):
