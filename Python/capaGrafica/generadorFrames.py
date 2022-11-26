@@ -3,6 +3,8 @@ from datetime import datetime, timedelta
 
 from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
 from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
+from Python.gestorAplicacion.libreria.libro import Libro
+from Python.gestorAplicacion.libreria.revista import Revista
 from Python.gestorAplicacion.servicios.prestamo import Prestamo
 from Python.gestorAplicacion.servicios.reserva import Reserva
 from Python.gestorAplicacion.servicios.servicio import Servicio
@@ -814,6 +816,106 @@ class GeneradorFrames():
 
         return frameMisPrestamos
 
-    
-    #def generarFrameRecomendarLibro(cls, usuario, biblioteca):
+    @classmethod
+    def generarFrameRecomendarLibro(cls, usuario, biblioteca):
+        frameRecomendarLibro =   tk.Frame(width=1080, height=720)
+        # Contenedores principales
+        frame_letrero = tk.Frame(frameRecomendarLibro, width=1060, height=100, borderwidth=5, highlightthickness=3,
+                                 highlightbackground="#61727C")
+        frame_letrero.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+
+        frame_libros = tk.Frame(frameRecomendarLibro, width=1060, height=570, borderwidth=5, highlightbackground="#61727C",
+                                highlightthickness=3)
+        frame_libros.grid(row=1, column=0, padx=10, pady=10)
+
+        usuario.encontrarGeneroFavorito()
+
+        librosMasSolicitados = Libro.masSolicitados(biblioteca, usuario.getGeneroFavorito())
+
+        frame_info = tk.Frame(frame_libros, width=500, height=50)
+        label_nombre = tk.Label(frame_info, font=("verdana", 12, "bold"), text="Nombre", width=30)
+        label_autor = tk.Label(frame_info, font=("verdana", 12, "bold"), text="Autor", width=30)
+        label_genero = tk.Label(frame_info, font=("verdana", 12, "bold"), text="Genero", width=15)
+
+        label_nombre.grid(row=0, column=1, sticky="w", pady=10)
+        label_autor.grid(row=0, column=2, sticky="w", pady=10)
+        label_genero.grid(row=0, column=3, sticky="w", pady=10)
+        frame_info.grid(row=0, column=0, sticky="w", pady=10)
+        for i in range(len(librosMasSolicitados)):
+            numeral = i+1
+            nombre_libro = librosMasSolicitados[i].getNombre()
+            nombre_autor = librosMasSolicitados[i].getAutor()
+            nombre_genero = librosMasSolicitados[i].getGenero()
+
+
+            frame_info = tk.Frame(frame_libros, width=500, height = 50)
+            label_numeral = tk.Label(frame_info,font = ("verdana", 12, "bold"), text = numeral,width = 3, anchor= "w")
+            label_nombre = tk.Label(frame_info, font=("verdana", 12, "bold"), text = nombre_libro,width = 30, anchor= "w")
+            label_autor = tk.Label(frame_info, font=("verdana", 12, "bold"), text = nombre_autor,width = 30, anchor= "w")
+            label_genero = tk.Label(frame_info, font=("verdana", 12, "bold"), text = nombre_genero,width = 30, anchor= "w")
+
+            label_numeral.grid(row = 0, column= 0, sticky ="w", pady=10)
+            label_nombre.grid(row=0, column=1, sticky ="w", pady=10)
+            label_autor.grid(row=0, column=2, sticky ="w", pady=10)
+            label_genero.grid(row=0, column=3, sticky ="w", pady=10)
+            frame_info.grid(row = i+1, column = 0, sticky ="w", pady=10)
+
+        # Letrero
+        letrero = tk.Label(frame_letrero, text="Libros recomendados para ti", font=("verdana", 16, "bold"), fg="white",
+                           borderwidth=3, background="#61727C", width=30, height=2)
+        letrero.grid(row=0, column=0)
+
+        # Evitar que el grid cambie de tamaño
+        frame_libros.grid_propagate(False)
+
+        return frameRecomendarLibro
+
+    @classmethod
+    def generarFrameRecomendarRevista(cls, usuario, biblioteca):
+        frameRecomendarRevista = tk.Frame(width=1080, height=720)
+        # Contenedores principales
+        frame_letrero = tk.Frame(frameRecomendarRevista, width=1060, height=100, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
+        frame_letrero.grid(row=0, column=0, columnspan=2, padx=10, pady=10)
+
+        frame_revistas = tk.Frame(frameRecomendarRevista, width=1060, height=570, borderwidth=5, highlightbackground="#61727C", highlightthickness=3)
+        frame_revistas.grid(row=1, column=0, padx=10, pady=10)
+
+        usuario.encontrarCategoriaFavorita()
+        revistasMasSolicitadas = Revista.masSolicitadas(biblioteca, usuario.getCategoriaFavorita())
+
+        frame_info = tk.Frame(frame_revistas, width=500, height=50)
+        label_nombre = tk.Label(frame_info, font=("verdana", 12, "bold"), text="Nombre", width=30)
+        label_autor = tk.Label(frame_info, font=("verdana", 12, "bold"), text="Autor", width=30)
+        label_genero = tk.Label(frame_info, font=("verdana", 12, "bold"), text="Categoria", width=15)
+
+        label_nombre.grid(row=0, column=1, sticky="w", pady=10)
+        label_autor.grid(row=0, column=2, sticky="w", pady=10)
+        label_genero.grid(row=0, column=3, sticky="w", pady=10)
+        frame_info.grid(row=0, column=0, sticky="w", pady=10)
+        for i in range(len(revistasMasSolicitadas)):
+            numeral = i + 1
+            nombre_revista= revistasMasSolicitadas[i].getNombre()
+            nombre_autor = revistasMasSolicitadas[i].getAutor()
+            nombre_categoria = revistasMasSolicitadas[i].getCategoria()
+
+            frame_info = tk.Frame(frame_revistas, width=500, height=50)
+            label_numeral = tk.Label(frame_info, font=("verdana", 12, "bold"), text=numeral, width=3, anchor="w")
+            label_nombre = tk.Label(frame_info, font=("verdana", 12, "bold"), text=nombre_revista, width=30, anchor="w")
+            label_autor = tk.Label(frame_info, font=("verdana", 12, "bold"), text=nombre_autor, width=30, anchor="w")
+            label_genero = tk.Label(frame_info, font=("verdana", 12, "bold"), text=nombre_categoria, width=30, anchor="w")
+
+            label_numeral.grid(row=0, column=0, sticky="w", pady=10)
+            label_nombre.grid(row=0, column=1, sticky="w", pady=10)
+            label_autor.grid(row=0, column=2, sticky="w", pady=10)
+            label_genero.grid(row=0, column=3, sticky="w", pady=10)
+            frame_info.grid(row=i + 1, column=0, sticky="w", pady=10)
+        # Letrero
+        letrero = tk.Label(frame_letrero, text="Revistas recomendadas para ti", font=("verdana", 16, "bold"),
+                           fg="white", borderwidth=3, background="#61727C", width=30, height=2)
+        letrero.grid(row=0, column=0)
+
+        # Evitar que el grid cambie de tamaño
+        frame_revistas.grid_propagate(False)
+
+        return frameRecomendarRevista
 

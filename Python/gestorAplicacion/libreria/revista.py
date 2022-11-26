@@ -17,11 +17,11 @@ class Revista(Titulo):
     @classmethod
     def masSolicitadas(cls, biblioteca, categoria):
         revistas = []
-
+        nombresRevistas = []
         for revista in biblioteca.getHistorialRevistasUsadas():
-            if revista.getCategoria() == categoria and revista not in revistas:
+            if revista.getCategoria() == categoria and revista.getNombre() not in nombresRevistas:
                 revistas.append(revista)
+                nombresRevistas.append(revista.getNombre())
 
-        revistas.sort()
         return revistas
 

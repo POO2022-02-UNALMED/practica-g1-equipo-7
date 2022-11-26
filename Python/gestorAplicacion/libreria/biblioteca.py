@@ -51,13 +51,13 @@ class Biblioteca:
     def getUsuarios(cls):
         return cls._usuarios
 
-    @classmethod
-    def getHistorialLibrosUsados(cls):
-        return cls._historialLibrosUsados
 
-    @classmethod
-    def getHistorialRevistasUsadas(cls):
-        return cls._historialRevistasUsadas
+    def getHistorialLibrosUsados(self):
+        return self._historialLibrosUsados
+
+
+    def getHistorialRevistasUsadas(self):
+        return self._historialRevistasUsadas
 
     @classmethod
     def setEjemplaresLibros(cls, ejemplares):

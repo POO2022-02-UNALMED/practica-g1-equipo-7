@@ -17,16 +17,13 @@ class Libro(Titulo):
     @classmethod
     def masSolicitados(cls, biblioteca, genero):
         libros = []
-
+        nombresLibros = []
         for libro in biblioteca.getHistorialLibrosUsados():
-            if libro.getGenero() == genero and libro not in libros:
+            if libro.getGenero() == genero and libro.getNombre() not in nombresLibros:
                 libros.append(libro)
-
-        libros.sort()
+                nombresLibros.append(libro.getNombre())
 
         return libros
-
-
 
 
     def __str__(self):

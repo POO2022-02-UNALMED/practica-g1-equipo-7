@@ -77,8 +77,8 @@ class VentanaUsuario(Tk):
 
         #3. Recomendaciones
         recomendacion = Menu(self._barra_del_menu)
-        recomendacion.add_command(label="Recomendar libro", command=lambda: cambiarFrame(Frame()))
-        recomendacion.add_command(label="Recomendar revista", command=lambda: cambiarFrame(Frame()))
+        recomendacion.add_command(label="Recomendar libro", command=lambda: cambiarFrame(GeneradorFrames.generarFrameRecomendarLibro(self._usuario, self._biblioteca_main)))
+        recomendacion.add_command(label="Recomendar revista", command=lambda: cambiarFrame(GeneradorFrames.generarFrameRecomendarRevista(self._usuario, self._biblioteca_main)))
         procesos_consultas.add_cascade(label="Recomendaciones", menu=recomendacion)
 
         #4 Gestionar servicios

@@ -79,7 +79,6 @@ class Usuario():
     #Metodos
     def encontrarGeneroFavorito(self):
         generosLeidos = {}
-
         for libro in self.getHistorialLibrosUsados():
             if libro.getGenero() in generosLeidos:
                 generosLeidos[libro.getGenero()] += 1
@@ -92,7 +91,6 @@ class Usuario():
 
     def encontrarCategoriaFavorita(self):
         categoriasLeidas = {}
-
         for revista in self.getHistorialRevistasUsadas():
             if revista.getCategoria() in categoriasLeidas:
                 categoriasLeidas[revista.getCategoria()] += 1
@@ -107,7 +105,7 @@ class Usuario():
         self._historialLibrosUsados.append(libro)
 
     def añadirHistorialRevistas(self, revista: Revista):
-        self._historialRevistasUsadas.append(Revista)
+        self._historialRevistasUsadas.append(revista)
 
     def añadirReserva(self, reserva: Reserva):
         self._reservas.append(reserva)
