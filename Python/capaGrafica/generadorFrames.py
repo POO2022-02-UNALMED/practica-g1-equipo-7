@@ -275,7 +275,7 @@ class GeneradorFrames():
                         elif cantidad_tiempo == 2:
                             fecha_final += timedelta(weeks=8)
 
-                        Reserva.generarReservaLibro(usuario, Ejemplar, biblioteca, fecha_final, fecha_inicial)
+                        Reserva.generarReservaLibro(usuario, Ejemplar, biblioteca, fecha_inicial, fecha_final)
                         frame_listas_reserva_libro.grid_forget()
                         generarListaLibroDisponibles()
                         print(f"RESERVA EXITOSO {Ejemplar.getLibro().getNombre()} para el {fecha_inicial, fecha_final}")
@@ -384,7 +384,7 @@ class GeneradorFrames():
                         elif cantidad_tiempo == 2:
                             fecha_final += timedelta(weeks=8)
 
-                        Reserva.generarReservaRevista(usuario, Ejemplar, biblioteca, fecha_final, fecha_inicial)
+                        Reserva.generarReservaRevista(usuario, Ejemplar, biblioteca, fecha_inicial, fecha_final)
                         frame_listas_reserva_revista.grid_forget()
                         generarListaRevistasDisponibles()
                         print(f"RESERVA EXITOSO {Ejemplar.getRevista().getNombre()} para el {fecha_inicial, fecha_final}")
@@ -483,6 +483,7 @@ class GeneradorFrames():
                     nombre_libro = ejemplar.getNombre()
                     nombre_autor = ejemplar.getAutor()
                     nombre_genero = ejemplar.getGenero()
+                    fecha = "{}/{}/{}".format(reserva.getFechaDevolucion().day, reserva.getFechaDevolucion().month, reserva.getFechaDevolucion().year)
                     # IMPLEMENTAR LO DE LISTAS ACÁ
                     frame_ejemplar = tk.Frame(frame_libros_reservas, width=600)
                     label_numeral = tk.Label(frame_ejemplar, text="{}. ".format(contLibros), width=7, height=1,
@@ -492,13 +493,15 @@ class GeneradorFrames():
                                             relief="groove")
                     label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=20, height=1, anchor="w",
                                            relief="groove")
-                    label_genero = tk.Label(frame_ejemplar, text=nombre_genero, width=20, height=1, anchor="w",
+                    label_genero = tk.Label(frame_ejemplar, text=nombre_genero, width=10, height=1, anchor="w",
                                             relief="groove")
-
+                    label_fecha = tk.Label(frame_ejemplar, text=fecha, width=10, height=1, anchor="w",
+                                            relief="groove")
                     label_numeral.grid(row=0, column=0, sticky="w")
                     label_nombre.grid(row=0, column=1, sticky="w")
                     label_autor.grid(row=0, column=2, sticky="w")
                     label_genero.grid(row=0, column=3, sticky="w")
+                    label_fecha.grid(row=0, column=4, sticky="w")
                     frame_ejemplar.grid(row=contLibros, column=0)
                     contLibros += 1
 
@@ -509,6 +512,8 @@ class GeneradorFrames():
                     nombre_revista = ejemplar.getNombre()
                     nombre_autor = ejemplar.getAutor()
                     nombre_categoria = ejemplar.getCategoria()
+                    fecha = "{}/{}/{}".format(reserva.getFechaDevolucion().day, reserva.getFechaDevolucion().month,
+                                              reserva.getFechaDevolucion().year)
                     # IMPLEMENTAR LO DE LISTAS ACÁ
                     frame_ejemplar = tk.Frame(frame_revistas_reservas, width=600)
 
@@ -517,15 +522,17 @@ class GeneradorFrames():
                                              relief="groove")
                     label_nombre = tk.Label(frame_ejemplar, text=nombre_revista, width=20, height=1, anchor="w",
                                             relief="groove")
-                    label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=20, height=1, anchor="w",
+                    label_autor = tk.Label(frame_ejemplar, text=nombre_autor, width=15, height=1, anchor="w",
                                            relief="groove")
-                    label_genero = tk.Label(frame_ejemplar, text=nombre_categoria, width=20, height=1, anchor="w",
+                    label_genero = tk.Label(frame_ejemplar, text=nombre_categoria, width=15, height=1, anchor="w",
                                             relief="groove")
-
+                    label_fecha = tk.Label(frame_ejemplar, text=fecha, width=10, height=1, anchor="w",
+                                           relief="groove")
                     label_numeral.grid(row=0, column=0, sticky="w")
                     label_nombre.grid(row=0, column=1, sticky="w")
                     label_autor.grid(row=0, column=2, sticky="w")
                     label_genero.grid(row=0, column=3, sticky="w")
+                    label_fecha.grid(row=0, column=4, sticky="w")
                     frame_ejemplar.grid(row=contRevistas, column=0, sticky="w")
                     contRevistas += 1
             if contLibros == 1 and contRevistas == 1:
@@ -1180,11 +1187,15 @@ class GeneradorFrames():
             label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right", relief="groove")
             label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
             label_genero = tk.Label(frame_lista, text="Tipo", width=20, height=1, justify="left", relief="groove")
+            label_fecha = tk.Label(frame_lista, text="Devolucion", width=10, height=1, anchor="w",relief="groove")
+
 
             label_numeral.grid(row=0, column=0, sticky="w")
             label_nombre.grid(row=0, column=1, sticky="w")
             label_autor.grid(row=0, column=2, sticky="w")
             label_genero.grid(row=0, column=3, sticky="w")
+            label_fecha.grid(row=0, column=4, sticky="w")
+
 
             # label_total = Label(frame_lista, text="Formato: Numeral  -  Nombre  -  Autor  -  Genero")
             # label_total.grid(row=0, column=0, sticky="nw")
@@ -1198,6 +1209,9 @@ class GeneradorFrames():
                     tipo = "Revista"
                 nombre_libro = tiuloReservado.getNombre()
                 nombre_autor = tiuloReservado.getAutor()
+                fecha = "{}/{}/{}".format(usuario.getReservas()[r - 1].getFechaDevolucion().day,
+                                          usuario.getReservas()[r - 1].getFechaDevolucion().month,
+                                          usuario.getReservas()[r - 1].getFechaDevolucion().year)
 
                 frame_lista = tk.Frame(frame_listas, width=600)
                 frame_lista.grid(row=r + 1, column=0, sticky="w")
@@ -1208,11 +1222,16 @@ class GeneradorFrames():
                 label_autor = tk.Label(frame_lista, text=nombre_autor, width=20, height=1, anchor="w", relief="groove")
                 label_genero = tk.Label(frame_lista, text=tipo, width=20, height=1, anchor="w",
                                         relief="groove")
+                label_fecha = tk.Label(frame_lista, text=fecha, width=10, height=1, anchor="w",
+                                       relief="groove")
+
+
 
                 label_numeral.grid(row=0, column=0, sticky="w")
                 label_nombre.grid(row=0, column=1, sticky="w")
                 label_autor.grid(row=0, column=2, sticky="w")
                 label_genero.grid(row=0, column=3, sticky="w")
+                label_fecha.grid(row=0, column=4, sticky="w")
 
         generarListaReservas()
         # Ventana de la derecha
