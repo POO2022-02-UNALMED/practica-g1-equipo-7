@@ -1,6 +1,7 @@
 import tkinter as tk
 from datetime import datetime, timedelta
 
+from Python.capaGrafica.fieldFrame import FieldFrame
 from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
 from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
 from Python.gestorAplicacion.libreria.libro import Libro
@@ -35,12 +36,14 @@ class GeneradorFrames():
 
         # Frame de la derecha
         msg = "Escribe el numero del Libro\n que desea prestar"
-        entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
-        entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
+        fieldFramePrestamo = FieldFrame(frameDER, criterios=[msg])
+        #entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
+        #entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
 
         def prestarLibro():
             try:
-                indice = entryPrestar.get()
+                #indice = entryPrestar.get()
+                indice = fieldFramePrestamo.getValue(0)
                 if indice == "":
                     raise ExcepcionEntero()
                 elif not (48 <= ord(indice[0]) <= 57):
@@ -52,7 +55,8 @@ class GeneradorFrames():
                 else:
                     Ejemplar = Servicio.getEjemplarLibroDisponibles()[indice]
                     Prestamo.generarPrestamoLibro(usuario, Ejemplar, biblioteca)
-                    entryPrestar.delete(0, tk.END)
+                    #entryPrestar.delete(0, tk.END)
+                    fieldFramePrestamo.delValue(0)
                     print("PRÉSTAMO EXITOSO")
 
                 frameIZQ.grid_forget()
@@ -63,9 +67,10 @@ class GeneradorFrames():
 
         botonPrestar = tk.Button(frameDER, text="Prestar", font=("verdana", 12), background="#61727C", fg="white",
                                  command=prestarLibro)
+        fieldFramePrestamo.grid(row = 2, column = 0)
         botonPrestar.grid(row=4, column=0, padx=5, pady=10)
-        entryPrestar.grid(row=3, column=0, padx=5, pady=10)
-        entrada.grid(row=2, column=0, padx=5, pady=10)
+        #entryPrestar.grid(row=3, column=0, padx=5, pady=10)
+        #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         def generarListaLibrosDisponibles():
             #Esto se hace para actualizar la disponibilidad
@@ -135,12 +140,14 @@ class GeneradorFrames():
 
         # Frame de la derecha
         msg = "Escribe el numero de la Revista\n que desea prestar"
-        entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
-        entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
+        #entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
+        #entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
+        fieldFramePrestamo = FieldFrame(frameDER, criterios=[msg])
 
         def prestarRevista():
             try:
-                indice = entryPrestar.get()
+                #indice = entryPrestar.get()
+                indice = fieldFramePrestamo.getValue()
                 if indice == "":
                     raise ExcepcionEntero()
                 elif not (48 <= ord(indice[0]) <= 57):
@@ -150,7 +157,8 @@ class GeneradorFrames():
                     raise ExcepcionElementoInexistente()
                 else:
                     Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice]
-                    entryPrestar.delete(0, tk.END)
+                    #entryPrestar.delete(0, tk.END)
+                    fieldFramePrestamo.delValue(0)
                     Prestamo.generarPrestamoRevista(usuario, Ejemplar, biblioteca)
                     print(f"PRÉSTAMO EXITOSO {Ejemplar.getRevista().getNombre()}")
 
@@ -162,9 +170,10 @@ class GeneradorFrames():
         botonPrestar = tk.Button(frameDER, text="Prestar", font=("verdana", 12), background="#61727C", fg="white",
                                  command=prestarRevista)
 
+        fieldFramePrestamo.grid(row = 2, column = 0)
         botonPrestar.grid(row=4, column=0, padx=5, pady=10)
-        entryPrestar.grid(row=3, column=0, padx=5, pady=10)
-        entrada.grid(row=2, column=0, padx=5, pady=10)
+        #entryPrestar.grid(row=3, column=0, padx=5, pady=10)
+        #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         # Frame de la izquierda
         def generarListaRevistasDisponibles():
@@ -231,15 +240,17 @@ class GeneradorFrames():
             cantidad_tiempo = int(filtro.split(" ")[0])
             print(len(Servicio.getEjemplarLibroDisponibles()))
             msg = "Escribe el numero del libro\n que desea reservar"
-            entrada = tk.Label(frame_filtro_reserva_libro, text=msg, font=("verdana", 14), padx=10, pady=10)
-            entryBusqueda = tk.Entry(frame_filtro_reserva_libro, font=("verdana", 12))
-
-            entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
-            entrada.grid(row=2, column=0, padx=5, pady=10)
+            #entrada = tk.Label(frame_filtro_reserva_libro, text=msg, font=("verdana", 14), padx=10, pady=10)
+            #entryBusqueda = tk.Entry(frame_filtro_reserva_libro, font=("verdana", 12))
+            fieldFrameReserva = FieldFrame(frame_filtro_reserva_libro, criterios=[msg])
+            fieldFrameReserva.grid(row = 2, column = 0, padx=5)
+            #entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
+            #entrada.grid(row=2, column=0, padx=5, pady=10)
 
             def HacerReservaLibro():
                 try:
-                    indice = entryBusqueda.get()
+                    #indice = entryBusqueda.get()
+                    indice = fieldFrameReserva.getValue(0)
                     if indice == "":
                         raise ExcepcionEntero()
                     elif not (48 <= ord(indice[0]) <= 57):
@@ -251,7 +262,8 @@ class GeneradorFrames():
                     else:
                         print(indice)
                         Ejemplar = Servicio.getEjemplarLibroDisponibles()[indice]
-                        entryBusqueda.delete(0, tk.END)
+                        #entryBusqueda.delete(0, tk.END)
+                        fieldFrameReserva.delValue(0)
                         fecha_inicial = datetime.now()
                         fecha_final = datetime.now()
                         if cantidad_tiempo == 5:
@@ -339,14 +351,16 @@ class GeneradorFrames():
 
         def despliegue_reserva_revista(filtro):
             cantidad_tiempo = int(filtro.split(" ")[0])
-            print(cantidad_tiempo)
+
             msg = "Escribe el numero de la revista\n que desea reservar"
-            entrada = tk.Label(frame_filtro_reserva_revista, text=msg, font=("verdana", 14), padx=10, pady=10)
-            entryBusqueda = tk.Entry(frame_filtro_reserva_revista, font=("verdana", 12))
+            #entrada = tk.Label(frame_filtro_reserva_revista, text=msg, font=("verdana", 14), padx=10, pady=10)
+            #entryBusqueda = tk.Entry(frame_filtro_reserva_revista, font=("verdana", 12))
+            fieldFrameReserva = FieldFrame(frame_filtro_reserva_revista, criterios=[msg])
 
             def HacerReservaRevista():
                 try:
-                    indice = entryBusqueda.get()
+                    #indice = entryBusqueda.get()
+                    indice = fieldFrameReserva.getValue(0)
                     if indice == "":
                         raise ExcepcionEntero()
                     elif not (48 <= ord(indice[0]) <= 57):
@@ -355,9 +369,10 @@ class GeneradorFrames():
                     if indice >= len(Servicio.getEjemplarRevistaDisponibles()) or indice < 0:
                         raise ExcepcionElementoInexistente()
                     else:
-                        print(indice)
+
                         Ejemplar = Servicio.getEjemplarRevistaDisponibles()[indice]
-                        entryBusqueda.delete(0, tk.END)
+                        #entryBusqueda.delete(0, tk.END)
+                        fieldFrameReserva.delValue(0)
                         fecha_inicial = datetime.now()
                         fecha_final = datetime.now()
                         if cantidad_tiempo == 5:
@@ -380,9 +395,10 @@ class GeneradorFrames():
             botonBusqueda = tk.Button(frame_filtro_reserva_revista, text="Reservar", font=("verdana", 12),
                                       background="#61727C",
                                       fg="white", command=HacerReservaRevista)
+            fieldFrameReserva.grid(row=2, column=0)
             botonBusqueda.grid(row=4, column=0, padx=5, pady=10)
-            entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
-            entrada.grid(row=2, column=0, padx=5, pady=10)
+            #entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
+            #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         clicked_reservar_revista = tk.StringVar()
         def generarListaRevistasDisponibles():
@@ -545,12 +561,15 @@ class GeneradorFrames():
         frameBuscarLibro =  tk.Frame(width=1080, height=720)
 
         def despliegue(filtro):
-            entrada = tk.Label(frame_filtro, text="Escribe el {} del libro".format(filtro), font=("verdana", 14), padx = 10, pady = 10)
-            entryBusqueda = tk.Entry(frame_filtro, font=("verdana", 12))
+            #entrada = tk.Label(frame_filtro, text="Escribe el {} del libro".format(filtro), font=("verdana", 14), padx = 10, pady = 10)
+            #entryBusqueda = tk.Entry(frame_filtro, font=("verdana", 12))
+            fieldFrameBusqueda = FieldFrame(frame_filtro, criterios=["Escribe el {} del libro".format(filtro)])
+            fieldFrameBusqueda.grid(row = 2, column = 0)
 
             def Filtrar():
                 try:
-                    string_Campo = entryBusqueda.get().lower()
+                    #string_Campo = entryBusqueda.get().lower()
+                    string_Campo = fieldFrameBusqueda.getValue(0)
                     if string_Campo == "":
                         raise ExcepcionString()
                     elif 48 <= ord(string_Campo[0]) <= 57:
@@ -576,7 +595,8 @@ class GeneradorFrames():
                     label_autor.grid(row=0, column=2, sticky="w")
                     label_genero.grid(row=0, column=3, sticky="w")
                     frame_listas.grid_propagate(False)
-                    entryBusqueda.delete(0, tk.END)
+                    #entryBusqueda.delete(0, tk.END)
+                    fieldFrameBusqueda.delValue(0)
                     filtro = clicked.get().lower()
                     cantidad = 0
                     if filtro == "autor":
@@ -630,8 +650,8 @@ class GeneradorFrames():
             botonBusqueda = tk.Button(frame_filtro, text="Buscar", font=("verdana", 12), background="#61727C",
                                       fg="white", command=Filtrar)
             botonBusqueda.grid(row=4, column=0, padx=10, pady=10)
-            entryBusqueda.grid(row=3, column=0, padx=10, pady=10)
-            entrada.grid(row=2, column=0, padx=10, pady=10)
+            #entryBusqueda.grid(row=3, column=0, padx=10, pady=10)
+            #entrada.grid(row=2, column=0, padx=10, pady=10)
 
         clicked = tk.StringVar()
         frame_filtro = tk.Frame(frameBuscarLibro, width= 400, height= 650, borderwidth=5, highlightthickness=3, highlightbackground="#61727C")
@@ -673,13 +693,16 @@ class GeneradorFrames():
                 msg = "Escribe la {} de la revista".format(filtro)
             else:
                 msg = " Escribe el {} de la Revista ".format(filtro)
-            entrada = tk.Label(frame_filtro_revista, text=msg, font=("verdana", 14), padx = 10, pady = 10)
-            entryBusqueda = tk.Entry(frame_filtro_revista, font=("verdana", 12))
+            #entrada = tk.Label(frame_filtro_revista, text=msg, font=("verdana", 14), padx = 10, pady = 10)
+            #entryBusqueda = tk.Entry(frame_filtro_revista, font=("verdana", 12))
 
+            fieldFrameBusqueda = FieldFrame(frame_filtro_revista, criterios=[msg])
+            fieldFrameBusqueda.grid(row=2, column = 0)
             def Filtrar():
                 try:
 
-                    string_Campo = entryBusqueda.get().lower()
+                    #string_Campo = entryBusqueda.get().lower()
+                    string_Campo = fieldFrameBusqueda.getValue(0)
                     if string_Campo == "":
                         raise ExcepcionEntero()
                     elif 48 <= ord(string_Campo[0]) <= 57:
@@ -704,10 +727,9 @@ class GeneradorFrames():
                     label_autor.grid(row=0, column=2, sticky="w")
                     label_genero.grid(row=0, column=3, sticky="w")
                     frame_listas_revista.grid_propagate(False)
-                    entryBusqueda.delete(0, tk.END)
+                    #entryBusqueda.delete(0, tk.END)
+                    fieldFrameBusqueda.delValue(0)
                     filtro = clicked_revista.get().lower()
-                    print(filtro)
-                    print(string_Campo)
                     cantidad = 0
                     if filtro == "autor":
                         for revista in biblioteca.getRevistas():
@@ -757,8 +779,8 @@ class GeneradorFrames():
             botonBusqueda = tk.Button(frame_filtro_revista, text="Buscar", font=("verdana", 12), background="#61727C",
                                       fg="white", command=Filtrar)
             botonBusqueda.grid(row=4, column=0, padx=10, pady=10)
-            entryBusqueda.grid(row=3, column=0, padx=10, pady=10)
-            entrada.grid(row=2, column=0, padx=10, pady=10)
+            #entryBusqueda.grid(row=3, column=0, padx=10, pady=10)
+            #entrada.grid(row=2, column=0, padx=10, pady=10)
 
         clicked_revista = tk.StringVar()
         #Ventana izquierda
@@ -1014,7 +1036,8 @@ class GeneradorFrames():
         #Funcion que llama a la devolcion
         def devolucion():
             try:
-                indice = entryDevolucion.get()
+                #indice = entryDevolucion.get()
+                indice = fieldFrameDevolucion.getValue(0)
                 if indice == "":
                     raise ExcepcionEntero()
                 elif not (48 <= ord(indice[0]) <= 57):
@@ -1025,7 +1048,8 @@ class GeneradorFrames():
 
                 else:
                     Prestamo.devolucion(indice, biblioteca, usuario)
-                    entryDevolucion.delete(0, tk.END)
+                    #entryDevolucion.delete(0, tk.END)
+                    fieldFrameDevolucion.delValue(0)
                     print("DEVOLCION EXITOSA")
 
                 frame_listas.grid_forget()
@@ -1090,13 +1114,15 @@ class GeneradorFrames():
         generarListaPrestamos()
         # Ventana de la derecha
         msg = "Escriba el numero de la devolucion\n que desea realizar"
-        entrada = tk.Label(frame_filtro, text=msg, font=("verdana", 14), padx=10, pady=10)
-        entryDevolucion = tk.Entry(frame_filtro, font=("verdana", 12))
+        #entrada = tk.Label(frame_filtro, text=msg, font=("verdana", 14), padx=10, pady=10)
+        #entryDevolucion = tk.Entry(frame_filtro, font=("verdana", 12))
+        fieldFrameDevolucion= FieldFrame(frame_filtro, criterios=[msg])
         botonDevolcion = tk.Button(frame_filtro, text="Devolver", font=("verdana", 12), background="#61727C", fg="white", command = devolucion)
 
+        fieldFrameDevolucion.grid(row=2, column=0, padx = 5)
         botonDevolcion.grid(row=4, column=0, padx=5, pady=10)
-        entryDevolucion.grid(row=3, column=0, padx=5, pady=10)
-        entrada.grid(row=2, column=0, padx=5, pady=10)
+        #entryDevolucion.grid(row=3, column=0, padx=5, pady=10)
+        #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         return frameDevolucion
 
@@ -1114,7 +1140,8 @@ class GeneradorFrames():
         # Funcion que llama a la devolcion
         def cancelacion():
             try:
-                indice = entryDevolucion.get()
+                #indice = entryDevolucion.get()
+                indice = fieldFrameDevolucion.getValue(0)
                 if indice == "":
                     raise ExcepcionEntero()
                 elif not (48 <= ord(indice[0]) <= 57):
@@ -1125,7 +1152,8 @@ class GeneradorFrames():
 
                 else:
                     Reserva.cancelarReserva(indice, biblioteca, usuario)
-                    entryDevolucion.delete(0, tk.END)
+                    #entryDevolucion.delete(0, tk.END)
+                    fieldFrameDevolucion.delValue(0)
                     print("CANCELACION EXITOSA")
 
                 frame_listas.grid_forget()
@@ -1189,13 +1217,15 @@ class GeneradorFrames():
         generarListaReservas()
         # Ventana de la derecha
         msg = "Escriba el numero de la reserva\n que desea cancelar"
-        entrada = tk.Label(frame_filtro, text=msg, font=("verdana", 14), padx=10, pady=10)
-        entryDevolucion = tk.Entry(frame_filtro, font=("verdana", 12))
+        #entrada = tk.Label(frame_filtro, text=msg, font=("verdana", 14), padx=10, pady=10)
+        #entryDevolucion = tk.Entry(frame_filtro, font=("verdana", 12))
+        fieldFrameDevolucion = FieldFrame(frame_filtro, criterios=[msg])
         botonDevolcion = tk.Button(frame_filtro, text="Cancelar", font=("verdana", 12), background="#61727C",
                                    fg="white", command=cancelacion)
 
+        fieldFrameDevolucion.grid(row=2, column=0,padx=5)
         botonDevolcion.grid(row=4, column=0, padx=5, pady=10)
-        entryDevolucion.grid(row=3, column=0, padx=5, pady=10)
-        entrada.grid(row=2, column=0, padx=5, pady=10)
+        #entryDevolucion.grid(row=3, column=0, padx=5, pady=10)
+        #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         return frameCancelacion

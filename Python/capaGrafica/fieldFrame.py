@@ -25,7 +25,7 @@ class FieldFrame(Frame):
 
             # Crear y colocar entrada de cada criterio
             entry = Entry(self, font=("Helvetica", 12))
-            entry.grid(column=1, row=i + 1, padx=(10, 10), pady=(10, 10))
+            entry.grid(column=0, row=i + 2, padx=(10, 10), pady=(10, 10))
 
             # Colocar el valor inicial si lo hay
             if valores is not None:
@@ -42,5 +42,8 @@ class FieldFrame(Frame):
         # criterio: El criterio cuyo valor se quiere obtener
 
     def getValue(self, criterio):
-        indice = self._criterios.index(criterio)
-        return self._elementos[indice].get()
+        #indice = self._criterios.index(criterio)
+        return self._elementos[criterio].get()
+
+    def delValue(self, indice):
+        self._elementos[indice].delete(0, END)
