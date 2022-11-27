@@ -594,7 +594,7 @@ class GeneradorFrames():
                     label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right",
                                             relief="groove")
                     label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
-                    label_genero = tk.Label(frame_lista, text="Categoria", width=20, height=1, justify="left",
+                    label_genero = tk.Label(frame_lista, text="Genero", width=20, height=1, justify="left",
                                             relief="groove")
 
                     label_numeral.grid(row=0, column=0, sticky="w")
@@ -681,7 +681,7 @@ class GeneradorFrames():
         label_nombre = tk.Label(frame_lista, text="Nombre", width=20, height=1, justify="right",
                                 relief="groove")
         label_autor = tk.Label(frame_lista, text="Autor", width=20, height=1, justify="left", relief="groove")
-        label_genero = tk.Label(frame_lista, text="Categoria", width=20, height=1, justify="left",
+        label_genero = tk.Label(frame_lista, text="Genero", width=20, height=1, justify="left",
                                 relief="groove")
 
         label_numeral.grid(row=0, column=0, sticky="w")
