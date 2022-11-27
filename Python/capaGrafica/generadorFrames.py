@@ -147,7 +147,7 @@ class GeneradorFrames():
         def prestarRevista():
             try:
                 #indice = entryPrestar.get()
-                indice = fieldFramePrestamo.getValue()
+                indice = fieldFramePrestamo.getValue(0)
                 if indice == "":
                     raise ExcepcionEntero()
                 elif not (48 <= ord(indice[0]) <= 57):
@@ -928,7 +928,7 @@ class GeneradorFrames():
         usuario.encontrarGeneroFavorito()
         if usuario.getGeneroFavorito() == 0:
             print("NO TIENE UN GÉNERO FAVORITO")
-            label_sinGenero = tk.Label(frame_libros, font=("verdana", 12, "bold"), text="Aun no cuneta con genero favorito.\nRealice prestamos o reservas para encontaralo.", width=50)
+            label_sinGenero = tk.Label(frame_libros, font=("verdana", 12, "bold"), text="Aun no cuenta con genero favorito.\nRealice prestamos o reservas para encontaralo.", width=50)
             label_sinGenero.grid(row = 0, column = 0, pady = 225, padx = 250)
 
         else:
@@ -987,7 +987,7 @@ class GeneradorFrames():
         if usuario.getCategoriaFavorita() == 0:
             print("NO TIENE UNA CATEGORÍA FAVORITA")
             label_sinCategoria = tk.Label(frame_revistas, font=("verdana", 12, "bold"),
-                                       text="Aun no cuneta con Categoria favorita.\nRealice prestamos o reservas para encontarala.",
+                                       text="Aun no cuenta con Categoria favorita.\nRealice prestamos o reservas para encontarala.",
                                        width=50)
             label_sinCategoria.grid(row=0, column=0, pady=225, padx=250)
         else:
