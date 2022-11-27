@@ -899,6 +899,8 @@ class GeneradorFrames():
         usuario.encontrarGeneroFavorito()
         if usuario.getGeneroFavorito() == 0:
             print("NO TIENE UN GÉNERO FAVORITO")
+            label_sinGenero = tk.Label(frame_libros, font=("verdana", 12, "bold"), text="Aun no cuneta con genero favorito.\nRealice prestamos o reservas para encontaralo.", width=50)
+            label_sinGenero.grid(row = 0, column = 0, pady = 225, padx = 250)
 
         else:
 
@@ -955,6 +957,10 @@ class GeneradorFrames():
         usuario.encontrarCategoriaFavorita()
         if usuario.getCategoriaFavorita() == 0:
             print("NO TIENE UNA CATEGORÍA FAVORITA")
+            label_sinCategoria = tk.Label(frame_revistas, font=("verdana", 12, "bold"),
+                                       text="Aun no cuneta con Categoria favorita.\nRealice prestamos o reservas para encontarala.",
+                                       width=50)
+            label_sinCategoria.grid(row=0, column=0, pady=225, padx=250)
         else:
             revistasMasSolicitadas = Revista.masSolicitadas(biblioteca, usuario.getCategoriaFavorita())
 
