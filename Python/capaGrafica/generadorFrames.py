@@ -1107,22 +1107,26 @@ class GeneradorFrames():
 
         # Funcion que llama a la devolcion
         def cancelacion():
-            indice = entryDevolucion.get()
-            if indice == "":
-                raise ExcepcionEntero()
-            elif not (48 <= ord(indice[0]) <= 57):
-                raise ExcepcionEntero()
-            indice = int(indice) - 1
-            if indice >= len(usuario.getReservas())  or indice < 0:
-                raise ExcepcionElementoInexistente()
+            try:
+                indice = entryDevolucion.get()
+                if indice == "":
+                    raise ExcepcionEntero()
+                elif not (48 <= ord(indice[0]) <= 57):
+                    raise ExcepcionEntero()
+                indice = int(indice) - 1
+                if indice >= len(usuario.getReservas())  or indice < 0:
+                    raise ExcepcionElementoInexistente()
 
-            else:
-                Reserva.cancelarReserva(indice, biblioteca, usuario)
-                entryDevolucion.delete(0, tk.END)
-                print("CANCELACION EXITOSA")
+                else:
+                    Reserva.cancelarReserva(indice, biblioteca, usuario)
+                    entryDevolucion.delete(0, tk.END)
+                    print("CANCELACION EXITOSA")
 
-            frame_listas.grid_forget()
-            generarListaReservas()
+                frame_listas.grid_forget()
+                generarListaReservas()
+
+            except ErrorApp as e:
+                Advertencia(str(e))
 
         # Ventana izquierda
         def generarListaReservas():
