@@ -152,6 +152,7 @@ class VentanaUsuario(Tk):
 
 
         def Guardar():
+            Biblioteca.setUsuarios([self._usuario])
             serializarTodo()
             self.destroy()
 

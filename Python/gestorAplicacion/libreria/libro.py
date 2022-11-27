@@ -1,3 +1,4 @@
+from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
 from Python.gestorAplicacion.libreria.titulo import Titulo
 import tkinter as tk
 from tkinter import *
@@ -18,7 +19,7 @@ class Libro(Titulo):
     def masSolicitados(cls, biblioteca, genero):
         libros = []
         nombresLibros = []
-        for libro in biblioteca.getHistorialLibrosUsados():
+        for libro in Biblioteca.getHistorialLibrosUsados():
             if libro.getGenero() == genero and libro.getNombre() not in nombresLibros:
                 libros.append(libro)
                 nombresLibros.append(libro.getNombre())

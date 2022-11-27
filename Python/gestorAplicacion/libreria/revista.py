@@ -1,3 +1,4 @@
+from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
 from Python.gestorAplicacion.libreria.titulo import Titulo
 from Python.gestorAplicacion.libreria.categoria import CATEGORIA
 
@@ -18,7 +19,7 @@ class Revista(Titulo):
     def masSolicitadas(cls, biblioteca, categoria):
         revistas = []
         nombresRevistas = []
-        for revista in biblioteca.getHistorialRevistasUsadas():
+        for revista in Biblioteca.getHistorialRevistasUsadas():
             if revista.getCategoria() == categoria and revista.getNombre() not in nombresRevistas:
                 revistas.append(revista)
                 nombresRevistas.append(revista.getNombre())
