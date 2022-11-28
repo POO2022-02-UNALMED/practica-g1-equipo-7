@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 
 from tkinter import *
@@ -163,3 +164,18 @@ class VentanaUsuario(Tk):
             for frame in VentanaUsuario.frames:
                 frame.grid_forget()
             frameUtilizado.grid_configure()
+
+        #Frame de inicio
+        frameInicio = Frame(self)
+        scrollBar = Scrollbar(frameInicio)
+        scrollBar.pack(side="right", fill=Y)
+        textoInstructivo = Text(frameInicio, width=132,height=44, font=("verdana", 10), yscrollcommand=scrollBar.set)
+        absolute_folder_path = os.path.dirname(os.path.realpath(__file__))
+        absolute_info_path = os.path.join(absolute_folder_path, '../recursos/instructivo.txt')
+        with open(absolute_info_path, "r+") as instructivo:
+            textoInstructivo.insert(INSERT, instructivo.read())
+
+        textoInstructivo.pack(side = LEFT, fill="both")
+        scrollBar.configure(command = textoInstructivo.yview)
+
+        cambiarFrame(frameInicio)
