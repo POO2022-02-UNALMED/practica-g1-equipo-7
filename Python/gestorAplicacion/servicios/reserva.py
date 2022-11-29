@@ -76,5 +76,7 @@ class Reserva(Servicio):
         usuario.eliminarReserva(reservaAEliminar)
         usuario.eliminarTiquete(tiqueteAEliminar)
 
+        biblioteca.añadirEjemplarRevista(reservaAEliminar.getEjemplarEscogido())
+
     def toString(self):
         return (self.mostrarTituloEscogido() + "Fecha reserva: " + self.getFechaReserva() + "Fecha devolucion: " + self.getFechaDevolucion())

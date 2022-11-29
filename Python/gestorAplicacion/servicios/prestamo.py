@@ -80,6 +80,8 @@ class Prestamo(Servicio):
         usuario.eliminarPrestamo(prestamoAEliminar)
         usuario.eliminarTiquete(tiqueteAEliminar)
 
+        biblioteca.añadirEjemplarLibro(prestamoAEliminar.getEjemplarEscogido())
+
     def __str__(self):
         return self.mostrarTituloEscogido() + "Fecha prestamo: " + self.getFecha()
 
