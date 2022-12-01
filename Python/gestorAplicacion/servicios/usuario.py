@@ -77,6 +77,10 @@ class Usuario():
         self._categoriaFavorita = categoria
 
     #Metodos
+    """* Se recorre la lista 'historialLibrosUsados' para posteriormente crear un diccionario que contendra 
+       la cantidad de veces que se repite cada genero. Teniendo ya este diccionario creado, se busca cuál
+        es el genero que más aparece y este se define como el favorito
+        """
     def encontrarGeneroFavorito(self):
         generosLeidos = {}
         for libro in self.getHistorialLibrosUsados():
@@ -89,6 +93,10 @@ class Usuario():
         generoFavorito = max(generosLeidos, key=generosLeidos.get, default=0)
         self.setGeneroFavorito(generoFavorito)
 
+    """* Se recorre la lista 'historialRevistasUsadas' para posteriormente crear un diccionario que contendra
+       la cantidad de veces que se repite cada categoria. Teniendo ya este diccionario creado, se busca 
+       cuál es la categoria que más aparece y esta se define como la favorita
+       """
     def encontrarCategoriaFavorita(self):
         categoriasLeidas = {}
         for revista in self.getHistorialRevistasUsadas():

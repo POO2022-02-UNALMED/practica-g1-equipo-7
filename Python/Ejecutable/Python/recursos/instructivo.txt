@@ -1,0 +1,54 @@
+JJ Library es una aplicacion de gestion de biblioteca.
+el usuario de la biblioteca que contrate la aplicacion 
+tendra acceso a un software en el cual podra realizar
+la gestion de los servicios ofrecidos por la biblioteca
+tales como:
+- Busqueda de libros y revistas.
+- Consulta de prestamos y reservas.
+- Realizacion de prestamos.
+- Realizacion de reservas.
+- Gestion de sus prestamos y reservas.
+
+Corto instructivo de la aplicacion:
+
+Archivo > Aplicacion: Despliega una ventana que da una breve descripcion de la aplicacion.
+
+Archivo > Salir y guardar: Guarda los datos y cierra la aplicacion.
+
+Procesos y consultas > Consultas > Buscar libro: Le permite al usuario ver los libros existentes en la biblioteca, haciendo uso 
+de distintos filtros para facilitar la busqueda.
+
+Procesos y consultas > Consultas > Buscar Revista: Le permite al usuario ver las revistas existentes en la biblioteca, haciendo 
+uso de distintos filtros para facilitar la busqueda.
+
+Procesos y consultas > Consultas > Mis prestamos: Le permite al usuario ver los prestamos que tiene actualmente, se debe actualizar
+antes de poder ver los cambios.
+
+Procesos y consultas > Consultas > Mis reservas: Le permite al usuario ver las reservas que tiene actualmente, se debe actualizar
+antes de poder ver los cambios.
+
+Procesos y consultas > Realizar reserva > Reservar libro: Le permite al usuario reservar un libro, eligiendo una cantidad de
+tiempo que desea mantener el libro, luego digita un entero con el numero de libro que desea elegir en la lista
+de libros disponibles mostrada. 
+
+Procesos y consultas > Realizar reserva > Reservar revista: Le permite al usuario reservar una revista, eligiendo una cantidad de
+tiempo que desea mantener la revista, luego digita un entero con el numero de revista que desea elegir en la lista
+de revistas disponibles mostrada.
+
+Procesos y consultas > Realizar prestamo > Prestar libro: Le permite al usuario prestar un libro digitando el numero de libro que
+desea elegir en la lista de libros disponibles.
+
+Procesos y consultas > Realizar prestamo > Prestar revista: Le permite al usuario prestar una revista digitando el numero de libro 
+que desea elegir en la lista de revistas disponibles.
+
+Procesos y consultas > Recomendaciones > Recomendar libro: Le muestra al usuario una lista con libros que tal vez le interese leer
+basado en el genro favorito del usuario calculado segun su historial de prestamos y reservas.
+
+Procesos y consultas > Recomendaciones > Recomendar revista: Le muestra al usuario una lista con revistas que tal vez le interese 
+leer basado en la categoria favorita del usuario calculada segun su historial de prestamos y reservas.
+
+Procesos y consultas > Gestionar servicios > Realizar devolucion: Le permite al usuario devolver los libros o revistas prestados 
+digitando el numero del libro o revista que desea devolver de la lista de prestamos del usuario. 
+
+Procesos y consultas > Gestionar servicios > Cancelar reserva: Le permite al usuario cancelar las reservas de los libros o 
+revistas reservados digitando el numero de la reserva que desea cancelar de la lista de reservas del usuario.

@@ -54,6 +54,9 @@ class Servicio():
         cls._ejemplarLibroDisponibles = ejemplarLibroDisponibles
 
     #Metodos
+    """* Funcionalidad para mostrar los libros disponibles (los que no se encuentran prestados o reservados)
+     * @param biblioteca Biblioteca que contendra los libros para aplicar el filtro
+     """
     @classmethod
     def filtrarLibrosDisponibles(cls, biblioteca):
         ejemplares = []
@@ -63,6 +66,9 @@ class Servicio():
 
         Servicio.setEjemplarLibroDisponibles(ejemplares)
 
+    """* Funcionalidad para mostrar las revistas disponibles (las que no se encuentran prestadas o reservadas)
+     * @param biblioteca Biblioteca que contendra las revistas para aplicar el filtro
+     """
     @classmethod
     def filtrarRevistasDisponibles(cls, biblioteca):
         ejemplares = []

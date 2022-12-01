@@ -27,7 +27,12 @@ class Prestamo(Servicio):
 
 
 
-
+    """* Esta función lo que hace es añadir un prestamo al usuario, genera un tiquete y actualiza el 
+       estado del libro que prestó
+     * @param usuario Usuario al cual se le va a generar el prestamo
+     * @param ejemplarPrestado Libro prestado
+     * @param biblioteca Biblioteca que contiene los libros que estan disponibles para prestar
+     """
     @classmethod
     def generarPrestamoLibro(cls, usuario, ejemplarPrestado, biblioteca):
         prestamo = Prestamo(usuario, ejemplarPrestado, ejemplarPrestado.getLibro(), datetime.now())
@@ -48,6 +53,12 @@ class Prestamo(Servicio):
         usuario.añadirPrestamo(prestamo)
         usuario.añadirTiquete(tiquete)
 
+    """* Esta función lo que hace es añadir un prestamo al usuario, genera un tiquete y actualiza el 
+       estado de la revista que prestó
+     * @param usuario Usuario al cual se le va a generar el prestamo
+     * @param ejemplarRevistaPrestada Revista prestada
+     * @param biblioteca Biblioteca que contiene las revistas que estan disponibles para prestar
+     """
     @classmethod
     def generarPrestamoRevista(cls, usuario, ejemplarPrestado, biblioteca):
         prestamo = Prestamo(usuario, ejemplarPrestado, ejemplarPrestado.getRevista(), datetime.now())
@@ -67,6 +78,13 @@ class Prestamo(Servicio):
         usuario.añadirPrestamo(prestamo)
         usuario.añadirTiquete(tiquete)
 
+    """* El usuario elige el prestamo a devolver, se busca el prestamo y posteriormente se cambia el estado 
+       de esta a 'FALSE'; de esta manera el servicio que estaba prestado vuelve a estar disponible. También
+       se elimina el tiquete correspondiente a ese prestamo (almacenado en la lista 'tiquetes')
+     * @param indiceTituloDevolucion Es el prestamo que se desea devolver 
+     * @param biblioteca Parametro necesario para el contexto de la funcionalidad
+     * @param usuario Usuario al que se le va a afectuar la devolucíon del prestamo 
+     """
     @classmethod
     def devolucion(cls, indiceDevolcion: int, biblioteca, usuario):
         prestamoAEliminar = usuario.getPrestamos()[indiceDevolcion]

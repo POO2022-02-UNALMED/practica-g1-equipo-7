@@ -26,6 +26,13 @@ class Reserva(Servicio):
     def setFechaDevolucion(self, fecha):
         self._fechaDevolucion = fecha
 
+    """* Esta función lo que hace es añadir la reserva al usuario (en la fecha correspondiente), genera un
+       tiquete y actualiza el estado del libro que este reservó
+     * @param usuario Usuario al cual se le va a generar la reserva
+     * @param ejemplarLibroReservado Libro que se va a reservar
+     * @param biblioteca Biblioteca que contiene los ejemplares disponibles para reservar
+     * @param fecha_reserva Fecha en la que se realizo la reserva
+     * @param fecha_devolucion Fecha en la que se debe devolver la revista"""
     @classmethod
     def generarReservaLibro(cls, usuario, ejemplarLibroReservado, biblioteca, fechaReserva, fechaDevolucion):
         reserva = Reserva(usuario, ejemplarLibroReservado, ejemplarLibroReservado.getLibro(), fechaReserva, fechaDevolucion)
@@ -44,6 +51,15 @@ class Reserva(Servicio):
         Servicio.eliminarDeLibrosDisponibles(ejemplarLibroReservado)
         usuario.añadirReserva(reserva)
         usuario.añadirTiquete(tiquete)
+
+    """* Esta función lo que hace es añadir la reserva al usuario (en la fecha correspondiente), genera un
+       tiquete y actualiza el estado del libro que este reservó
+     * @param usuario Usuario al cual se le va a generar la reserva 
+     * @param ejemplarRevistaReservada Revista reservada
+     * @param biblioteca Biblioteca que contiene los ejemplares disponibles para reservar
+     * @param fecha_reserva Fecha en la que se realizo la reserva
+     * @param fecha_devolucion Fecha en la que se debe devolver la revista
+     """
     @classmethod
     def generarReservaRevista(cls, usuario, ejemplarRevistaReservada, biblioteca , fechaReserva, fechaDevolucion):
         reserva = Reserva(usuario, ejemplarRevistaReservada, ejemplarRevistaReservada.getRevista(), fechaReserva, fechaDevolucion)
@@ -63,6 +79,13 @@ class Reserva(Servicio):
         usuario.añadirReserva(reserva)
         usuario.añadirTiquete(tiquete)
 
+    """* El usuario elige la reserva a cancelar, se busca la reserva y posteriormente se cambia el estado 
+       de esta a 'FALSE'; de esta manera el servicio que estaba reservado vuelve a estar disponible. También
+       se elimina el tiquete correspondiente a esa reserva (almacenado en la lista 'tiquetes')
+     * @param indiceCancelarReserva Es la reserva que se desea cancelar
+     * @param biblioteca Parametro necesario para el contexto de la funcionalidad
+     * @param usuario Usuario al que se le va a afectuar la cancelacíon de la reserva 
+     """
     @classmethod
     def cancelarReserva(cls, indiceCancelarReserva: int, biblioteca, usuario):
         reservaAEliminar = usuario.getReservas()[indiceCancelarReserva]

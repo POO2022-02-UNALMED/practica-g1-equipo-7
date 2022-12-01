@@ -6,14 +6,7 @@ import tkinter as tk
 from Python.baseDatos.serializador import serializarTodo
 from Python.capaGrafica.generadorFrames import GeneradorFrames
 from Python.gestorAplicacion.libreria.biblioteca import Biblioteca
-from Python.gestorAplicacion.libreria.ejemplarLibro import EjemplarLibro
-from Python.gestorAplicacion.libreria.ejemplarRevista import EjemplarRevista
 
-from Python.gestorAplicacion.servicios.prestamo import Prestamo
-from Python.gestorAplicacion.libreria.libro import Libro
-from Python.gestorAplicacion.servicios.servicio import Servicio
-from Python.gestorAplicacion.libreria.revista import Revista
-from Python.gestorAplicacion.servicios.reserva import Reserva
 
 
 
@@ -98,25 +91,6 @@ class VentanaUsuario(Tk):
         self._barra_del_menu.add_cascade(label = "Ayuda", menu = ayuda)
 
         self.config(menu = self._barra_del_menu)
-
-        #GENERACIÓN DE FRAMES
-
-        """FramePrestarLibro = GeneradorFrames.generarFramePrestamoLibro(self._usuario, self._biblioteca_main)
-        FramePrestarRevista = GeneradorFrames.generarFramePrestamoRevista(self._usuario, self._biblioteca_main)
-        FrameBuscarLibro = GeneradorFrames.generarFrameBuscarLibro(self._biblioteca_main)
-        FrameBuscarRevista = GeneradorFrames.generarFrameBuscarRevista(self._biblioteca_main)
-        FrameMisPrestamos = GeneradorFrames.generarFrameMisPrestamos(self._usuario)
-        FrameMisReservas = GeneradorFrames.generarFrameMisReservas(self._usuario)
-        FrameReservarLibro = GeneradorFrames.generarFrameReservarLibro(self._usuario, self._biblioteca_main)
-        FrameReservarRevista = GeneradorFrames.generarFrameReservaRevista(self._usuario, self._biblioteca_main)
-        VentanaUsuario.frames.append(FramePrestarLibro)
-        VentanaUsuario.frames.append(FramePrestarRevista)
-        VentanaUsuario.frames.append(FrameBuscarLibro)
-        VentanaUsuario.frames.append(FrameBuscarRevista)
-        VentanaUsuario.frames.append(FrameMisPrestamos)
-        VentanaUsuario.frames.append(FrameMisReservas)
-        VentanaUsuario.frames.append(FrameReservarLibro)
-        VentanaUsuario.frames.append(FrameReservarRevista)"""
 
         def informacion():
             ventana = Tk()

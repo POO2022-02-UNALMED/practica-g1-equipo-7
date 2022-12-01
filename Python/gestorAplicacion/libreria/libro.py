@@ -14,7 +14,12 @@ class Libro(Titulo):
     def setGenero(self, genero):
         self._genero = genero
 
-
+    """
+     * Esta función sirve para filtrar los libros más utilizados por gnereo (tomando en cuenta el historial de libros usados) 
+     * @param biblioteca Biblioteca en la que se encuentran los libros a filtrar
+     * @param genero Genero de los libros
+     * @return Retorna los resultados que se encontraron compatibles con el filtro aplicado
+     """
     @classmethod
     def masSolicitados(cls, biblioteca, genero):
         libros = []

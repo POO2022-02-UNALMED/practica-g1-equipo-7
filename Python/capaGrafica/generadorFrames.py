@@ -11,7 +11,7 @@ from Python.gestorAplicacion.servicios.reserva import Reserva
 from Python.gestorAplicacion.servicios.servicio import Servicio
 
 
-from Python.excepciones.errorapp import ErrorApp
+from Python.excepciones.errorAplicacion import ErrorAplicacion
 
 from Python.excepciones.excepcionentero import ExcepcionEntero
 from Python.excepciones.excepcionstring import ExcepcionString
@@ -20,6 +20,8 @@ from Python.excepciones.advertencia import Advertencia
 
 
 class GeneradorFrames():
+    """Genera El frame de la funcion prestar libro, colocando el listado de libros disponibles a la izquierda y el frame
+    para ingresar datos a la dercha"""
     @classmethod
     def generarFramePrestamoLibro(cls, usuario, biblioteca):
         print(len(Servicio.getEjemplarLibroDisponibles()))
@@ -40,6 +42,7 @@ class GeneradorFrames():
         #entrada = tk.Label(frameDER, text=msg, font=("verdana", 14), padx=10, pady=10)
         #entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
 
+        """Llama la funcion pertinente para realizar el prestamo, mirando primero las excepciones"""
         def prestarLibro():
             try:
                 #indice = entryPrestar.get()
@@ -61,7 +64,7 @@ class GeneradorFrames():
 
                 frameIZQ.grid_forget()
                 generarListaLibrosDisponibles()
-            except ErrorApp as e:
+            except ErrorAplicacion as e:
                 Advertencia(str(e))
 
 
@@ -72,6 +75,7 @@ class GeneradorFrames():
         #entryPrestar.grid(row=3, column=0, padx=5, pady=10)
         #entrada.grid(row=2, column=0, padx=5, pady=10)
 
+        """Llama al filtro de libros disponibles para luego generar la lista de libros disponibles"""
         def generarListaLibrosDisponibles():
             #Esto se hace para actualizar la disponibilidad
             Servicio.filtrarLibrosDisponibles(biblioteca)
@@ -126,6 +130,8 @@ class GeneradorFrames():
         generarListaLibrosDisponibles()
         return frameTotal
 
+    """Genera el frame de la funcion prestar revista, colocando el listado de revistas disponibles a la izquierda y el frame
+    para ingresar datos a la dercha"""
     @classmethod
     def generarFramePrestamoRevista(cls, usuario, biblioteca):
 
@@ -144,6 +150,7 @@ class GeneradorFrames():
         #entryPrestar = tk.Entry(frameDER, font=("verdana", 12))
         fieldFramePrestamo = FieldFrame(frameDER, criterios=[msg])
 
+        """Se encarga de llamar la logica de generar el prestamo luego de revisar excepciones"""
         def prestarRevista():
             try:
                 #indice = entryPrestar.get()
@@ -164,7 +171,7 @@ class GeneradorFrames():
 
                 frameIZQ.grid_forget()
                 generarListaRevistasDisponibles()
-            except ErrorApp as e:
+            except ErrorAplicacion as e:
                 Advertencia(str(e))
 
         botonPrestar = tk.Button(frameDER, text="Prestar", font=("verdana", 12), background="#61727C", fg="white",
@@ -176,6 +183,7 @@ class GeneradorFrames():
         #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         # Frame de la izquierda
+        """Filtra los libros disponibles y genera una lista con estos"""
         def generarListaRevistasDisponibles():
             #Se hace para actualizar la disponibilidad
             Servicio.filtrarRevistasDisponibles(biblioteca)
@@ -226,6 +234,8 @@ class GeneradorFrames():
         generarListaRevistasDisponibles()
         return frameTotal
 
+    """Genera el frame de la funciom reservar libro, cololcando el listado de libros disponibles a la izquierda y el frame
+    de ingresar datos a la derecha"""
     @classmethod
     def generarFrameReservarLibro(cls, usuario, biblioteca):
         print(len(Servicio.getEjemplarLibroDisponibles()))
@@ -236,6 +246,7 @@ class GeneradorFrames():
                                               highlightthickness=3, highlightbackground="#61727C")
         frame_filtro_reserva_libro.grid(row=0, column=1, padx=20, pady=20)
 
+        """Luego de seleccionar una de las opciones de tiempo despliega los widgets que reciben los datos"""
         def despliegue_reserva_libro(filtro):
             cantidad_tiempo = int(filtro.split(" ")[0])
             print(len(Servicio.getEjemplarLibroDisponibles()))
@@ -247,6 +258,7 @@ class GeneradorFrames():
             #entryBusqueda.grid(row=3, column=0, padx=5, pady=10)
             #entrada.grid(row=2, column=0, padx=5, pady=10)
 
+            """Realiza la logica de la reserva revisando primero las excepciones"""
             def HacerReservaLibro():
                 try:
                     #indice = entryBusqueda.get()
@@ -279,7 +291,7 @@ class GeneradorFrames():
                         frame_listas_reserva_libro.grid_forget()
                         generarListaLibroDisponibles()
                         print(f"RESERVA EXITOSO {Ejemplar.getLibro().getNombre()} para el {fecha_inicial, fecha_final}")
-                except ErrorApp as e:
+                except ErrorAplicacion as e:
                     Advertencia(str(e))
 
             botonBusqueda = tk.Button(frame_filtro_reserva_libro, text="Reservar", font=("verdana", 12),
@@ -341,6 +353,8 @@ class GeneradorFrames():
         generarListaLibroDisponibles()
         return frameReservarLibro
 
+    """Genera el frame de la funcion prestar revista, colocando el listado de revistas disponibles a la izquierda y el frame
+    para ingresar datos a la dercha"""
     @classmethod
     def generarFrameReservaRevista(cls, usuario, biblioteca):
         frameReservarRevista = tk.Frame(width=1080, height=720)
@@ -348,7 +362,7 @@ class GeneradorFrames():
                                                 pady=5)
         frame_listas_reserva_revista.grid(row=0, column=0, padx=20, pady=20)
 
-
+        """Luego de seleccionar una de las opciones de tiempo despliega los widgets que reciben los datos"""
         def despliegue_reserva_revista(filtro):
             cantidad_tiempo = int(filtro.split(" ")[0])
 
@@ -357,6 +371,7 @@ class GeneradorFrames():
             #entryBusqueda = tk.Entry(frame_filtro_reserva_revista, font=("verdana", 12))
             fieldFrameReserva = FieldFrame(frame_filtro_reserva_revista, criterios=[msg])
 
+            """LLama a la logica de reservar revista examinando primero si se generan excepciones"""
             def HacerReservaRevista():
                 try:
                     #indice = entryBusqueda.get()
@@ -388,7 +403,7 @@ class GeneradorFrames():
                         frame_listas_reserva_revista.grid_forget()
                         generarListaRevistasDisponibles()
                         print(f"RESERVA EXITOSO {Ejemplar.getRevista().getNombre()} para el {fecha_inicial, fecha_final}")
-                except ErrorApp as e:
+                except ErrorAplicacion as e:
                     Advertencia(str(e))
 
 
@@ -401,6 +416,7 @@ class GeneradorFrames():
             #entrada.grid(row=2, column=0, padx=5, pady=10)
 
         clicked_reservar_revista = tk.StringVar()
+        """Filtra y genera la lista de revistas disponibles"""
         def generarListaRevistasDisponibles():
             #Se hace para actualizar la disponibilidad
             Servicio.filtrarRevistasDisponibles(biblioteca)
@@ -458,6 +474,7 @@ class GeneradorFrames():
         generarListaRevistasDisponibles()
         return frameReservarRevista
 
+    """Genera un frame con dos frames anidados en los cuales se mostraran los libros y revistas reservados"""
     @classmethod
     def generarFrameMisReservas(cls, usuario):
         frameMisReservas = tk.Frame(width=1080, height=720)
@@ -471,6 +488,7 @@ class GeneradorFrames():
         frame_libros_reservas.grid(row=1, column=0, padx=10, pady=10)
 
         # LOGICA PARA LLENAR LA LISTA DE PRÉSTAMOS
+        """genera los libros y revistas reservados del usuario"""
         def ActualizarReservas():
             lista_reservas = usuario.getReservas()
             contLibros = 1
@@ -563,16 +581,19 @@ class GeneradorFrames():
 
         return frameMisReservas
 
+    """Genera el frame de buscar libro, el frame a al izquierda muestra los resultados de busqueda y a la derecha recibe los datos de entrada"""
     @classmethod
     def generarFrameBuscarLibro(cls, biblioteca):
         frameBuscarLibro =  tk.Frame(width=1080, height=720)
 
+        """Luego de seleccionar el tipo del filtro por primera vez despliega el frame con el fieldFrame que recibe los datos"""
         def despliegue(filtro):
             #entrada = tk.Label(frame_filtro, text="Escribe el {} del libro".format(filtro), font=("verdana", 14), padx = 10, pady = 10)
             #entryBusqueda = tk.Entry(frame_filtro, font=("verdana", 12))
             fieldFrameBusqueda = FieldFrame(frame_filtro, criterios=["Escribe el {} del libro".format(filtro)])
             fieldFrameBusqueda.grid(row = 2, column = 0)
 
+            """Muestra los resultados de la busqueda capturada en el fieldFrame"""
             def Filtrar():
                 try:
                     #string_Campo = entryBusqueda.get().lower()
@@ -651,7 +672,7 @@ class GeneradorFrames():
                             label_autor.grid(row=0, column=2, sticky="w")
                             label_genero.grid(row=0, column=3, sticky="w")
                             frame_libros.grid(row=i+1, column=0)
-                except ErrorApp as e:
+                except ErrorAplicacion as e:
                     Advertencia(str(e))
 
             botonBusqueda = tk.Button(frame_filtro, text="Buscar", font=("verdana", 12), background="#61727C",
@@ -692,9 +713,12 @@ class GeneradorFrames():
 
         return frameBuscarLibro
 
+    """Genera el frame de buscar revista, el frame a al izquierda muestra los resultados de busqueda y a la derecha recibe los datos de entrada"""
     @classmethod
     def generarFrameBuscarRevista(cls, biblioteca):
         frameBuscarRevista =  tk.Frame(width=1080, height=720)
+
+        """Luego de seleccionar el tipo del filtro por primera vez despliega el frame con el fieldFrame que recibe los datos"""
         def despliegue_revista(filtro):
             if filtro.lower() == "categoria":
                 msg = "Escribe la {} de la revista".format(filtro)
@@ -705,6 +729,7 @@ class GeneradorFrames():
 
             fieldFrameBusqueda = FieldFrame(frame_filtro_revista, criterios=[msg])
             fieldFrameBusqueda.grid(row=2, column = 0)
+            """Muestra los resultados de la busqueda capturada en el fieldFrame"""
             def Filtrar():
                 try:
 
@@ -781,7 +806,7 @@ class GeneradorFrames():
                             label_autor.grid(row=0, column=2, sticky="w")
                             label_genero.grid(row=0, column=3, sticky="w")
                             frame_revista.grid(row=i + 1, column=0, sticky="w")
-                except ErrorApp as e:
+                except ErrorAplicacion as e:
                     Advertencia(str(e))
             botonBusqueda = tk.Button(frame_filtro_revista, text="Buscar", font=("verdana", 12), background="#61727C",
                                       fg="white", command=Filtrar)
@@ -820,6 +845,7 @@ class GeneradorFrames():
 
         return frameBuscarRevista
 
+    """Genera un frame con dos frames anidados en los cuales se mostraran los libros y revistas prestados"""
     @classmethod
     def generarFrameMisPrestamos(cls, usuario):
         frameMisPrestamos =   tk.Frame(width=1080, height=720)
@@ -832,6 +858,7 @@ class GeneradorFrames():
         frame_libros.grid(row=1, column=0, padx=10, pady=10)
 
         #LOGICA PARA LLENAR LA LISTA DE PRÉSTAMOS
+        """Genera los libros y revistas prestados por el usuario"""
         def ActualizarPrestamos():
 
             lista_prestamos = usuario.getPrestamos()
@@ -913,6 +940,7 @@ class GeneradorFrames():
 
         return frameMisPrestamos
 
+    """Genera el frame de la funcion recomendar libros"""
     @classmethod
     def generarFrameRecomendarLibro(cls, usuario, biblioteca):
         frameRecomendarLibro =   tk.Frame(width=1080, height=720)
@@ -926,13 +954,14 @@ class GeneradorFrames():
         frame_libros.grid(row=1, column=0, padx=10, pady=10)
 
         usuario.encontrarGeneroFavorito()
+        """Comprueba si tiene genero favorito generando el label pertinente en caso de que no"""
         if usuario.getGeneroFavorito() == 0:
             print("NO TIENE UN GÉNERO FAVORITO")
             label_sinGenero = tk.Label(frame_libros, font=("verdana", 12, "bold"), text="Aun no cuenta con genero favorito.\nRealice prestamos o reservas para encontaralo.", width=50)
             label_sinGenero.grid(row = 0, column = 0, pady = 225, padx = 250)
 
         else:
-
+            """Encuentra los libros mas solicitados segun el genero favorito del usuario"""
             librosMasSolicitados = Libro.masSolicitados(biblioteca, usuario.getGeneroFavorito())
 
             frame_info = tk.Frame(frame_libros, width=500, height=50)
@@ -973,6 +1002,7 @@ class GeneradorFrames():
 
         return frameRecomendarLibro
 
+    """Genera el frame de la funcion recomendar revista"""
     @classmethod
     def generarFrameRecomendarRevista(cls, usuario, biblioteca):
         frameRecomendarRevista = tk.Frame(width=1080, height=720)
@@ -984,6 +1014,7 @@ class GeneradorFrames():
         frame_revistas.grid(row=1, column=0, padx=10, pady=10)
 
         usuario.encontrarCategoriaFavorita()
+        """Comprueba que el usuario cuente con una categoria favorita y en caso de que no genere el mensaje pertinente"""
         if usuario.getCategoriaFavorita() == 0:
             print("NO TIENE UNA CATEGORÍA FAVORITA")
             label_sinCategoria = tk.Label(frame_revistas, font=("verdana", 12, "bold"),
@@ -991,6 +1022,7 @@ class GeneradorFrames():
                                        width=50)
             label_sinCategoria.grid(row=0, column=0, pady=225, padx=250)
         else:
+            """Muestra las revistas mas solicitadas segun la categoria favorita del usuario"""
             revistasMasSolicitadas = Revista.masSolicitadas(biblioteca, usuario.getCategoriaFavorita())
 
             frame_info = tk.Frame(frame_revistas, width=500, height=50)
@@ -1029,6 +1061,8 @@ class GeneradorFrames():
 
         return frameRecomendarRevista
 
+    """Genera un frame con dos frames anidados, a la izquierda mostrará la lista de prestamos del usaurio
+    a la derecha se reciben los datos pertinentes"""
     @classmethod
     def generarFrameDevolucion(cls, usuario, biblioteca):
         frameDevolucion = tk.Frame(width=1080, height=720)
@@ -1041,6 +1075,7 @@ class GeneradorFrames():
         frame_filtro.grid(row=0, column=1, padx=20, pady=20)
 
         #Funcion que llama a la devolcion
+        """Llama a la logica de devolucion examinando primero si se crean excepciones"""
         def devolucion():
             try:
                 #indice = entryDevolucion.get()
@@ -1061,11 +1096,12 @@ class GeneradorFrames():
 
                 frame_listas.grid_forget()
                 generarListaPrestamos()
-            except ErrorApp as e:
+            except ErrorAplicacion as e:
                 Advertencia(str(e))
 
 
         #Ventana izquierda
+        """Genera la lista con los prestamos del usuario"""
         def generarListaPrestamos():
             frame_listas = tk.Frame(frameDevolucion, width=600, height=650, borderwidth=5, padx=5, pady=5)
             frame_listas.grid(row=0, column=0, padx=20, pady=20)
@@ -1133,6 +1169,8 @@ class GeneradorFrames():
 
         return frameDevolucion
 
+    """Genera un frame con dos frames anidados, a la izquierda mostrará la lista de reservas del usaurio
+        a la derecha se reciben los datos pertinentes"""
     @classmethod
     def generarFrameCancelacion(cls, usuario, biblioteca):
         frameCancelacion = tk.Frame(width=1080, height=720)
@@ -1145,6 +1183,7 @@ class GeneradorFrames():
         frame_filtro.grid(row=0, column=1, padx=20, pady=20)
 
         # Funcion que llama a la devolcion
+        """Llama a la logica para eliminar la reserva seleccionada examinando primero si existen excepciones"""
         def cancelacion():
             try:
                 #indice = entryDevolucion.get()
@@ -1166,10 +1205,11 @@ class GeneradorFrames():
                 frame_listas.grid_forget()
                 generarListaReservas()
 
-            except ErrorApp as e:
+            except ErrorAplicacion as e:
                 Advertencia(str(e))
 
         # Ventana izquierda
+        """Genera la lista con los libros o revistas reservados por el usuario"""
         def generarListaReservas():
             frame_listas = tk.Frame(frameCancelacion, width=600, height=650, borderwidth=5, padx=5, pady=5)
             frame_listas.grid(row=0, column=0, padx=20, pady=20)

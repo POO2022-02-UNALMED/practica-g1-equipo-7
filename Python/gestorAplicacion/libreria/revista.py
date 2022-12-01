@@ -15,6 +15,11 @@ class Revista(Titulo):
     def setCategoria(self, categoria):
         self._categoria = categoria
 
+    """* Esta función sirve para filtrar las revistas más utilizadas por categoria (tomando en cuenta el historial de revistas usadas) 
+     * @param biblioteca Biblioteca en la que se encuentran las revistas a filtrar
+     * @param categoria Categoria de las revistas
+     * @return Retorna los resultados que se encontraron compatibles con el filtro aplicado
+     """
     @classmethod
     def masSolicitadas(cls, biblioteca, categoria):
         revistas = []
